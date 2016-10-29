@@ -172,6 +172,7 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
     };
     
     function redirect(){
+    	$scope.loadPercent = 100;
     	$location.path('/map').replace();
     	$scope.$apply();
     };
