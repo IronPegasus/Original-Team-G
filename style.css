@@ -1,0 +1,167 @@
+.hoverImage:hover{
+	cursor: pointer;
+	filter: brightness(160%);
+}
+
+.healthBarBack{
+	position: absolute;
+	width: 15px;
+	height: 2px;
+	left: 0px;
+	bottom: -2px;
+	background-color: red;
+}
+
+.healthBarFront{
+	position: absolute;
+	height: 2px;
+	left: 0px;
+	bottom: -2px;
+	background-color: green;
+}
+
+.healthBarBorder{
+	position: absolute;
+	width: 14px;
+	height: 1px;
+	left: 0px;
+	bottom: -2px;
+	border: 1px solid black;
+}
+
+.weaponRankBar{
+	position: absolute;
+	height: 3px;
+	left: 0px;
+	bottom: -3px;
+	background-color: red;
+}
+
+.weaponRankBorder{
+	position: absolute;
+	width: 29px;
+	height: 2px;
+	left: 0px;
+	bottom: -3px;
+	border: 1px solid black;
+}
+
+.characterInfo{
+	background-color: #DAAC5E;
+	height: 218px;
+	width: 631px;
+	position: relative;
+	font-family: "Verdana";
+}
+
+.infoElement{
+	position: absolute;
+	border-radius: 10px;
+}
+
+.infoElement span{
+	vertical-align:middle;
+}
+
+.indentedStatLabel{
+	position: absolute;
+	font-size:12px;
+	margin-left:10px;
+	margin-top:5px;
+}
+
+.indentedStat{
+	position: absolute;
+	margin-left:50px;
+	margin-top:2px;
+}
+
+.largeIndentedStat{
+	position: absolute;
+	margin-left:60px;
+	margin-top:2px;
+}
+
+.indentedWeaponName{
+	position: absolute;
+	margin-left:10px;
+	margin-top:5px;
+}
+
+.indentedExpMovLabel{
+	position: absolute;
+	font-size:12px;
+	margin-left:25px;
+	margin-top:5px;
+}
+
+.indentedExpMovText{
+	position: absolute;
+	margin-left:55px;
+	margin-top:3px;
+}
+
+.rightIndented{
+	position: absolute;
+	margin-top:5px;
+}
+
+.HPText{
+	font-size:12px;
+	position: absolute;
+	margin-left:15px;
+	margin-top:20px;
+}
+
+.currHPText{
+	font-size:35px;
+	position: absolute;
+	margin-left:40px;
+	margin-top:5px;
+}
+
+.totalHPText{
+	font-size:25px;
+	position: absolute;
+	margin-left:90px;
+	margin-top:10px;
+}
+
+.popOutHeader{
+	margin-top:5px;
+}
+
+.popOutBody{
+	margin-top:25px;
+}
+
+.popOutText{
+	font-size:12px;
+	position: absolute;
+	margin-left:5px;
+	margin-right:5px;
+}
+
+.personalSkillHeader{
+	margin-top:20px;
+}
+
+.personalSkillBody{
+	margin-top:40px;
+}
+
+.centerText{ text-align: center; }
+.rightText{ text-align: right; }
+.whiteText{ color: white; }
+.redText{ color: #491107; }
+.tanText{ color: #E5C68D; }
+.boldText{ font-weight: bold; }
+.italicText{ font-style: italic; }
+
+.navy{ background-color: #332F40; }
+.paleTan{ background-color: #E5C68D; }
+.lightTan{ background-color: #e5d0aa; }
+.darkTan{ background-color: #BA7228; }
+.brown{ background-color: #965b1f !important; cursor: pointer; }
+.green{ background-color: #216619; }
+.blackBorder{ border: 1px solid black; }
