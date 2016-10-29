@@ -74,13 +74,18 @@ body{
 	filter: brightness(160%);
 }
 
+.hoverBrown:hover{
+	background-color: #965b1f !important;
+	cursor: pointer;
+}
+
 .healthBarBack{
 	position: absolute;
 	width: 15px;
 	height: 2px;
 	left: 0px;
 	bottom: -2px;
-	background-color: red;
+	background-color: dimgray;
 }
 
 .healthBarFront{
@@ -88,7 +93,7 @@ body{
 	height: 2px;
 	left: 0px;
 	bottom: -2px;
-	background-color: green;
+	background-color: red;
 }
 
 .healthBarBorder{
@@ -128,10 +133,6 @@ body{
 .infoElement{
 	position: absolute;
 	border-radius: 10px;
-}
-
-.infoElement span{
-	vertical-align:middle;
 }
 
 .indentedStatLabel{
@@ -221,6 +222,18 @@ body{
 	margin-top:40px;
 }
 
+.debuffBody{
+	margin-top:54px;
+}
+
+.weaponBuffBody{
+	margin-top:67px;
+}
+
+.pairUpBody{
+	margin-top:80px;
+}
+
 .centerText{ text-align: center; }
 .rightText{ text-align: right; }
 .whiteText{ color: white; }
@@ -233,6 +246,93 @@ body{
 .paleTan{ background-color: #E5C68D; }
 .lightTan{ background-color: #e5d0aa; }
 .darkTan{ background-color: #BA7228; }
-.brown{ background-color: #965b1f !important; cursor: pointer; }
 .green{ background-color: #216619; }
 .blackBorder{ border: 1px solid black; }
+
+.skillGemPos{
+	width:16px;
+	margin-left:605px;
+	height:16px;
+}
+
+.skillGemInfoPos{
+	width:250px;
+	margin-left:350px;
+	height:150px;
+}
+
+.statsPos{
+	width:85px;
+	margin-left:250px;
+	height:24px;
+}
+
+.statInfoPos{
+	width:250px;
+	margin-left:340px;
+	height:105px;
+}
+
+.atkHitPos{
+	width:130px;
+	margin-left:10px;
+	height:26px;
+}
+
+.critAvoPos{
+	width:120px;
+	margin-left:120px;
+	height:26px;
+}
+
+.movExpPos{
+	width:85px;
+	margin-left:155px;
+	height:25px;
+}
+
+.HpPos{
+	width:165px;
+	margin-left:10px;
+	margin-top:90px;
+	height:55px;
+}
+
+.classLvlPos{
+	margin-top:55px;
+	height:30px;
+}
+
+.pairUpIcoPos{
+	width:16px;
+	margin-left:570px;
+	margin-top:192px;
+	height:16px;
+}
+
+.pairUpInfoPos{
+	width:150px;
+	margin-left:415px;
+	margin-top:53px;
+	height:160px;
+}
+
+.weaponRankPos{
+	width:75px;
+	margin-top:184px;
+	height:24px;
+}
+
+.itemsPos{
+	width:250px;
+	margin-left:345px;
+	height:30px;
+}
+
+.charNamePos{
+	font-size:25px;
+	width:230px;
+	margin-left:10px;
+	margin-top:10px;
+	height:40px;
+}
