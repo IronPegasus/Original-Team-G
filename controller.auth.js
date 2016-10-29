@@ -68,12 +68,19 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
             range: 'Characatures!B3:AH3',
           }).then(function(response) {
         	 var row = response.result.values[0];
+        	 
+        	//Properly format image URLs
          	 for(var i = 0; i < spreadsheetData.values.length; i++){
         		 var str = row[i];
         		 if(str != ""){
         			 var start = str.indexOf("\"")+1;
             		 var end = str.lastIndexOf("\"");
             		 var url = str.substring(start, end);
+            		 
+            		 //Append "s" to "http" if needed
+            		 if(url.substring(0,5) != "https")
+            			 url = url.substring(0,4) + "s" + url.substring(4,url.length);
+            			 
             		 spreadsheetData.values[i].push(url); 
         		 }else{
         			 row.splice(i, 1);
