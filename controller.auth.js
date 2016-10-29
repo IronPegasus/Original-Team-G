@@ -192,7 +192,7 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
     
     function fetch(){
     	var request = new XMLHttpRequest();
-    	request.open('POST', 'LIB/text.txt', false);
+    	request.open('GET', 'LIB/text.txt', false);
     	request.send();
     	if (request.status == 200)
     		return request.responseText;
