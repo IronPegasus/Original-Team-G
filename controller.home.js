@@ -1,6 +1,8 @@
 app.controller('HomeCtrl', ['$scope', '$location', 'DataService', function ($scope, $location, DataService) {
     var onLoad = checkData();
     
+    //Reroutes the user if they haven't logged into the app
+    //Loads data from the DataService if they have
     function checkData(){
     	if(DataService.getSpreadsheet() == null)
     		$location.path('/');
@@ -10,10 +12,12 @@ app.controller('HomeCtrl', ['$scope', '$location', 'DataService', function ($sco
     	}
     };
     
+    //Sets the character to display in the information box
     $scope.displayData = function(index){
     	$scope.loadedChar = $scope.charaData[index];
     };
     
+    //Checks rate of atk/crit/hit/avo to see if they are greater than 0
     $scope.checkRate = function(index){
     	if($scope.loadedChar == undefined) return false;
     	
@@ -22,6 +26,7 @@ app.controller('HomeCtrl', ['$scope', '$location', 'DataService', function ($sco
     	else return false;
     };
     
+    //Checks if a weapon name is a valid type, so that weapon proficiency can be displayed
     $scope.existsWeapon = function(index){
     	if($scope.loadedChar == undefined) return false;
     	
@@ -34,7 +39,7 @@ app.controller('HomeCtrl', ['$scope', '$location', 'DataService', function ($sco
     		return false;
     };
     
-    //Comment 2
+    //Returns the icon route relevant to the passed weapon type
     $scope.weaponIcon = function(index){    	
     	var weaponName = $scope.loadedChar[index];
     	if(weaponName == "Sword"){ return "IMG/sword_rank.png";}
@@ -48,7 +53,11 @@ app.controller('HomeCtrl', ['$scope', '$location', 'DataService', function ($sco
     	return "";
     };
     
+    //Calculates the percentage of weapon proficicency for a specific weapon,
+    //then returns the width of the progress bar in pixels
     $scope.calcWeaponExp = function(index){
+    	if($scope.loadedChar == undefined) return 0;
+    	
     	var exp = $scope.loadedChar[index];
     	var slash = exp.indexOf("/");
     	var progress = parseInt(exp.substring(0,slash));
@@ -57,24 +66,31 @@ app.controller('HomeCtrl', ['$scope', '$location', 'DataService', function ($sco
     	return (progress/total) * 30;
     };
     
+    //Checks to see if the weapon name in the passed slot is null
     $scope.validWeapon = function(index){
     	if($scope.loadedChar == undefined) return false;
     	
     	var weaponName = $scope.loadedChar[index];
-    	if(weaponName != "-" && weaponName != "None" && weaponName != "- (-)")
+    	if(weaponName != "-" && weaponName != "- (-)")
     		return true;
     	else return false;
     };
     
+    /* Calculates total buff/debuffs for each stat (str/mag/skl/etc) and
+     * returns the appropriate text color.
+     * red (#af2b00) <- total<0
+     * blue (#42adf4) <- total>0
+     * tan (#E5C68D) <- total=0
+     */
     $scope.determineStatColor = function(stat){
     	var color = "#E5C68D"; //default tan
     	var debuff;
     	var weaponBuff;
     	var pairUp;
     	
-    	if($scope.loadedChar == undefined) return color;
+    	if($scope.loadedChar == undefined) return color; //returns tan
     	
-    	//Determine appropriate indicies for stat being evaluated
+    	//Determine appropriate indicies for stat being evaluated (passed string)
     	if(stat == "str"){
     		debuff = 19; weaponBuff = 45; pairUp = 59;
     	}else if(stat == "mag"){
@@ -89,7 +105,7 @@ app.controller('HomeCtrl', ['$scope', '$location', 'DataService', function ($sco
     		debuff = 24; weaponBuff = 50; pairUp = 64;
     	}else if(stat == "res"){
     		debuff = 25; weaponBuff = 51; pairUp = 65;
-    	}else{ return color; } //if string passed is invalid, quit
+    	}else{ return color; } //if string passed is invalid, return tan
     	
     	if($scope.loadedChar[debuff] == "") debuff = 0;
     	else debuff = parseInt($scope.loadedChar[debuff]);
@@ -107,6 +123,7 @@ app.controller('HomeCtrl', ['$scope', '$location', 'DataService', function ($sco
     	return color;
     };
     
+    //Checks if there is a value in the index
     $scope.validDebuff = function(index){
     	if($scope.loadedChar == undefined) return false;
     	
@@ -114,6 +131,7 @@ app.controller('HomeCtrl', ['$scope', '$location', 'DataService', function ($sco
     	else return true;
     };
     
+    //Checks if the value in the index is != 0
     $scope.validWeaponBuff = function(index){
     	if($scope.loadedChar == undefined) return false;
     	
@@ -122,6 +140,8 @@ app.controller('HomeCtrl', ['$scope', '$location', 'DataService', function ($sco
     	else return true;
     };
     
+    //Checks if the loaded character is a) paired with someone
+    //and b) if the stat has a buff that is != 0
     $scope.validPairUpBuff = function(index){
     	if($scope.loadedChar == undefined) return false;
     	if($scope.loadedChar[index] == "") return false;
@@ -131,6 +151,8 @@ app.controller('HomeCtrl', ['$scope', '$location', 'DataService', function ($sco
     	else return true;
     };
     
+    //For displaying skill gems, checks to see if the character's
+    //level >= lvlCap (passed in, value at which character obtains skill)
     $scope.checkLvl = function(lvlCap){
     	if($scope.loadedChar == undefined) return false;
     	

@@ -105,6 +105,12 @@ body{
 	border: 1px solid black;
 }
 
+.weaponRankLtrPos{
+	position: absolute;
+	left: 20px;
+	bottom: 2px;
+}
+
 .weaponRankBar{
 	position: absolute;
 	height: 3px;
@@ -306,7 +312,7 @@ body{
 .pairUpIcoPos{
 	width:16px;
 	margin-left:570px;
-	margin-top:192px;
+	margin-top:190px;
 	height:16px;
 }
 
@@ -319,7 +325,7 @@ body{
 
 .weaponRankPos{
 	width:75px;
-	margin-top:184px;
+	margin-top:188px;
 	height:24px;
 }
 

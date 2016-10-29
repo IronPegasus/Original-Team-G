@@ -37,6 +37,7 @@
 		<span class="currHPText">{{loadedChar[7]}}</span>
 		<span class="totalHPText"> / {{loadedChar[8]}}</span>
 	</div>
+	
 	<!--Attack-->
 	<div class="infoElement darkTan tanText atkHitPos" style="margin-top:150px">
 		<span class="indentedStatLabel">Atk</span>
@@ -63,7 +64,8 @@
 	</div>
 	
 	
-	<!--Character stats-->
+	<!--CHARACTER STATS (STR/MAG/SKL/ETC COLUMN)-->
+	<!--ng-mouseover and ng-mouseleave trigger the appearance of the info box for each stat-->
 	<!--Strength-->
 	<div class="infoElement darkTan tanText statsPos hoverBrown" ng-mouseover="showStr=true" ng-mouseleave="showStr=false" style="margin-top:10px">
 		<span class="indentedStatLabel">Str</span>
@@ -120,39 +122,41 @@
 	
 	
 	<!--Weapon ranks-->
-	<div ng-if="existsWeapon(28)" class="infoElement weaponRankPos" style="margin-left:345px">
+	<div ng-if="existsWeapon(28)" class="infoElement weaponRankPos" style="margin-left:355px">
 		<span style="position:relative">
 			<img ng-src="{{weaponIcon(28)}}" style="display:inline-block">
 			<div class="weaponRankBar" ng-style="{width:calcWeaponExp(4)+'px'}"></div>
 			<div class="weaponRankBorder"></div>
+			<div class="weaponRankLtrPos">{{loadedChar[29]}}</div>
 		</span>
-		<span>&nbsp;{{loadedChar[29]}}</span>
 	</div>
-	<div ng-if="existsWeapon(30)" class="infoElement weaponRankPos" style="margin-left:420px">
+	<div ng-if="existsWeapon(30)" class="infoElement weaponRankPos" style="margin-left:430px">
 		<span style="position:relative">
 			<img ng-src="{{weaponIcon(30)}}" style="display:inline-block">
 			<div class="weaponRankBar" ng-style="{width:calcWeaponExp(5)+'px'}"></div>
 			<div class="weaponRankBorder"></div>
+			<div class="weaponRankLtrPos">{{loadedChar[31]}}</div>
 		</span>
-		<span>&nbsp;{{loadedChar[31]}}</span>
 	</div>
-	<div ng-if="existsWeapon(32)" class="infoElement weaponRankPos" style="margin-left:495px">
+	<div ng-if="existsWeapon(32)" class="infoElement weaponRankPos" style="margin-left:505px">
 		<span style="position:relative">
 			<img ng-src="{{weaponIcon(32)}}" style="display:inline-block">
 			<div class="weaponRankBar" ng-style="{width:calcWeaponExp(6)+'px'}"></div>
 			<div class="weaponRankBorder"></div>
+			<div class="weaponRankLtrPos">{{loadedChar[33]}}</div>
 		</span>
-		<span>&nbsp;{{loadedChar[33]}}</span>
 	</div>
 	
 	
 	<!--Pair Up Icon-->
+	<!--ng-mouseover and ng-mouseleave trigger the appearance of the info box when you hover over the icon-->
 	<div class="infoElement hoverImage pairUpIcoPos" ng-mouseover="pairUp=true" ng-mouseleave="pairUp=false">
 		<img ng-src="IMG/pairup.png"></img>
 	</div>
 	
 	
 	<!--Skill Gems-->
+	<!--ng-mouseover and ng-mouseleave trigger the appearance of the info box for each skill-->
 	<div class="infoElement hoverImage skillGemPos" ng-mouseover="wGem=true" ng-mouseleave="wGem=false" style="margin-top:10px">
 		<img ng-src="IMG/white_skill.png"></img>
 	</div>
@@ -293,7 +297,7 @@
 	</div>
 	
 	
-	<!--Pair Up Stats-->
+	<!--Pair Up Stats Info-->
 	<div ng-if="pairUp" class="infoElement green whiteText pairUpInfoPos">
 		<div class="popOutText popOutHeader boldText">Pair Up Bonuses</div>
 		<div class="popOutText popOutBody">

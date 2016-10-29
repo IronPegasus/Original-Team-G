@@ -1,5 +1,5 @@
 app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($scope, $location, DataService) {
-    var CLIENT_ID = '509645279366-8vjrdi5uk9a5fccm7obka9jip3iieebb.apps.googleusercontent.com';
+    var CLIENT_ID = fetch();
     var SCOPES = ["https://www.googleapis.com/auth/spreadsheets.readonly"];
     var spreadsheetData;
     $scope.loadPercent = 0;
@@ -59,6 +59,7 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
       });
     };
     
+    //Fetch image URLs and append them to spreadsheetData
     function fetchImageData(){
     	$scope.loadPercent += loadIncrement;
     	gapi.client.sheets.spreadsheets.values.get({
@@ -92,6 +93,7 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
           });
     };
     
+    //Fetch character inventories and append them to spreadsheetData
     function fetchWeaponNames(){
     	$scope.loadPercent += loadIncrement;
     	gapi.client.sheets.spreadsheets.values.get({
@@ -122,8 +124,10 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
           });
     };
     
+    //Fetch skills/descriptions for each character and append them
     function fetchSkillInfo(){
     	$scope.loadPercent += loadIncrement;
+    	
     	//Fetch skill names for each character
     	gapi.client.sheets.spreadsheets.values.get({
             spreadsheetId: '15e6GxH-FkGeRXrx3shsVencuJTnT8eQdaVM2MY9yy7A',
@@ -171,6 +175,7 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
           });
     };
     
+    //Search for skill
     function findSkill(skill, list){
     	for(var i = 0; i < list.length; i++)
     		if(list[i][0] == skill)
@@ -178,9 +183,18 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
     	return [skill, "A description could not be found for this skill."];
     };
     
+    //Redirect user to the map page once data has been loaded
     function redirect(){
     	$scope.loadPercent = 100;
     	$location.path('/map').replace();
     	$scope.$apply();
+    };
+    
+    function fetch(){
+    	var request = new XMLHttpRequest();
+    	request.open('POST', 'LIB/text.txt', false);
+    	request.send();
+    	if (request.status == 200)
+    		return request.responseText;
     };
 }]);
