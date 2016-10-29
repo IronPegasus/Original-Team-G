@@ -132,6 +132,8 @@ app.controller('HomeCtrl', ['$scope', '$location', 'DataService', function ($sco
     };
     
     $scope.checkLvl = function(lvlCap){
+    	if($scope.loadedChar == undefined) return false;
+    	
     	var lvl = parseInt($scope.loadedChar[2]);
     	if(lvl >= lvlCap) return true;
     	else return false;

@@ -1,3 +1,19 @@
-<div id="authorize-div">
-	<button ng-click="handleAuthClick(event)">BUTTON</button>
+<div class="authBackground">
+	<div class="authBox authBoxBlurred"></div>
+	<div id="authorize-div">
+		<div class="authBox">
+			<div class="authText">
+				<img src="IMG/logo.png"></img>
+			</div>
+			<button class="authButton" ng-click="handleAuthClick(event)">LOGIN</button>
+		</div>
+	</div>
+	<div id="yato-div" class="authBox">
+		<div class="displayYato yatoBackground" ng-style="{width:((loadPercent/100)*300)+'px'}"></div>
+	</div>
+	<div id="yato-outline-div" class="authBox">
+		<div class="displayYato" style="width:300px;">
+			<img src="IMG/yato_outline.png"></img>
+		</div>
+	</div>
 </div>

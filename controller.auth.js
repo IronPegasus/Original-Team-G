@@ -2,6 +2,15 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
     var CLIENT_ID = '509645279366-8vjrdi5uk9a5fccm7obka9jip3iieebb.apps.googleusercontent.com';
     var SCOPES = ["https://www.googleapis.com/auth/spreadsheets.readonly"];
     var spreadsheetData;
+    $scope.loadPercent = 0;
+    var loadIncrement = 14;
+    
+    //Set div visibility
+    var authorizeDiv = document.getElementById('authorize-div');
+    var yatoDiv = document.getElementById('yato-div');
+    var yatoOutlineDiv = document.getElementById('yato-outline-div');
+    yatoDiv.style.display = 'none';
+    yatoOutlineDiv.style.display = 'none';
     
     //Check if current user has authorized this application.
     function checkAuth() {
@@ -14,16 +23,12 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
     };
 
     //Handle response from authorization server.
-    function handleAuthResult(authResult) {
-      var authorizeDiv = document.getElementById('authorize-div');
+    function handleAuthResult(authResult) {   
       if (authResult && !authResult.error) {
-        // Hide auth UI, then load client library.
-        authorizeDiv.style.display = 'none';
-        loadSheetsApi();
-      } else {
-        // Show auth UI, allowing the user to initiate authorization by
-        // clicking authorize button.
-        authorizeDiv.style.display = 'inline';
+    	  authorizeDiv.style.display = 'none';
+    	  yatoDiv.style.display = 'inline';
+    	  yatoOutlineDiv.style.display = 'inline';
+          loadSheetsApi();
       }
     };
 
@@ -43,6 +48,7 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
 
     //Fetch whole formatted spreadsheet
     function fetchSpreadsheetData() {
+      $scope.loadPercent += loadIncrement;
       gapi.client.sheets.spreadsheets.values.get({
         spreadsheetId: '15e6GxH-FkGeRXrx3shsVencuJTnT8eQdaVM2MY9yy7A',
         majorDimension: "ROWS",
@@ -54,6 +60,7 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
     };
     
     function fetchImageData(){
+    	$scope.loadPercent += loadIncrement;
     	gapi.client.sheets.spreadsheets.values.get({
             spreadsheetId: '15e6GxH-FkGeRXrx3shsVencuJTnT8eQdaVM2MY9yy7A',
             majorDimension: "ROWS",
@@ -79,6 +86,7 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
     };
     
     function fetchWeaponNames(){
+    	$scope.loadPercent += loadIncrement;
     	gapi.client.sheets.spreadsheets.values.get({
             spreadsheetId: '15e6GxH-FkGeRXrx3shsVencuJTnT8eQdaVM2MY9yy7A',
             majorDimension: "COLUMNS",
@@ -108,6 +116,7 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
     };
     
     function fetchSkillInfo(){
+    	$scope.loadPercent += loadIncrement;
     	//Fetch skill names for each character
     	gapi.client.sheets.spreadsheets.values.get({
             spreadsheetId: '15e6GxH-FkGeRXrx3shsVencuJTnT8eQdaVM2MY9yy7A',
@@ -115,6 +124,7 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
             range: 'Characatures!B35:AG42',
           }).then(function(response) {
         	  var skills = response.result.values;
+        	  $scope.loadPercent += loadIncrement;
         	  
         	  //Fetch normal skills and their matching descriptions
         	  gapi.client.sheets.spreadsheets.values.get({
@@ -123,6 +133,7 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
                   range: 'Skrillex!A1:B143',
                 }).then(function(response2) {
                 	 var skillDescriptions = response2.result.values;
+                	 $scope.loadPercent += loadIncrement;
                 	 
                 	 //Fetch personal skills and their matching descriptions
                 	 gapi.client.sheets.spreadsheets.values.get({
@@ -131,6 +142,8 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
                          range: 'Personal Skrillex!B2:C31',
                        }).then(function(response3) {
                     	   var personalSkillsDesc = response3.result.values;
+                    	   $scope.loadPercent += loadIncrement;
+                    	   
                     	   for(var i = 0; i < spreadsheetData.values.length; i++){
                        		 var charSkl = skills[i];
                        		 if(charSkl.length > 0){
