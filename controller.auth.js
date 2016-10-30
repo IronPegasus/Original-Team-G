@@ -1,6 +1,5 @@
 app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($scope, $location, DataService) {
-    var CLIENT_ID = fetch();
-    var SCOPES = ["https://www.googleapis.com/auth/spreadsheets.readonly"];
+    var id = fetch();
     var spreadsheetData;
     $scope.loadPercent = 0;
     var loadIncrement = 14;
@@ -11,39 +10,18 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
     var yatoOutlineDiv = document.getElementById('yato-outline-div');
     yatoDiv.style.display = 'none';
     yatoOutlineDiv.style.display = 'none';
-    
-    //Check if current user has authorized this application.
-    function checkAuth() {
-      gapi.auth.authorize(
-        {
-          'client_id': CLIENT_ID,
-          'scope': SCOPES.join(' '),
-          'immediate': true
-        }, handleAuthResult);
-    };
-
-    //Handle response from authorization server.
-    function handleAuthResult(authResult) {   
-      if (authResult && !authResult.error) {
-    	  authorizeDiv.style.display = 'none';
-    	  yatoDiv.style.display = 'inline';
-    	  yatoOutlineDiv.style.display = 'inline';
-          loadSheetsApi();
-      }
-    };
 
     //Initiate auth flow in response to user clicking authorize button.
-    $scope.handleAuthClick = function(event) {
-      gapi.auth.authorize(
-        {client_id: CLIENT_ID, scope: SCOPES, immediate: false},
-        handleAuthResult);
-      return false;
-    };
-    
-    //Load Sheets API client library
-    function loadSheetsApi() {
-      var discoveryUrl = 'https://sheets.googleapis.com/$discovery/rest?version=v4';
-      gapi.client.load(discoveryUrl).then(fetchSpreadsheetData);
+    $scope.loadAPI = function(event) {
+    	gapi.client.init({
+    		'apiKey': id, 
+    		'discoveryDocs': ["https://sheets.googleapis.com/$discovery/rest?version=v4"],
+    	}).then(function(){
+    		authorizeDiv.style.display = 'none';
+	      	yatoDiv.style.display = 'inline';
+	      	yatoOutlineDiv.style.display = 'inline';
+    		fetchSpreadsheetData();
+    	});
     };
 
     //Fetch whole formatted spreadsheet
