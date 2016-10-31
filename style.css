@@ -3,6 +3,19 @@ body{
 	width:100%;
 }
 
+.mapBox{
+	position:absolute;
+	top:0px;
+	left:0px;
+	height:100%;
+	width:100%;
+}
+
+.charDiv{
+	height:32px;
+	width:32px;
+}
+
 .authBackground{
 	position:absolute;
 	background-image: url("IMG/background.png");
@@ -70,38 +83,38 @@ body{
 }
 
 .hoverImage:hover{
-	cursor: pointer;
+	cursor: pointer !important;
 	filter: brightness(160%);
 }
 
 .hoverBrown:hover{
 	background-color: #965b1f !important;
-	cursor: pointer;
+	cursor: pointer !important;
 }
 
 .healthBarBack{
 	position: absolute;
-	width: 15px;
+	width: 28px;
 	height: 2px;
-	left: 0px;
-	bottom: -2px;
+	left: 2px;
+	top: 28px;
 	background-color: dimgray;
 }
 
 .healthBarFront{
 	position: absolute;
 	height: 2px;
-	left: 0px;
-	bottom: -2px;
+	left: 2px;
+	top: 28px;
 	background-color: red;
 }
 
 .healthBarBorder{
 	position: absolute;
-	width: 14px;
+	width: 27px;
 	height: 1px;
-	left: 0px;
-	bottom: -2px;
+	left: 2px;
+	top: 28px;
 	border: 1px solid black;
 }
 
@@ -130,10 +143,13 @@ body{
 
 .characterInfo{
 	background-color: #DAAC5E;
-	height: 218px;
-	width: 631px;
-	position: relative;
+	height:218px;
+	width:631px;
+	left:0px;
+	top:20px;
+	position: absolute;
 	font-family: "Verdana";
+	box-shadow: 1px 1px 10px black;
 }
 
 .infoElement{
@@ -252,6 +268,7 @@ body{
 .paleTan{ background-color: #E5C68D; }
 .lightTan{ background-color: #e5d0aa; }
 .darkTan{ background-color: #BA7228; }
+.olive{ background-color: #5e3913; }
 .green{ background-color: #216619; }
 .blackBorder{ border: 1px solid black; }
 
@@ -341,4 +358,35 @@ body{
 	margin-left:10px;
 	margin-top:10px;
 	height:40px;
+}
+
+.closeButton{
+	width:16px;
+	height:16px;
+	margin-left: calc(100% - 18px);
+	margin-top: -18px;
+}
+
+.dragBar{
+	width:100%;
+	height:20px;
+	margin-left:0px;
+	margin-top:-20px;
+}
+
+.dragBar:hover{
+	cursor:move;
+}
+
+.absolutePos{
+	position:absolute;
+}
+
+.mapCharCentered{
+	margin: auto;
+	position: absolute;
+	left:0;
+	right: 0;
+	top: 0;
+	bottom: 0;  
 }
