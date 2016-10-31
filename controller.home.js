@@ -1,5 +1,6 @@
 app.controller('HomeCtrl', ['$scope', '$location', 'DataService', function ($scope, $location, DataService) {
     var onLoad = checkData();
+    var charPos = ["Y34", "", "S41", "U39", "@37", "&40", "Z36", "", "R34", "%36", "T29", "R39", "R33", "+40", "T27", "S39", "W39", "V39", "#42", "", "V34", "X28", "X39", "Y33", "$42", "=39", "Q33", "W32", "@36", "Y38"];
     
     //Reroutes the user if they haven't logged into the app
     //Loads data from the DataService if they have
@@ -8,13 +9,18 @@ app.controller('HomeCtrl', ['$scope', '$location', 'DataService', function ($sco
     		$location.path('/');
     	else{
     		$scope.charaData = DataService.getSpreadsheet();
-    		$scope.loadedChar = $scope.charaData[0];
+    		//$scope.loadedChar = $scope.charaData[0];
     	}
     };
     
     //Sets the character to display in the information box
     $scope.displayData = function(index){
     	$scope.loadedChar = $scope.charaData[index];
+    };
+    
+    //Removes the character being displayed in the info box
+    $scope.removeData = function(){
+    	$scope.loadedChar = undefined;
     };
     
     //Checks rate of atk/crit/hit/avo to see if they are greater than 0
@@ -160,4 +166,77 @@ app.controller('HomeCtrl', ['$scope', '$location', 'DataService', function ($sco
     	if(lvl >= lvlCap) return true;
     	else return false;
     };
+    
+    $scope.determineX = function(index){
+    	var pos = charPos[index];
+    	if(pos == "") return "0px";
+    	
+    	pos = pos.substring(1,pos.length); //grab last 1-2 chars
+    	pos = parseInt(pos);
+    	return ((pos*34)+2) + "px";
+    };
+    
+    $scope.determineY = function(index){
+    	var pos = charPos[index];
+    	if(pos == "") return "0px";
+    	
+    	pos = pos.substring(0,1); //grab first char
+    	//If pos is a letter
+    	if(pos.match(/[A-Z]/i))
+    		return (-34*(64-pos.charCodeAt(0))+2) + "px";
+    	
+    	switch(pos){
+    		case '@': pos = 27; break;
+    		case '#': pos = 28; break;
+    		case '$': pos = 29; break;
+    		case '%': pos = 30; break;
+    		case '&': pos = 31; break;
+    		case '=': pos = 32; break;
+    		case '+': pos = 33; break;
+    		case '~': pos = 34; break;
+    		case ';': pos = 35; break;
+    		case '>': pos = 36; break;
+    		default: pos = 0; break;
+    	}
+    	
+    	return ((pos*34)+2) + "px";
+    };
+    
+    $scope.getInfoLeft = function(){
+    	return charInfoLeft;
+    };
+    
+    $scope.getInfoTop = function(){
+    	return charInfoTop;
+    };
+    
+    //SUPPORT FOR DRAGABILITY
+    function dragStart(event){
+    	var style = window.getComputedStyle(event.target, null);
+        event.dataTransfer.setData("text/html",(parseInt(style.getPropertyValue("left"),10) - event.clientX) + ',' + (parseInt(style.getPropertyValue("top"),10) - event.clientY));
+    };
+    
+    function dragOver(event){
+    	event.preventDefault();
+    	return false;
+    };
+    
+    function dragEnter(event){
+    	event.preventDefault();
+    };
+    
+    function dropDiv(event){
+    	event.preventDefault();
+    	var drag = document.getElementById('infoBox');
+    	var offset = event.dataTransfer.getData("text/html").split(',');
+    	drag.style.left = (event.clientX + parseInt(offset[0],10)) + 'px';
+    	drag.style.top = (event.clientY + parseInt(offset[1],10)) + 'px';
+    };
+    
+    var drag = document.getElementById('infoBox');
+    var drop = document.getElementById('dropArea');
+    drag.addEventListener('dragstart',dragStart,false);
+    drop.addEventListener('dragenter',dragEnter,false);
+    drop.addEventListener('dragover',dragOver,false);
+    drop.addEventListener('drop',dropDiv,false); 
 }]);
