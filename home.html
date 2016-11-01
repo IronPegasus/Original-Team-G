@@ -1,14 +1,153 @@
 <div id="dropArea" class="mapBox">
 	<img id="map" class="absolutePos" src="http://i.imgur.com/RJl1oFD.png"></img>
-	<div class="absolutePos charDiv" ng-style="{top: determineY($index), left: determineX($index)}" ng-repeat="character in charaData" id="char_{{$index}}">
+	
+	<!--Draw characters-->
+	<div class="absolutePos charDiv" ng-style="{top: determineY($index,0), left: determineX($index,0)}" ng-repeat="character in charaData" id="char_{{$index}}">
 		<img ng-src="{{character[99]}}" ng-click="displayData($index)" class="hoverImage mapCharCentered"></img>
 		<div class="healthBarBack"></div>
 		<div class="healthBarFront" ng-style="{width:((character[7]/character[8])*28)+'px'}"></div>
 		<div class="healthBarBorder"></div>
 	</div>
+	
+	<!--Draw enemies-->
+	<div class="absolutePos charDiv" ng-style="{top: determineY($index,1), left: determineX($index,1)}" ng-repeat="enemy in enemyData">
+		<img ng-src="{{kaden}}" ng-click="enemy_$index=!enemy_$index" class="hoverImage mapCharCentered" style="width:28px;"></img>
+		<div class="healthBarBack"></div>
+		<div class="healthBarFront" ng-style="{width:((enemy[5]/enemy[6])*28)+'px'}"></div>
+		<div class="healthBarBorder"></div>
+		
+		<!--ENEMY INFO BOX-->
+		<div class="infoElement enemyInfo" ng-if="enemy_$index==true">
+			<div class="infoElement navy whiteText" style="width:190px;height:38px;margin-left:5px;margin-top:5px">
+				<span class="boldText popOutText" style="margin-top:5px">{{enemy[0]}}</span><br>
+				<span class="popOutText">Lv. {{enemy[4]}} {{enemy[1]}}</span>
+			</div>
+			<div class="infoElement darkTan tanText" style="margin-left:5px;margin-top:48px;width:92px;height:19px;">
+				HP: {{enemy[5]}}/{{enemy[6]}}
+			</div>
+			<div class="infoElement darkTan tanText" style="margin-left:103px;margin-top:48px;width:92px;height:19px;">
+				Mov: {{enemy[14]}}
+			</div>
+			<div class="infoElement darkTan tanText" style="margin-left:5px;margin-top:72px;width:97px;height:19px;">
+				Atk: {{enemy[24]}}
+			</div>
+			<div class="infoElement darkTan tanText" style="margin-left:88px;margin-top:72px;width:102px;height:19px;">
+				Crit: {{enemy[26]}}
+			</div>
+			<div class="infoElement darkTan tanText" style="margin-left:5px;margin-top:96px;width:97px;height:19px;">
+				Hit: {{enemy[25]}}
+			</div>
+			<div class="infoElement darkTan tanText" style="margin-left:88px;margin-top:96px;width:102px;height:19px;">
+				Avo: {{enemy[27]}}
+			</div>
+			<div class="infoElement darkTan tanText" style="margin-left:5px;margin-top:120px;width:185px;height:19px;">
+				SHIELDS (eventually)
+			</div>
+			
+			<!--Skill Gems-->
+			<div class="infoElement hoverImage" style="margin-left:7px;margin-top:149px;width:16px;height:16px;">
+				<img ng-if="hasSkill($index,42)" title="Personal skill" ng-src="IMG/white_skill.png"></img>
+				<img ng-if="!hasSkill($index,42)" ng-src="IMG/blank_skill.png"></img>
+			</div>
+			<div class="infoElement hoverImage" style="margin-left:28px;margin-top:149px;width:16px;height:16px;">
+				<img ng-if="hasSkill($index,34)" ng-src="IMG/pink_skill.png"></img>
+				<img ng-if="!hasSkill($index,34)" ng-src="IMG/blank_skill.png"></img>
+			</div>
+			<div class="infoElement hoverImage" style="margin-left:49px;margin-top:149px;width:16px;height:16px;">
+				<img ng-if="hasSkill($index,35)" ng-src="IMG/red_skill.png"></img>
+				<img ng-if="!hasSkill($index,35)" ng-src="IMG/blank_skill.png"></img>
+			</div>
+			<div class="infoElement hoverImage" style="margin-left:70px;margin-top:149px;width:16px;height:16px;">
+				<img ng-if="hasSkill($index,36)" ng-src="IMG/orange_skill.png"></img>
+				<img ng-if="!hasSkill($index,36)" ng-src="IMG/blank_skill.png"></img>
+			</div>
+			<div class="infoElement hoverImage" style="margin-left:91px;margin-top:149px;width:16px;height:16px;">
+				<img ng-if="hasSkill($index,37)" ng-src="IMG/yellow_skill.png"></img>
+				<img ng-if="!hasSkill($index,37)" ng-src="IMG/blank_skill.png"></img>
+			</div>
+			<div class="infoElement hoverImage" style="margin-left:112px;margin-top:149px;width:16px;height:16px;">
+				<img ng-if="hasSkill($index,38)" ng-src="IMG/green_skill.png"></img>
+				<img ng-if="!hasSkill($index,38)" ng-src="IMG/blank_skill.png"></img>
+			</div>
+			<div class="infoElement hoverImage" style="margin-left:133px;margin-top:149px;width:16px;height:16px;">
+				<img ng-if="hasSkill($index,39)" ng-src="IMG/aqua_skill.png"></img>
+				<img ng-if="!hasSkill($index,39)" ng-src="IMG/blank_skill.png"></img>
+			</div>
+			<div class="infoElement hoverImage" style="margin-left:152px;margin-top:149px;width:16px;height:16px;">
+				<img ng-if="hasSkill($index,40)" ng-src="IMG/blue_skill.png"></img>
+				<img ng-if="!hasSkill($index,40)" ng-src="IMG/blank_skill.png"></img>
+			</div>
+			<div class="infoElement hoverImage" style="margin-left:171px;margin-top:149px;width:16px;height:16px;">
+				<img ng-if="hasSkill($index,41)" ng-src="IMG/purple_skill.png"></img>
+				<img ng-if="!hasSkill($index,41)" ng-src="IMG/blank_skill.png"></img>
+			</div>
+			
+			<!--Stats Column-->
+			<div class="infoElement darkTan tanText" style="margin-left:200px;margin-top:5px;width:92px;height:19px;">
+				Str: {{enemy[7]}}
+			</div>
+			<div class="infoElement darkTan tanText" style="margin-left:200px;margin-top:29px;width:92px;height:19px;">
+				Mag: {{enemy[8]}} 
+			</div>
+			<div class="infoElement darkTan tanText" style="margin-left:200px;margin-top:53px;width:92px;height:19px;">
+				Skl: {{enemy[9]}}
+			</div>
+			<div class="infoElement darkTan tanText" style="margin-left:200px;margin-top:77px;width:92px;height:19px;">
+				Spd: {{enemy[10]}}
+			</div>
+			<div class="infoElement darkTan tanText" style="margin-left:200px;margin-top:101px;width:92px;height:19px;">
+				Lck: {{enemy[11]}}
+			</div>
+			<div class="infoElement darkTan tanText" style="margin-left:200px;margin-top:125px;width:92px;height:19px;">
+				Def: {{enemy[12]}}
+			</div>
+			<div class="infoElement darkTan tanText" style="margin-left:200px;margin-top:149px;width:92px;height:19px;">
+				Res: {{enemy[13]}}
+			</div>
+			
+			<!--Item Inventory-->
+			<div class="infoElement lightTan redText" style="margin-left:297px;margin-top:5px;width:198px;height:19px;">
+				{{enemy[29]}}
+			</div>
+			<div class="infoElement paleTan redText" style="margin-left:297px;margin-top:29px;width:198px;height:19px;">
+				{{enemy[30]}}
+			</div>
+			<div class="infoElement paleTan redText" style="margin-left:297px;margin-top:53px;width:198px;height:19px;">
+				{{enemy[31]}}
+			</div>
+			<div class="infoElement paleTan redText" style="margin-left:297px;margin-top:77px;width:198px;height:19px;">
+				{{enemy[32]}}
+			</div>
+			<div class="infoElement paleTan redText" style="margin-left:297px;margin-top:101px;width:198px;height:19px;">
+				{{enemy[33]}}
+			</div>
+			
+			<!--Weapon ranks-->
+			<div ng-if="existsEnemyWeapon($index,43)" class="infoElement" style="margin-left:297px;margin-top:125px;height:24px;width:75px;">
+				<span style="position:relative">
+					<img ng-src="{{enemyWeaponIcon($index,43)}}" style="display:inline-block">
+					<div class="weaponRankLtrPos">{{enemy[44]}}</div>
+				</span>
+			</div>
+			<div ng-if="existsEnemyWeapon($index,45)" class="infoElement" style="margin-left:372px;margin-top:125px;height:24px;width:75px;">
+				<span style="position:relative">
+					<img ng-src="{{enemyWeaponIcon($index,45)}}" style="display:inline-block">
+					<div class="weaponRankLtrPos">{{enemy[46]}}</div>
+				</span>
+			</div>
+			<div ng-if="existsEnemyWeapon($index,47)" class="infoElement" style="margin-left:447px;margin-top:125px;height:24px;width:53px;">
+				<span style="position:relative">
+					<img ng-src="{{enemyWeaponIcon($index,47)}}" style="display:inline-block">
+					<div class="weaponRankLtrPos">{{enemy[48]}}</div>
+				</span>
+			</div>
+			
+		</div>
+	</div>
+</div>
 
 	<!-- SELECTED CHARACTER DATA BOX -->
-	<div id="infoBox" class="characterInfo" draggable="true" ng-show="loadedChar!=undefined">
+	<div id="infoBox" class="characterInfo floatAbove" draggable="true" ng-show="loadedChar!=undefined">
 		<!--Drag bar-->
 		<div class="absolutePos dragBar olive"></div>
 		<!--Close button-->

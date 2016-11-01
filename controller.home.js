@@ -1,14 +1,17 @@
 app.controller('HomeCtrl', ['$scope', '$location', 'DataService', function ($scope, $location, DataService) {
     var onLoad = checkData();
     var charPos = ["Y34", "", "S41", "U39", "@37", "&40", "Z36", "", "R34", "%36", "T29", "R39", "R33", "+40", "T27", "S39", "W39", "V39", "#42", "", "V34", "X28", "X39", "Y33", "$42", "=39", "Q33", "W32", "@36", "Y38"];
-    	
+    var enemyPos = ["S26", "&17", "K45", "M21", "~18", "S29", "", "S27", "W20", "@11", "%11", "", "K41", "J42", "T21", "H35", "N26", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];	
+    $scope.kaden = "https://vignette4.wikia.nocookie.net/fireemblem/images/3/34/FE14_Nishiki_Fox_Spirit_Map_Sprite.gif";
+    
     //Reroutes the user if they haven't logged into the app
     //Loads data from the DataService if they have
     function checkData(){
-    	if(DataService.getSpreadsheet() == null)
+    	if(DataService.getCharacters() == null)
     		$location.path('/');
     	else{
-    		$scope.charaData = DataService.getSpreadsheet();
+    		$scope.charaData = DataService.getCharacters();
+    		$scope.enemyData = DataService.getEnemies();
     		//$scope.loadedChar = $scope.charaData[0];
     	}
     };
@@ -52,8 +55,16 @@ app.controller('HomeCtrl', ['$scope', '$location', 'DataService', function ($sco
     //Checks if a weapon name is a valid type, so that weapon proficiency can be displayed
     $scope.existsWeapon = function(index){
     	if($scope.loadedChar == undefined) return false;
-    	
-    	var weaponName = $scope.loadedChar[index];
+    	var w = $scope.loadedChar[index];
+    	return compareWeaponName(w);
+    };
+    
+    $scope.existsEnemyWeapon = function(enemy,index){
+    	var w = $scope.enemyData[enemy][index];
+    	return compareWeaponName(w);
+    };
+    
+    function compareWeaponName(weaponName){
     	if(weaponName == "Sword" || weaponName == "Lance" || weaponName == "Axe"
     		|| weaponName == "Tome" || weaponName == "Knife" || weaponName == "Bow"
     		|| weaponName == "Stone" || weaponName == "Staff")
@@ -64,7 +75,16 @@ app.controller('HomeCtrl', ['$scope', '$location', 'DataService', function ($sco
     
     //Returns the icon route relevant to the passed weapon type
     $scope.weaponIcon = function(index){    	
-    	var weaponName = $scope.loadedChar[index];
+    	var w = $scope.loadedChar[index];
+    	return getIcon(w);
+    };
+    
+    $scope.enemyWeaponIcon = function(enemy,index){
+    	var w = $scope.enemyData[enemy][index];
+    	return getIcon(w);
+    };
+    
+    function getIcon(weaponName){
     	if(weaponName == "Sword"){ return "IMG/sword_rank.png";}
     	if(weaponName == "Lance"){ return "IMG/lance_rank.png";}
     	if(weaponName == "Axe"){ return "IMG/axe_rank.png"; }
@@ -184,8 +204,17 @@ app.controller('HomeCtrl', ['$scope', '$location', 'DataService', function ($sco
     	else return false;
     };
     
-    $scope.determineX = function(index){
-    	var pos = charPos[index];
+    //For displaying enemy skill gems, checks to see if the enemy has a
+    //skill name in that slot
+    $scope.hasSkill = function(enemy,index){
+    	if($scope.enemyData[enemy][index] != "-") return true;
+    	else return false;
+    };
+    
+    $scope.determineX = function(index, num){
+    	var pos;
+    	if(num == 0) pos = charPos[index];
+    	else pos = enemyPos[index];
     	if(pos == "") return "0px";
     	
     	pos = pos.substring(1,pos.length); //grab last 1-2 chars
@@ -193,8 +222,10 @@ app.controller('HomeCtrl', ['$scope', '$location', 'DataService', function ($sco
     	return ((pos*34)+2) + "px";
     };
     
-    $scope.determineY = function(index){
-    	var pos = charPos[index];
+    $scope.determineY = function(index, num){
+    	var pos;
+    	if(num == 0) pos = charPos[index];
+    	else pos = enemyPos[index];
     	if(pos == "") return "0px";
     	
     	pos = pos.substring(0,1); //grab first char

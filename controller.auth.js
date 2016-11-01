@@ -1,6 +1,9 @@
 app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($scope, $location, DataService) {
     var id = fetch();
-    var spreadsheetData;
+    var salvSheetId = '15e6GxH-FkGeRXrx3shsVencuJTnT8eQdaVM2MY9yy7A';
+    var characterData;
+    var enemyData;
+    
     $scope.loadPercent = 0;
     var loadIncrement = 14;
     
@@ -20,28 +23,28 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
     		authorizeDiv.style.display = 'none';
 	      	yatoDiv.style.display = 'inline';
 	      	yatoOutlineDiv.style.display = 'inline';
-    		fetchSpreadsheetData();
+    		fetchCharacterData();
     	});
     };
 
     //Fetch whole formatted spreadsheet
-    function fetchSpreadsheetData() {
+    function fetchCharacterData() {
       $scope.loadPercent += loadIncrement;
       gapi.client.sheets.spreadsheets.values.get({
-        spreadsheetId: '15e6GxH-FkGeRXrx3shsVencuJTnT8eQdaVM2MY9yy7A',
+        spreadsheetId: salvSheetId,
         majorDimension: "ROWS",
         range: 'Ugly Characatures!A3:CU32',
       }).then(function(response) {
-    	 spreadsheetData = response.result;
+    	 characterData = response.result;
     	 fetchImageData();
       });
     };
     
-    //Fetch image URLs and append them to spreadsheetData
+    //Fetch image URLs and append them to characterData
     function fetchImageData(){
     	$scope.loadPercent += loadIncrement;
     	gapi.client.sheets.spreadsheets.values.get({
-            spreadsheetId: '15e6GxH-FkGeRXrx3shsVencuJTnT8eQdaVM2MY9yy7A',
+            spreadsheetId: salvSheetId,
             majorDimension: "ROWS",
             valueRenderOption: "FORMULA",
             range: 'Characatures!B3:AH3',
@@ -49,7 +52,7 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
         	 var row = response.result.values[0];
         	 
         	//Properly format image URLs
-         	 for(var i = 0; i < spreadsheetData.values.length; i++){
+         	 for(var i = 0; i < characterData.values.length; i++){
         		 var str = row[i];
         		 if(str != ""){
         			 var start = str.indexOf("\"")+1;
@@ -60,28 +63,27 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
             		 if(url.substring(0,5) != "https")
             			 url = url.substring(0,4) + "s" + url.substring(4,url.length);
             			 
-            		 spreadsheetData.values[i].push(url); 
+            		 characterData.values[i].push(url); 
         		 }else{
         			 row.splice(i, 1);
         			 i-=1;
         		 }
         	 }
-        	 
         	 fetchWeaponNames();
           });
     };
     
-    //Fetch character inventories and append them to spreadsheetData
+    //Fetch character inventories and append them to characterData
     function fetchWeaponNames(){
     	$scope.loadPercent += loadIncrement;
     	gapi.client.sheets.spreadsheets.values.get({
-            spreadsheetId: '15e6GxH-FkGeRXrx3shsVencuJTnT8eQdaVM2MY9yy7A',
+            spreadsheetId: salvSheetId,
             majorDimension: "COLUMNS",
             range: 'Characatures!B27:AH31',
           }).then(function(response) {
         	  var weapons = response.result.values;
-         	  for(var i = 0; i < spreadsheetData.values.length; i++){
-         		 var charName = spreadsheetData.values[i][0];
+         	  for(var i = 0; i < characterData.values.length; i++){
+         		 var charName = characterData.values[i][0];
          		 if(charName == "Amy" || charName == "Asami" || charName == "Tristan"){
          			 //Dual column processing
          			 var column = weapons[i];
@@ -89,15 +91,14 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
          			 weapons.splice(i+1,1); //remove uses column, don't mess up alignment!
          			 
          			 for(var j = 0; j < column.length; j++)
-             			 spreadsheetData.values[i].push(column[j] + " (" + uses[j] + ")");
+             			 characterData.values[i].push(column[j] + " (" + uses[j] + ")");
          		 }else{
          			 //Normal column processing
          			 var column = weapons[i];
              		 for(var j = 0; j < column.length; j++)
-             			 spreadsheetData.values[i].push(column[j]);
+             			 characterData.values[i].push(column[j]);
          		 }
          	  }
-        	 
         	 fetchSkillInfo();
           });
     };
@@ -108,7 +109,7 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
     	
     	//Fetch skill names for each character
     	gapi.client.sheets.spreadsheets.values.get({
-            spreadsheetId: '15e6GxH-FkGeRXrx3shsVencuJTnT8eQdaVM2MY9yy7A',
+            spreadsheetId: salvSheetId,
             majorDimension: "COLUMNS",
             range: 'Characatures!B35:AG42',
           }).then(function(response) {
@@ -117,7 +118,7 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
         	  
         	  //Fetch normal skills and their matching descriptions
         	  gapi.client.sheets.spreadsheets.values.get({
-                  spreadsheetId: '15e6GxH-FkGeRXrx3shsVencuJTnT8eQdaVM2MY9yy7A',
+                  spreadsheetId: salvSheetId,
                   majorDimension: "ROWS",
                   range: 'Skrillex!A1:B143',
                 }).then(function(response2) {
@@ -126,30 +127,44 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
                 	 
                 	 //Fetch personal skills and their matching descriptions
                 	 gapi.client.sheets.spreadsheets.values.get({
-                         spreadsheetId: '15e6GxH-FkGeRXrx3shsVencuJTnT8eQdaVM2MY9yy7A',
+                         spreadsheetId: salvSheetId,
                          majorDimension: "ROWS",
                          range: 'Personal Skrillex!B2:C31',
                        }).then(function(response3) {
                     	   var personalSkillsDesc = response3.result.values;
                     	   $scope.loadPercent += loadIncrement;
                     	   
-                    	   for(var i = 0; i < spreadsheetData.values.length; i++){
+                    	   for(var i = 0; i < characterData.values.length; i++){
                        		 var charSkl = skills[i];
                        		 if(charSkl.length > 0){
                                  for(var j = 0; j < charSkl.length; j++){
-                                     spreadsheetData.values[i].push(findSkill(charSkl[j], skillDescriptions));
+                                     characterData.values[i].push(findSkill(charSkl[j], skillDescriptions));
                                  }
-                                 spreadsheetData.values[i].push(personalSkillsDesc[i]);
+                                 characterData.values[i].push(personalSkillsDesc[i]);
                        		 }else{
                        		     skills.splice(i,1);
                        		     i--;
                        		 }
                        	   }
                     	   
-	                       DataService.setSpreadsheet(spreadsheetData.values); //save compiled data
-	                       redirect(); //go to map page
+	                       DataService.setCharacters(characterData.values); //save compiled data
+	                       getEnemyData();
                        });
                 });
+          });
+    };
+    
+    //Fetch the entire contents of the enemies spreadsheet
+    function getEnemyData(){
+    	gapi.client.sheets.spreadsheets.values.get({
+            spreadsheetId: salvSheetId,
+            majorDimension: "ROWS",
+            range: 'Loser Cowards!A3:CD',
+          }).then(function(response) {
+       	   	  enemyData = response.result.values;
+       	   	  enemyData.splice(34,2); //temp solution to extra data in spreadsheet
+              DataService.setEnemies(enemyData); //save compiled data
+              redirect(); //go to map page
           });
     };
     
