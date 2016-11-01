@@ -256,6 +256,31 @@ body{
 	margin-top:80px;
 }
 
+.enemyStatLabel{
+	position: absolute;
+	font-size:10px;
+	margin-left:15px;
+	margin-top:4px;
+}
+
+.indentedEnemyStat{
+	position: absolute;
+	margin-left:45px;
+	margin-top:1px;
+}
+
+.indentedEnemyHPStat{
+	position: absolute;
+	margin-left:35px;
+	margin-top:1px;
+}
+
+.indentedEnemyItem{
+	position:absolute;
+	margin-left:10px;
+	margin-top:3px;
+};
+
 .centerText{ text-align: center; }
 .rightText{ text-align: right; }
 .whiteText{ color: white; }
@@ -363,10 +388,10 @@ body{
 
 .enemyInfo{
 	background-color: #DAAC5E;
-	width:500px;
+	width:483px;
 	height:173px;
-	margin-left:-505px;
-	margin-top:-34px;
+	margin-left:-488px;
+	margin-top:-69px;
 	box-shadow: 1px 1px 10px black;
 	z-index:1;
 }
@@ -391,6 +416,22 @@ body{
 
 .dragBar:hover{
 	cursor:move;
+}
+
+.glowBox{
+	position:absolute;
+	height:32px;
+	width:32px;
+	display:inline-block;
+}
+
+.glowBox:hover{
+	box-shadow: 0px 0px 10px #00ffff;
+	z-index:1;
+}
+
+.glowBoxIndent{
+	margin-left:36px;
 }
 
 .absolutePos{

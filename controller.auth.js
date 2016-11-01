@@ -162,7 +162,7 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
             range: 'Loser Cowards!A3:CD',
           }).then(function(response) {
        	   	  enemyData = response.result.values;
-       	   	  enemyData.splice(34,2); //temp solution to extra data in spreadsheet
+       	   	  enemyData.splice(40,2); //temp solution to extra data in spreadsheet
               DataService.setEnemies(enemyData); //save compiled data
               redirect(); //go to map page
           });

@@ -1,5 +1,10 @@
 <div id="dropArea" class="mapBox">
-	<img id="map" class="absolutePos" src="http://i.imgur.com/RJl1oFD.png"></img>
+	<img id="map" class="absolutePos" src="https://i.imgur.com/RJl1oFD.png"></img>
+	
+	<!--Draw tile names-->
+	<div ng-repeat="row in rows" class="glowBoxIndent absolutePos" ng-style="{top: determineGlowY($index)}">
+		<div class="glowBox" ng-repeat="(indexX,column) in columns" title="{{row}}{{column}}" ng-style="{left: determineGlowX(indexX)}"></div>
+	</div>
 	
 	<!--Draw characters-->
 	<div class="absolutePos charDiv" ng-style="{top: determineY($index,0), left: determineX($index,0)}" ng-repeat="character in charaData" id="char_{{$index}}">
@@ -18,30 +23,46 @@
 		
 		<!--ENEMY INFO BOX-->
 		<div class="infoElement enemyInfo" ng-if="enemy_$index==true">
-			<div class="infoElement navy whiteText" style="width:190px;height:38px;margin-left:5px;margin-top:5px">
+			<!--Name-->
+			<div class="infoElement navy whiteText" style="width:185px;height:38px;margin-left:5px;margin-top:5px">
 				<span class="boldText popOutText" style="margin-top:5px">{{enemy[0]}}</span><br>
 				<span class="popOutText">Lv. {{enemy[4]}} {{enemy[1]}}</span>
 			</div>
+			<!--HP-->
 			<div class="infoElement darkTan tanText" style="margin-left:5px;margin-top:48px;width:92px;height:19px;">
-				HP: {{enemy[5]}}/{{enemy[6]}}
+				<span class="enemyStatLabel">HP</span>
+				<span class="indentedEnemyHPStat">{{enemy[5]}}/{{enemy[6]}}</span>
 			</div>
-			<div class="infoElement darkTan tanText" style="margin-left:103px;margin-top:48px;width:92px;height:19px;">
-				Mov: {{enemy[14]}}
+			<!--Movement-->
+			<div class="infoElement darkTan tanText" style="margin-left:103px;margin-top:48px;width:87px;height:19px;">
+				<span class="enemyStatLabel">Mov</img></span>
+				<span class="indentedEnemyStat">{{enemy[14]}}</span>
 			</div>
+			<!--Attack-->
 			<div class="infoElement darkTan tanText" style="margin-left:5px;margin-top:72px;width:97px;height:19px;">
-				Atk: {{enemy[24]}}
+				<span class="enemyStatLabel">Atk</img></span>
+				<span class="indentedEnemyStat">{{enemy[24]}}</span>
 			</div>
+			<!--Critical-->
 			<div class="infoElement darkTan tanText" style="margin-left:88px;margin-top:72px;width:102px;height:19px;">
-				Crit: {{enemy[26]}}
+				<span class="enemyStatLabel">Crit</img></span>
+				<span class="indentedEnemyStat">{{enemy[26]}}</span>
 			</div>
+			<!--Hit-->
 			<div class="infoElement darkTan tanText" style="margin-left:5px;margin-top:96px;width:97px;height:19px;">
-				Hit: {{enemy[25]}}
+				<span class="enemyStatLabel">Hit</img></span>
+				<span class="indentedEnemyStat">{{enemy[25]}}</span>
 			</div>
+			<!--Avoidance-->
 			<div class="infoElement darkTan tanText" style="margin-left:88px;margin-top:96px;width:102px;height:19px;">
-				Avo: {{enemy[27]}}
+				<span class="enemyStatLabel">Avo</img></span>
+				<span class="indentedEnemyStat">{{enemy[27]}}</span>
 			</div>
-			<div class="infoElement darkTan tanText" style="margin-left:5px;margin-top:120px;width:185px;height:19px;">
-				SHIELDS (eventually)
+			<!--Shields-->
+			<div class="infoElement darkTan" style="margin-left:5px;margin-top:120px;width:185px;height:19px;">
+				<div style="margin-left:52px;margin-top:1px">
+					<img ng-if="!checkEShields($index,2)" src="IMG/emptyshield.png"/><img ng-if="checkEShields($index,2)" src="IMG/filledshield.png"/><img ng-if="!checkEShields($index,4)" src="IMG/emptyshield.png"/><img ng-if="checkEShields($index,4)" src="IMG/filledshield.png"/><img ng-if="!checkEShields($index,6)" src="IMG/emptyshield.png"/><img ng-if="checkEShields($index,6)" src="IMG/filledshield.png"/><img ng-if="!checkEShields($index,8)" src="IMG/emptyshield.png"/><img ng-if="checkEShields($index,8)" src="IMG/filledshield.png"/><img ng-if="!checkEShields($index,10)" src="IMG/emptyshield.png"/><img ng-if="checkEShields($index,10)" src="IMG/filledshield.png"/>
+				</div>
 			</div>
 			
 			<!--Skill Gems-->
@@ -83,59 +104,73 @@
 			</div>
 			
 			<!--Stats Column-->
-			<div class="infoElement darkTan tanText" style="margin-left:200px;margin-top:5px;width:92px;height:19px;">
-				Str: {{enemy[7]}}
+			<!--Strength-->
+			<div class="infoElement darkTan tanText" style="margin-left:195px;margin-top:5px;width:80px;height:19px;">
+				<span class="enemyStatLabel">Str</span>
+				<span class="indentedEnemyStat">{{enemy[7]}}</span>
 			</div>
-			<div class="infoElement darkTan tanText" style="margin-left:200px;margin-top:29px;width:92px;height:19px;">
-				Mag: {{enemy[8]}} 
+			<!--Magic-->
+			<div class="infoElement darkTan tanText" style="margin-left:195px;margin-top:29px;width:80px;height:19px;">
+				<span class="enemyStatLabel">Mag</span>
+				<span class="indentedEnemyStat">{{enemy[8]}}</span>
 			</div>
-			<div class="infoElement darkTan tanText" style="margin-left:200px;margin-top:53px;width:92px;height:19px;">
-				Skl: {{enemy[9]}}
+			<!--Skill-->
+			<div class="infoElement darkTan tanText" style="margin-left:195px;margin-top:53px;width:80px;height:19px;">
+				<span class="enemyStatLabel">Skl</span>
+				<span class="indentedEnemyStat">{{enemy[9]}}</span>
 			</div>
-			<div class="infoElement darkTan tanText" style="margin-left:200px;margin-top:77px;width:92px;height:19px;">
-				Spd: {{enemy[10]}}
+			<!--Speed-->
+			<div class="infoElement darkTan tanText" style="margin-left:195px;margin-top:77px;width:80px;height:19px;">
+				<span class="enemyStatLabel">Spd</span>
+				<span class="indentedEnemyStat">{{enemy[10]}}</span>
 			</div>
-			<div class="infoElement darkTan tanText" style="margin-left:200px;margin-top:101px;width:92px;height:19px;">
-				Lck: {{enemy[11]}}
+			<!--Luck-->
+			<div class="infoElement darkTan tanText" style="margin-left:195px;margin-top:101px;width:80px;height:19px;">
+				<span class="enemyStatLabel">Lck</span>
+				<span class="indentedEnemyStat">{{enemy[11]}}</span>
 			</div>
-			<div class="infoElement darkTan tanText" style="margin-left:200px;margin-top:125px;width:92px;height:19px;">
-				Def: {{enemy[12]}}
+			<!--Defense-->
+			<div class="infoElement darkTan tanText" style="margin-left:195px;margin-top:125px;width:80px;height:19px;">
+				<span class="enemyStatLabel">Def</span>
+				<span class="indentedEnemyStat">{{enemy[12]}}</span>
 			</div>
-			<div class="infoElement darkTan tanText" style="margin-left:200px;margin-top:149px;width:92px;height:19px;">
-				Res: {{enemy[13]}}
+			<!--Resistance-->
+			<div class="infoElement darkTan tanText" style="margin-left:195px;margin-top:149px;width:80px;height:19px;">
+				<span class="enemyStatLabel">Res</span>
+				<span class="indentedEnemyStat">{{enemy[13]}}</span>
 			</div>
 			
 			<!--Item Inventory-->
-			<div class="infoElement lightTan redText" style="margin-left:297px;margin-top:5px;width:198px;height:19px;">
-				{{enemy[29]}}
+			<div class="infoElement lightTan redText" style="margin-left:280px;margin-top:5px;width:198px;height:24px;">
+				<span class="indentedEnemyItem">{{enemy[29]}}</span>
 			</div>
-			<div class="infoElement paleTan redText" style="margin-left:297px;margin-top:29px;width:198px;height:19px;">
-				{{enemy[30]}}
+			<div class="infoElement paleTan redText" style="margin-left:280px;margin-top:34px;width:198px;height:24px;">
+				<span class="indentedEnemyItem">{{enemy[30]}}</span>
 			</div>
-			<div class="infoElement paleTan redText" style="margin-left:297px;margin-top:53px;width:198px;height:19px;">
-				{{enemy[31]}}
+			<div class="infoElement paleTan redText" style="margin-left:280px;margin-top:63px;width:198px;height:24px;">
+				<span class="indentedEnemyItem">{{enemy[31]}}</span>
 			</div>
-			<div class="infoElement paleTan redText" style="margin-left:297px;margin-top:77px;width:198px;height:19px;">
-				{{enemy[32]}}
+			<div class="infoElement paleTan redText" style="margin-left:280px;margin-top:92px;width:198px;height:24px;">
+				<span class="indentedEnemyItem">{{enemy[32]}}</span>
 			</div>
-			<div class="infoElement paleTan redText" style="margin-left:297px;margin-top:101px;width:198px;height:19px;">
-				{{enemy[33]}}
+			<div class="infoElement paleTan redText" style="margin-left:280px;margin-top:121px;width:198px;height:24px;">
+				<span class="indentedEnemyItem">{{enemy[33]}}</span>
 			</div>
 			
 			<!--Weapon ranks-->
-			<div ng-if="existsEnemyWeapon($index,43)" class="infoElement" style="margin-left:297px;margin-top:125px;height:24px;width:75px;">
+			<div ng-if="existsEnemyWeapon($index,43)" class="infoElement" style="margin-left:297px;margin-top:151px;height:24px;width:67px;">
 				<span style="position:relative">
 					<img ng-src="{{enemyWeaponIcon($index,43)}}" style="display:inline-block">
 					<div class="weaponRankLtrPos">{{enemy[44]}}</div>
 				</span>
 			</div>
-			<div ng-if="existsEnemyWeapon($index,45)" class="infoElement" style="margin-left:372px;margin-top:125px;height:24px;width:75px;">
+			<div ng-if="existsEnemyWeapon($index,45)" class="infoElement" style="margin-left:364px;margin-top:151px;height:24px;width:67px;">
 				<span style="position:relative">
 					<img ng-src="{{enemyWeaponIcon($index,45)}}" style="display:inline-block">
 					<div class="weaponRankLtrPos">{{enemy[46]}}</div>
 				</span>
 			</div>
-			<div ng-if="existsEnemyWeapon($index,47)" class="infoElement" style="margin-left:447px;margin-top:125px;height:24px;width:53px;">
+			<div ng-if="existsEnemyWeapon($index,47)" class="infoElement" style="margin-left:431px;margin-top:151px;height:24px;width:67px;">
 				<span style="position:relative">
 					<img ng-src="{{enemyWeaponIcon($index,47)}}" style="display:inline-block">
 					<div class="weaponRankLtrPos">{{enemy[48]}}</div>
