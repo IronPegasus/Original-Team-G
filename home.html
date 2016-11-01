@@ -1,6 +1,6 @@
 <div id="dropArea" class="mapBox">
-	<img class="absolutePos" src="http://i.imgur.com/RJl1oFD.png"></img>
-	<div class="absolutePos charDiv" ng-style="{top: determineY($index), left: determineX($index)}" ng-repeat="character in charaData">
+	<img id="map" class="absolutePos" src="http://i.imgur.com/RJl1oFD.png"></img>
+	<div class="absolutePos charDiv" ng-style="{top: determineY($index), left: determineX($index)}" ng-repeat="character in charaData" id="char_{{$index}}">
 		<img ng-src="{{character[99]}}" ng-click="displayData($index)" class="hoverImage mapCharCentered"></img>
 		<div class="healthBarBack"></div>
 		<div class="healthBarFront" ng-style="{width:((character[7]/character[8])*28)+'px'}"></div>
