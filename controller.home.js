@@ -1,7 +1,7 @@
 app.controller('HomeCtrl', ['$scope', '$location', 'DataService', function ($scope, $location, DataService) {
     var onLoad = checkData();
     var charPos = ["Y34", "", "S41", "U39", "@37", "&40", "Z36", "", "R34", "%36", "T29", "R39", "R33", "+40", "T27", "S39", "W39", "V39", "#42", "", "V34", "X28", "X39", "Y33", "$42", "=39", "Q33", "W32", "@36", "Y38"];
-    	
+    
     //Reroutes the user if they haven't logged into the app
     //Loads data from the DataService if they have
     function checkData(){
@@ -15,21 +15,7 @@ app.controller('HomeCtrl', ['$scope', '$location', 'DataService', function ($sco
     
     //Sets the character to display in the information box
     $scope.displayData = function(index){
-    	//Relocate the character information box relative to the mouse if not displayed
-    	if($scope.loadedChar == undefined){
-    		var x = event.pageX;
-        	var y = event.pageY;
-        	
-        	if(x < 670) x += 40;	
-        	else x -= 671;
-        	
-        	if(y < 109) y += 40;
-        	else y -= 218;
-        	
-        	drag.style.left = x + 'px';
-        	drag.style.top = y + 'px';
-    	}
-		$scope.loadedChar = $scope.charaData[index];
+    	$scope.loadedChar = $scope.charaData[index];
     };
     
     //Removes the character being displayed in the info box
@@ -249,11 +235,8 @@ app.controller('HomeCtrl', ['$scope', '$location', 'DataService', function ($sco
     
     var drag = document.getElementById('infoBox');
     var drop = document.getElementById('dropArea');
-    var map = document.getElementById('map');
     drag.addEventListener('dragstart',dragStart,false);
     drop.addEventListener('dragenter',dragEnter,false);
     drop.addEventListener('dragover',dragOver,false);
-    drop.addEventListener('drop',dropDiv,false);
-    drop.style.width = map.naturalWidth + 'px';
-	drop.style.height = map.naturalHeight + 'px';
+    drop.addEventListener('drop',dropDiv,false); 
 }]);
