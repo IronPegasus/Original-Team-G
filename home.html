@@ -1,4 +1,4 @@
-<div id="dropArea" class="mapBox">
+<div id="dropArea" class="mapBox" ng-init="calcNumColumns();calcNumRows();">
 	<img id="map" class="absolutePos" src="https://i.imgur.com/RJl1oFD.png"></img>
 	
 	<!--Draw tile names-->
@@ -15,14 +15,14 @@
 	</div>
 	
 	<!--Draw enemies-->
-	<div class="absolutePos charDiv" ng-style="{top: determineY($index,1), left: determineX($index,1)}" ng-repeat="enemy in enemyData">
+	<div class="absolutePos charDiv" ng-style="{top: determineY($index,1), left: determineX($index,1)}" ng-repeat="enemy in enemyData" id="enemy_{{$index}}">
 		<img ng-src="{{kaden}}" ng-click="enemy_$index=!enemy_$index" class="hoverImage mapCharCentered" style="width:28px;"></img>
 		<div class="healthBarBack"></div>
 		<div class="healthBarFront" ng-style="{width:((enemy[5]/enemy[6])*28)+'px'}"></div>
 		<div class="healthBarBorder"></div>
 		
 		<!--ENEMY INFO BOX-->
-		<div class="infoElement enemyInfo" ng-if="enemy_$index==true">
+		<div class="infoElement enemyInfo" ng-style="{top: displayEInfoY($index), left: displayEInfoX($index)}", ng-if="enemy_$index==true">
 			<!--Name-->
 			<div class="infoElement navy whiteText" style="width:185px;height:38px;margin-left:5px;margin-top:5px">
 				<span class="boldText popOutText" style="margin-top:5px">{{enemy[0]}}</span><br>
@@ -179,7 +179,6 @@
 			
 		</div>
 	</div>
-</div>
 
 	<!-- SELECTED CHARACTER DATA BOX -->
 	<div id="infoBox" class="characterInfo floatAbove" draggable="true" ng-show="loadedChar!=undefined">
@@ -190,7 +189,7 @@
 			<img src="IMG/close.png"></img>
 		</div>
 		<!--Name-->
-		<div class="infoElement navy whiteText centerText charNamePos">
+		<div class="infoElement navy whiteText charNamePos" style="text-align:center">
 			<span style="vertical-align:middle">{{loadedChar[0]}}</span>
 		</div>
 		<!--Primary class-->
@@ -285,19 +284,19 @@
 		
 		<!--Equipped items-->
 		<div class="infoElement lightTan redText itemsPos" title="Equipped weapon" style="margin-top:10px">
-			<span class="indentedWeaponName" ng-if="validWeapon(100)">{{loadedChar[100]}}</span>
+			<span class="indentedWeaponName" ng-if="validWeapon(100)">{{loadedChar[100][0]}}</span>
 		</div>
 		<div class="infoElement paleTan redText itemsPos" style="margin-top:45px">
-			<span class="indentedWeaponName" ng-if="validWeapon(101)">{{loadedChar[101]}}</span>
+			<span class="indentedWeaponName" ng-if="validWeapon(101)">{{loadedChar[101][0]}}</span>
 		</div>
 		<div class="infoElement paleTan redText itemsPos" style="margin-top:80px">
-			<span class="indentedWeaponName" ng-if="validWeapon(102)">{{loadedChar[102]}}</span>
+			<span class="indentedWeaponName" ng-if="validWeapon(102)">{{loadedChar[102][0]}}</span>
 		</div>
 		<div class="infoElement paleTan redText itemsPos" style="margin-top:115px">
-			<span class="indentedWeaponName" ng-if="validWeapon(103)">{{loadedChar[103]}}</span>
+			<span class="indentedWeaponName" ng-if="validWeapon(103)">{{loadedChar[103][0]}}</span>
 		</div>
 		<div class="infoElement paleTan redText itemsPos" style="margin-top:150px">
-			<span class="indentedWeaponName" ng-if="validWeapon(104)">{{loadedChar[104]}}</span>
+			<span class="indentedWeaponName" ng-if="validWeapon(104)">{{loadedChar[104][0]}}</span>
 		</div>
 		
 		

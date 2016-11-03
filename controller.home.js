@@ -1,10 +1,7 @@
 app.controller('HomeCtrl', ['$scope', '$location', 'DataService', function ($scope, $location, DataService) {
     var onLoad = checkData();
     var charPos = ["Y34", "", "S41", "U39", "@37", "&40", "Z36", "", "R34", "%36", "T29", "R39", "R33", "+40", "T27", "S39", "W39", "V39", "#42", "", "V34", "X28", "X39", "Y33", "$42", "=39", "Q33", "W32", "@36", "Y38"];
-    var enemyPos = ["S26", "&17", "K45", "M21", "~18", "S29", "", "S27", "W20", "@11", "%11", "", "K41", "J42", "T21", "H35", "N26", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];	
-    var rowNames = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "@", "#", "$", "%", "&", "=", "+", "~", ";", ">"];
-    $scope.rows = calcNumRows();
-    $scope.columns = calcNumColumns();
+    var enemyPos = ["S26", "&17", "K45", "M21", "~18", "S29", "", "S27", "W20", "@11", "%11", "", "K41", "J42", "T21", "H35", "N26", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];
     $scope.kaden = "https://vignette4.wikia.nocookie.net/fireemblem/images/3/34/FE14_Nishiki_Fox_Spirit_Map_Sprite.gif/revision/latest?cb=20151107160827";
     
     //Reroutes the user if they haven't logged into the app
@@ -19,28 +16,26 @@ app.controller('HomeCtrl', ['$scope', '$location', 'DataService', function ($sco
     	}
     };
     
-    function calcNumRows(){
+    $scope.calcNumRows = function(){
+    	var rowNames = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "@", "#", "$", "%", "&", "=", "+", "~", ";", ">"];
     	var map = document.getElementById('map');
     	var height = map.naturalHeight; //calculate the height of the map
     	
     	height -= 36;
     	height = height / 34;
-    	var ray = rowNames.slice(0, height+1);
-    	return ray;
+    	$scope.rows = rowNames.slice(0, height+1);
     };
     
-    function calcNumColumns(){
+   $scope.calcNumColumns = function(){
     	var map = document.getElementById('map');
     	var width = map.naturalWidth; //calculate the height of the map
     	
     	width -= 36;
     	width = width / 34;
-    	var ray = [];
+    	$scope.columns = [];
     	
     	for(var i = 0; i < width; i++)
-    		ray.push(i+1);
-    	
-    	return ray;
+    		$scope.columns.push(i+1);
     };
     
     //Sets the character to display in the information box
@@ -140,7 +135,7 @@ app.controller('HomeCtrl', ['$scope', '$location', 'DataService', function ($sco
     $scope.validWeapon = function(index){
     	if($scope.loadedChar == undefined) return false;
     	
-    	var weaponName = $scope.loadedChar[index];
+    	var weaponName = $scope.loadedChar[index][0];
     	if(weaponName != "-" && weaponName != "- (-)")
     		return true;
     	else return false;
@@ -292,12 +287,29 @@ app.controller('HomeCtrl', ['$scope', '$location', 'DataService', function ($sco
     	return temp;
     };
     
-    $scope.getInfoLeft = function(){
-    	return charInfoLeft;
+    $scope.displayEInfoY = function(index){
+    	var enemy = document.getElementById('enemy_'+index);
+    	var map = document.getElementById('map');
+    	var pageBottom = map.naturalHeight;
+    	var top = -69;
+    	var enemyTop = enemy.style.top;
+    	enemyTop = parseInt(enemyTop.substring(0,enemyTop.length-2));
+    	
+    	if(enemyTop < 69) top = 0;
+    	else if(enemyTop + 109 > pageBottom) top = -1* (pageBottom - enemyTop);
+    	
+    	return top + "px";
     };
     
-    $scope.getInfoTop = function(){
-    	return charInfoTop;
+    $scope.displayEInfoX = function(index){
+    	var enemy = document.getElementById('enemy_'+index);
+    	var enemyLeft = enemy.style.left;
+    	enemyLeft = parseInt(enemyLeft.substring(0,enemyLeft.length-2));
+    	var left = -488;
+    	
+    	if(enemyLeft + left < 0) left = 37;
+    	
+    	return left + "px";
     };
     
     //SUPPORT FOR DRAGABILITY

@@ -76,30 +76,46 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
     //Fetch character inventories and append them to characterData
     function fetchWeaponNames(){
     	$scope.loadPercent += loadIncrement;
+    	
+    	//Fetch inventories for each character
     	gapi.client.sheets.spreadsheets.values.get({
             spreadsheetId: salvSheetId,
             majorDimension: "COLUMNS",
             range: 'Characatures!B27:AH31',
           }).then(function(response) {
         	  var weapons = response.result.values;
-         	  for(var i = 0; i < characterData.values.length; i++){
-         		 var charName = characterData.values[i][0];
-         		 if(charName == "Amy" || charName == "Asami" || charName == "Tristan"){
-         			 //Dual column processing
-         			 var column = weapons[i];
-         			 var uses = weapons[i+1];
-         			 weapons.splice(i+1,1); //remove uses column, don't mess up alignment!
-         			 
-         			 for(var j = 0; j < column.length; j++)
-             			 characterData.values[i].push(column[j] + " (" + uses[j] + ")");
-         		 }else{
-         			 //Normal column processing
-         			 var column = weapons[i];
-             		 for(var j = 0; j < column.length; j++)
-             			 characterData.values[i].push(column[j]);
-         		 }
-         	  }
-        	 fetchSkillInfo();
+        	  
+        	  //Fetch weapon information sheet
+        	  gapi.client.sheets.spreadsheets.values.get({
+                  spreadsheetId: salvSheetId,
+                  majorDimension: "ROWS",
+                  range: 'Weapon Index!A2:T',
+                }).then(function(response2) {
+                  var wIndex = response2.result.values;
+	         	  for(var i = 0; i < characterData.values.length; i++){
+	         		 var charName = characterData.values[i][0];
+	         		 if(charName == "Amy" || charName == "Asami" || charName == "Tristan"){
+	         			 //Dual column processing
+	         			 var column = weapons[i];
+	         			 var uses = weapons[i+1];
+	         			 weapons.splice(i+1,1); //remove uses column, don't mess up alignment!
+	         			 
+	         			 for(var j = 0; j < column.length; j++){
+	         				var wRay = locateWeapon(column[j], wIndex);
+	         				wRay[0] = column[j] + " (" + uses[j] + ")"; //append name with (uses)
+	         				characterData.values[i].push(wRay);
+	         			 }
+	         		 }else{
+	         			 //Normal column processing
+	         			 var column = weapons[i];
+	             		 for(var j = 0; j < column.length; j++){
+	             			var wRay = locateWeapon(column[j], wIndex);
+	             			characterData.values[i].push(wRay);
+	             		 }
+	         		 }
+	         	  }
+	         	  fetchSkillInfo();
+                });
           });
     };
     
@@ -174,6 +190,16 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
     		if(list[i][0] == skill)
     			return list[i];
     	return [skill, "A description could not be found for this skill."];
+    };
+    
+    function locateWeapon(name, list){
+    	if(name.indexOf("(") != -1)
+    		name = name.substring(0,name.indexOf("(")-1);
+    	
+    	for(var i = 0; i < list.length; i++)
+    		if(list[i][0] == name)
+    			return list[i];
+    	return [name, "Mystery", "Mental", "0", "Z", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "Confusion", "0", "Couldn't find any data on this weapon."];
     };
     
     //Redirect user to the map page once data has been loaded
