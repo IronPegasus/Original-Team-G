@@ -1,5 +1,7 @@
 app.controller('HomeCtrl', ['$scope', '$location', 'DataService', function ($scope, $location, DataService) {
-    var onLoad = checkData();
+	$scope.rows = ["A"];
+    $scope.columns = ["1"];
+	var onLoad = checkData();
     var charPos = ["Y34", "", "S41", "U39", "@37", "&40", "Z36", "", "R34", "%36", "T29", "R39", "R33", "+40", "T27", "S39", "W39", "V39", "#42", "", "V34", "X28", "X39", "Y33", "$42", "=39", "Q33", "W32", "@36", "Y38"];
     var enemyPos = ["S26", "&17", "K45", "M21", "~18", "S29", "", "S27", "W20", "@11", "%11", "", "K41", "J42", "T21", "H35", "N26", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];
     $scope.kaden = "https://vignette4.wikia.nocookie.net/fireemblem/images/3/34/FE14_Nishiki_Fox_Spirit_Map_Sprite.gif/revision/latest?cb=20151107160827";
@@ -16,7 +18,7 @@ app.controller('HomeCtrl', ['$scope', '$location', 'DataService', function ($sco
     	}
     };
     
-    $scope.calcNumRows = function(){
+    function calcNumRows(){
     	var rowNames = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "@", "#", "$", "%", "&", "=", "+", "~", ";", ">"];
     	var map = document.getElementById('map');
     	var height = map.naturalHeight; //calculate the height of the map
@@ -26,7 +28,7 @@ app.controller('HomeCtrl', ['$scope', '$location', 'DataService', function ($sco
     	$scope.rows = rowNames.slice(0, height+1);
     };
     
-   $scope.calcNumColumns = function(){
+   function calcNumColumns(){
     	var map = document.getElementById('map');
     	var width = map.naturalWidth; //calculate the height of the map
     	
@@ -379,4 +381,7 @@ app.controller('HomeCtrl', ['$scope', '$location', 'DataService', function ($sco
     drop.addEventListener('drop',dropDiv,false);
     drop.style.width = map.naturalWidth + 'px';
 	drop.style.height = map.naturalHeight + 'px';
+	
+	calcNumRows();
+	calcNumColumns();
 }]);
