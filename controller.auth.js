@@ -1,19 +1,15 @@
 app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($scope, $location, DataService) {
     var id = fetch();
+    $scope.loadingIcon = pickLoadingIcon();
     var salvSheetId = '15e6GxH-FkGeRXrx3shsVencuJTnT8eQdaVM2MY9yy7A';
     var characterData;
     var enemyData;
     var wIndex;
     
-    $scope.loadPercent = 0;
-    var loadIncrement = 14;
-    
     //Set div visibility
     var authorizeDiv = document.getElementById('authorize-div');
-    var yatoDiv = document.getElementById('yato-div');
-    var yatoOutlineDiv = document.getElementById('yato-outline-div');
-    yatoDiv.style.display = 'none';
-    yatoOutlineDiv.style.display = 'none';
+    var loadingDiv = document.getElementById('loading-div');
+    loadingDiv.style.display = 'none';
 
     //Initiate auth flow in response to user clicking authorize button.
     $scope.loadAPI = function(event) {
@@ -22,15 +18,33 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
     		'discoveryDocs': ["https://sheets.googleapis.com/$discovery/rest?version=v4"],
     	}).then(function(){
     		authorizeDiv.style.display = 'none';
-	      	yatoDiv.style.display = 'inline';
-	      	yatoOutlineDiv.style.display = 'inline';
+    		loadingDiv.style.display = 'inline';
     		fetchCharacterData();
     	});
+    };
+    
+    function pickLoadingIcon(){
+    	var rand = Math.floor((Math.random() * 14) + 1); //generate a number between one and twelve
+    	switch(rand){
+	    	case 1: return "IMG/cavalier.gif"; break;
+	    	case 2: return "IMG/darkmage.gif"; break;
+	    	case 3: return "IMG/diviner.gif"; break;
+	    	case 4: return "IMG/fighter.gif"; break;
+	    	case 5: return "IMG/kitsune.gif"; break;
+	    	case 6: return "IMG/knight.gif"; break;
+	    	case 7: return "IMG/ninja.gif"; break;
+	    	case 8: return "IMG/samurai.gif"; break;
+	    	case 9: return "IMG/spearfighter.gif"; break;
+	    	case 10: return "IMG/thief.gif"; break;
+	    	case 11: return "IMG/archer.gif"; break;
+	    	case 12: return "IMG/skyknight.gif"; break;
+	    	case 13: return "IMG/wolfskin.gif"; break;
+	    	case 14: return "IMG/troubadour.gif"; break;
+    	}
     };
 
     //Fetch whole formatted spreadsheet
     function fetchCharacterData() {
-      $scope.loadPercent += loadIncrement;
       gapi.client.sheets.spreadsheets.values.get({
         spreadsheetId: salvSheetId,
         majorDimension: "ROWS",
@@ -43,7 +57,6 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
     
     //Fetch image URLs and append them to characterData
     function fetchImageData(){
-    	$scope.loadPercent += loadIncrement;
     	gapi.client.sheets.spreadsheets.values.get({
             spreadsheetId: salvSheetId,
             majorDimension: "ROWS",
@@ -76,8 +89,6 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
     
     //Fetch character inventories and append them to characterData
     function fetchWeaponNames(){
-    	$scope.loadPercent += loadIncrement;
-    	
     	//Fetch inventories for each character
     	gapi.client.sheets.spreadsheets.values.get({
             spreadsheetId: salvSheetId,
@@ -122,8 +133,6 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
     
     //Fetch skills/descriptions for each character and append them
     function fetchSkillInfo(){
-    	$scope.loadPercent += loadIncrement;
-    	
     	//Fetch skill names for each character
     	gapi.client.sheets.spreadsheets.values.get({
             spreadsheetId: salvSheetId,
@@ -131,7 +140,6 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
             range: 'Characatures!B35:AG42',
           }).then(function(response) {
         	  var skills = response.result.values;
-        	  $scope.loadPercent += loadIncrement;
         	  
         	  //Fetch normal skills and their matching descriptions
         	  gapi.client.sheets.spreadsheets.values.get({
@@ -140,7 +148,6 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
                   range: 'Skrillex!A1:B143',
                 }).then(function(response2) {
                 	 var skillDescriptions = response2.result.values;
-                	 $scope.loadPercent += loadIncrement;
                 	 
                 	 //Fetch personal skills and their matching descriptions
                 	 gapi.client.sheets.spreadsheets.values.get({
@@ -149,7 +156,6 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
                          range: 'Personal Skrillex!B2:C31',
                        }).then(function(response3) {
                     	   var personalSkillsDesc = response3.result.values;
-                    	   $scope.loadPercent += loadIncrement;
                     	   
                     	   for(var i = 0; i < characterData.values.length; i++){
                        		 var charSkl = skills[i];
