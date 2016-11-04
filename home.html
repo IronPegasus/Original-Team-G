@@ -142,19 +142,24 @@
 			
 			<!--Item Inventory-->
 			<div class="infoElement lightTan redText" style="margin-left:280px;margin-top:5px;width:198px;height:24px;">
-				<span class="indentedEnemyItem">{{enemy[29]}}</span>
+				<span class="indentedEWeaponIcon" ng-if="validEnemyWeapon($index,29)"><img ng-src="{{getEnemyWeaponClassIcon($index,29)}}"/></span>
+				<span class="indentedEnemyItem">{{enemy[29][0]}}</span>
 			</div>
 			<div class="infoElement paleTan redText" style="margin-left:280px;margin-top:34px;width:198px;height:24px;">
-				<span class="indentedEnemyItem">{{enemy[30]}}</span>
+				<span class="indentedEWeaponIcon" ng-if="validEnemyWeapon($index,30)"><img ng-src="{{getEnemyWeaponClassIcon($index,30)}}"/></span>
+				<span class="indentedEnemyItem">{{enemy[30][0]}}</span>
 			</div>
 			<div class="infoElement paleTan redText" style="margin-left:280px;margin-top:63px;width:198px;height:24px;">
-				<span class="indentedEnemyItem">{{enemy[31]}}</span>
+				<span class="indentedEWeaponIcon" ng-if="validEnemyWeapon($index,31)"><img ng-src="{{getEnemyWeaponClassIcon($index,31)}}"/></span>
+				<span class="indentedEnemyItem">{{enemy[31][0]}}</span>
 			</div>
 			<div class="infoElement paleTan redText" style="margin-left:280px;margin-top:92px;width:198px;height:24px;">
-				<span class="indentedEnemyItem">{{enemy[32]}}</span>
+				<span class="indentedEWeaponIcon" ng-if="validEnemyWeapon($index,32)"><img ng-src="{{getEnemyWeaponClassIcon($index,32)}}"/></span>
+				<span class="indentedEnemyItem">{{enemy[32][0]}}</span>
 			</div>
 			<div class="infoElement paleTan redText" style="margin-left:280px;margin-top:121px;width:198px;height:24px;">
-				<span class="indentedEnemyItem">{{enemy[33]}}</span>
+				<span class="indentedEWeaponIcon" ng-if="validEnemyWeapon($index,33)"><img ng-src="{{getEnemyWeaponClassIcon($index,33)}}"/></span>
+				<span class="indentedEnemyItem">{{enemy[33][0]}}</span>
 			</div>
 			
 			<!--Weapon ranks-->
@@ -194,7 +199,7 @@
 		</div>
 		<!--Primary class-->
 		<div class="infoElement paleTan redText classLvlPos" style="width:215px;margin-left:10px">
-			<span class="indentedWeaponName">{{loadedChar[1]}}</span>
+			<span class="indentedClassName">{{loadedChar[1]}}</span>
 		</div>
 		<!--Current level-->
 		<div class="infoElement paleTan redText classLvlPos" style="width:55px;margin-left:180px">
@@ -283,19 +288,24 @@
 		
 		
 		<!--Equipped items-->
-		<div class="infoElement lightTan redText itemsPos" title="Equipped weapon" style="margin-top:10px">
+		<div class="infoElement lightTan redText itemsPos" ng-mouseenter="wpn1=true" ng-mouseleave="wpn1=false" style="margin-top:10px">
+			<span class="indentedWeaponIcon" ng-if="validWeapon(100)"><img ng-src="{{getWeaponClassIcon(100)}}"/></span>
 			<span class="indentedWeaponName" ng-if="validWeapon(100)">{{loadedChar[100][0]}}</span>
 		</div>
-		<div class="infoElement paleTan redText itemsPos" style="margin-top:45px">
+		<div class="infoElement paleTan redText itemsPos" ng-mouseenter="wpn2=true" ng-mouseleave="wpn2=false" style="margin-top:45px">
+			<span class="indentedWeaponIcon" ng-if="validWeapon(101)"><img ng-src="{{getWeaponClassIcon(101)}}"/></span>
 			<span class="indentedWeaponName" ng-if="validWeapon(101)">{{loadedChar[101][0]}}</span>
 		</div>
-		<div class="infoElement paleTan redText itemsPos" style="margin-top:80px">
+		<div class="infoElement paleTan redText itemsPos" ng-mouseenter="wpn3=true" ng-mouseleave="wpn3=false" style="margin-top:80px">
+			<span class="indentedWeaponIcon" ng-if="validWeapon(102)"><img ng-src="{{getWeaponClassIcon(102)}}"/></span>
 			<span class="indentedWeaponName" ng-if="validWeapon(102)">{{loadedChar[102][0]}}</span>
 		</div>
-		<div class="infoElement paleTan redText itemsPos" style="margin-top:115px">
+		<div class="infoElement paleTan redText itemsPos" ng-mouseenter="wpn4=true" ng-mouseleave="wpn4=false" style="margin-top:115px">
+			<span class="indentedWeaponIcon" ng-if="validWeapon(103)"><img ng-src="{{getWeaponClassIcon(103)}}"/></span>
 			<span class="indentedWeaponName" ng-if="validWeapon(103)">{{loadedChar[103][0]}}</span>
 		</div>
-		<div class="infoElement paleTan redText itemsPos" style="margin-top:150px">
+		<div class="infoElement paleTan redText itemsPos" ng-mouseenter="wpn5=true" ng-mouseleave="wpn5=false" style="margin-top:150px">
+			<span class="indentedWeaponIcon" ng-if="validWeapon(104)"><img ng-src="{{getWeaponClassIcon(104)}}"/></span>
 			<span class="indentedWeaponName" ng-if="validWeapon(104)">{{loadedChar[104][0]}}</span>
 		</div>
 		
@@ -304,24 +314,24 @@
 		<div ng-if="existsWeapon(28)" class="infoElement weaponRankPos" style="margin-left:355px">
 			<span style="position:relative">
 				<img ng-src="{{weaponIcon(28)}}" style="display:inline-block">
+				<div class="weaponRankBackground"></div>
 				<div class="weaponRankBar" ng-style="{width:calcWeaponExp(4)+'px'}"></div>
-				<div class="weaponRankBorder"></div>
 				<div class="weaponRankLtrPos">{{loadedChar[29]}}</div>
 			</span>
 		</div>
 		<div ng-if="existsWeapon(30)" class="infoElement weaponRankPos" style="margin-left:430px">
 			<span style="position:relative">
 				<img ng-src="{{weaponIcon(30)}}" style="display:inline-block">
+				<div class="weaponRankBackground"></div>
 				<div class="weaponRankBar" ng-style="{width:calcWeaponExp(5)+'px'}"></div>
-				<div class="weaponRankBorder"></div>
 				<div class="weaponRankLtrPos">{{loadedChar[31]}}</div>
 			</span>
 		</div>
 		<div ng-if="existsWeapon(32)" class="infoElement weaponRankPos" style="margin-left:505px">
 			<span style="position:relative">
 				<img ng-src="{{weaponIcon(32)}}" style="display:inline-block">
+				<div class="weaponRankBackground"></div>
 				<div class="weaponRankBar" ng-style="{width:calcWeaponExp(6)+'px'}"></div>
-				<div class="weaponRankBorder"></div>
 				<div class="weaponRankLtrPos">{{loadedChar[33]}}</div>
 			</span>
 		</div>
@@ -475,6 +485,42 @@
 			</div>
 		</div>
 		
+		<!--Weapon Info Boxes-->
+		<div class="infoElement green whiteText itemInfoPos" ng-if="wpn1 && validWeapon(100)" style="margin-top:45px">
+			<span class="popOutText popOutHeader">Class: {{loadedChar[100][1]}}</span><br>
+			<span class="popOutText popOutTextSpacing">Type: {{loadedChar[100][2]}}</span><br>
+			<span class="popOutText popOutTextSpacing" ng-if="hasWeaponRank(100)">Rank: {{loadedChar[100][4]}}</span><br>
+			<span class="popOutText popOutTextSpacing" ng-if="hasWeaponRange(100)">Range: {{loadedChar[100][18]}}</span><br>
+			<span class="popOutText popOutTextSpacing" ng-if="weaponHasDes(100)">{{loadedChar[100][19]}}</span>
+		</div>
+		<div class="infoElement green whiteText itemInfoPos" ng-if="wpn2 && validWeapon(101)" style="margin-top:80px">
+			<span class="popOutText popOutHeader">Class: {{loadedChar[101][1]}}</span><br>
+			<span class="popOutText popOutTextSpacing">Type: {{loadedChar[101][2]}}</span><br>
+			<span class="popOutText popOutTextSpacing" ng-if="hasWeaponRank(101)">Rank: {{loadedChar[101][4]}}</span><br>
+			<span class="popOutText popOutTextSpacing" ng-if="hasWeaponRange(101)">Range: {{loadedChar[101][18]}}</span><br>
+			<span class="popOutText popOutTextSpacing" ng-if="weaponHasDes(101)">{{loadedChar[101][19]}}</span>
+		</div>
+		<div class="infoElement green whiteText itemInfoPos" ng-if="wpn3 && validWeapon(102)" style="margin-top:115px">
+			<span class="popOutText popOutHeader">Class: {{loadedChar[102][1]}}</span><br>
+			<span class="popOutText popOutTextSpacing">Type: {{loadedChar[102][2]}}</span><br>
+			<span class="popOutText popOutTextSpacing" ng-if="hasWeaponRank(102)">Rank: {{loadedChar[102][4]}}</span><br>
+			<span class="popOutText popOutTextSpacing" ng-if="hasWeaponRange(102)">Range: {{loadedChar[102][18]}}</span><br>
+			<span class="popOutText popOutTextSpacing" ng-if="weaponHasDes(102)">{{loadedChar[102][19]}}</span>
+		</div>
+		<div class="infoElement green whiteText itemInfoPos" ng-if="wpn4 && validWeapon(103)" style="margin-top:5px">
+			<span class="popOutText popOutHeader">Class: {{loadedChar[103][1]}}</span><br>
+			<span class="popOutText popOutTextSpacing">Type: {{loadedChar[103][2]}}</span><br>
+			<span class="popOutText popOutTextSpacing" ng-if="hasWeaponRank(103)">Rank: {{loadedChar[103][4]}}</span><br>
+			<span class="popOutText popOutTextSpacing" ng-if="hasWeaponRange(103)">Range: {{loadedChar[103][18]}}</span><br>
+			<span class="popOutText popOutTextSpacing" ng-if="weaponHasDes(103)">{{loadedChar[103][19]}}</span>
+		</div>
+		<div class="infoElement green whiteText itemInfoPos" ng-if="wpn5 && validWeapon(104)" style="margin-top:45px">
+			<span class="popOutText popOutHeader">Class: {{loadedChar[104][1]}}</span><br>
+			<span class="popOutText popOutTextSpacing">Type: {{loadedChar[104][2]}}</span><br>
+			<span class="popOutText popOutTextSpacing" ng-if="hasWeaponRank(104)">Rank: {{loadedChar[104][4]}}</span><br>
+			<span class="popOutText popOutTextSpacing" ng-if="hasWeaponRange(104)">Range: {{loadedChar[104][18]}}</span><br>
+			<span class="popOutText popOutTextSpacing" ng-if="weaponHasDes(104)">{{loadedChar[104][19]}}</span>
+		</div>
 		
 		<!--Pair Up Stats Info-->
 		<div ng-if="pairUp" class="infoElement green whiteText pairUpInfoPos">

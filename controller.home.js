@@ -141,6 +141,41 @@ app.controller('HomeCtrl', ['$scope', '$location', 'DataService', function ($sco
     	else return false;
     };
     
+    $scope.validEnemyWeapon = function(enemy, index){
+    	var weaponName = $scope.enemyData[enemy][index][0];
+    	if(weaponName != "")
+    		return true;
+    	else return false;
+    };
+    
+    $scope.weaponHasDes = function(index){
+    	if($scope.loadedChar == undefined) return false;
+    	return $scope.loadedChar[index].length == 20;
+    };
+    
+    $scope.hasWeaponRange = function(index){
+    	if($scope.loadedChar == undefined) return false;
+    	return $scope.loadedChar[index][18] != "";
+    };
+    
+    $scope.hasWeaponRank = function(index){
+    	if($scope.loadedChar == undefined) return false;
+    	return $scope.loadedChar[index][4] != "";
+    };
+    
+    $scope.getWeaponClassIcon = function(index){
+    	if($scope.loadedChar == undefined) return false;
+    	var type = $scope.loadedChar[index][1];
+    	type = type.toLowerCase();
+    	return "IMG/type_" + type + ".png";
+    };
+    
+    $scope.getEnemyWeaponClassIcon = function(enemy,index){
+    	var type = $scope.enemyData[enemy][index][1];
+    	type = type.toLowerCase();
+    	return "IMG/type_" + type + ".png";
+    };
+    
     /* Calculates total buff/debuffs for each stat (str/mag/skl/etc) and
      * returns the appropriate text color.
      * red (#af2b00) <- total<0

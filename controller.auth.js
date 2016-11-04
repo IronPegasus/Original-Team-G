@@ -3,6 +3,7 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
     var salvSheetId = '15e6GxH-FkGeRXrx3shsVencuJTnT8eQdaVM2MY9yy7A';
     var characterData;
     var enemyData;
+    var wIndex;
     
     $scope.loadPercent = 0;
     var loadIncrement = 14;
@@ -91,7 +92,7 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
                   majorDimension: "ROWS",
                   range: 'Weapon Index!A2:T',
                 }).then(function(response2) {
-                  var wIndex = response2.result.values;
+                  wIndex = response2.result.values;
 	         	  for(var i = 0; i < characterData.values.length; i++){
 	         		 var charName = characterData.values[i][0];
 	         		 if(charName == "Amy" || charName == "Asami" || charName == "Tristan"){
@@ -179,6 +180,14 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
           }).then(function(response) {
        	   	  enemyData = response.result.values;
        	   	  enemyData.splice(40,2); //temp solution to extra data in spreadsheet
+       	   	  
+       	   	  //Replace weapon names with weapon data arrays
+       	   	  for(var i = 0; i < enemyData.length; i++){
+       	   		  for(var j = 29; j < 34; j++){
+       	   			  enemyData[i][j] = locateWeapon(enemyData[i][j], wIndex);
+       	   		  }
+       	   	  }
+       	   	  
               DataService.setEnemies(enemyData); //save compiled data
               redirect(); //go to map page
           });
@@ -196,9 +205,13 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
     	if(name.indexOf("(") != -1)
     		name = name.substring(0,name.indexOf("(")-1);
     	
+    	if(name.indexOf("G") == name.length-1) //if last character in the string is G, it's money
+    		return [name, "Gold", "-", "0", "Z", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "Wealth", "0", "I bet you could buy something nice with this."];
+    	
     	for(var i = 0; i < list.length; i++)
     		if(list[i][0] == name)
-    			return list[i];
+    			return list[i].slice();
+    	
     	return [name, "Mystery", "Mental", "0", "Z", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "Confusion", "0", "Couldn't find any data on this weapon."];
     };
     

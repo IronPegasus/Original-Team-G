@@ -129,16 +129,16 @@ body{
 	height: 3px;
 	left: 0px;
 	bottom: -3px;
-	background-color: red;
+	background-color:red;
 }
 
-.weaponRankBorder{
+.weaponRankBackground{
 	position: absolute;
-	width: 29px;
-	height: 2px;
+	width: 30px;
+	height: 3px;
 	left: 0px;
 	bottom: -3px;
-	border: 1px solid black;
+	background-color:#944F24;
 }
 
 .characterInfo{
@@ -177,6 +177,19 @@ body{
 }
 
 .indentedWeaponName{
+	position: absolute;
+	margin-left:31px;
+	margin-top:5px;
+}
+
+.indentedWeaponIcon{
+	position: absolute;
+	margin-left:10px;
+	margin-top:7px;
+	display:inline-block;
+}
+
+.indentedClassName{
 	position: absolute;
 	margin-left:10px;
 	margin-top:5px;
@@ -236,6 +249,10 @@ body{
 	margin-right:5px;
 }
 
+.popOutTextSpacing{
+	margin-top:5px;
+}
+
 .personalSkillHeader{
 	margin-top:20px;
 }
@@ -277,9 +294,15 @@ body{
 
 .indentedEnemyItem{
 	position:absolute;
-	margin-left:10px;
+	margin-left:31px;
 	margin-top:3px;
-};
+}
+
+.indentedEWeaponIcon{
+	position:absolute;
+	margin-left:10px;
+	margin-top:4px;
+}
 
 .centerText{ text-align: center; }
 .rightText{ text-align: right; }
@@ -295,7 +318,7 @@ body{
 .darkTan{ background-color: #BA7228; }
 .olive{ background-color: #5e3913; }
 .lightGreen{ background-color: #39af2b; }
-.green{ background-color: #216619; }
+.green{ background-color: #216619; opacity: 0.95;}
 .blackBorder{ border: 1px solid black; }
 
 .skillGemPos{
@@ -378,6 +401,13 @@ body{
 	height:30px;
 }
 
+.itemInfoPos{
+	font-size:12px;
+	width:240px;
+	margin-left:350px;
+	height:100px;
+}
+
 .charNamePos{
 	font-size:25px;
 	width:230px;
@@ -390,6 +420,8 @@ body{
 	background-color: #DAAC5E;
 	width:483px;
 	height:173px;
+	font-family: "Verdana";
+	font-size:14px;
 	box-shadow: 1px 1px 10px black;
 	z-index:1;
 }
