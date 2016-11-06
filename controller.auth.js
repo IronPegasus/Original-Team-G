@@ -208,6 +208,10 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
     };
     
     function locateWeapon(name, list){
+    	if(name == undefined) //if last character in the string is G, it's money
+    		return ["Undefined Item", "ERROR", "-", "0", "Z", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "-", "0", "Something's wrong here."];
+    	
+    	
     	if(name.indexOf("(") != -1)
     		name = name.substring(0,name.indexOf("(")-1);
     	
