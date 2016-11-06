@@ -1,10 +1,12 @@
-app.controller('HomeCtrl', ['$scope', '$location', 'DataService', function ($scope, $location, DataService) {
+app.controller('HomeCtrl', ['$scope', '$location', '$timeout', 'DataService', function ($scope, $location, $timeout, DataService) {
 	$scope.rows = ["A"];
     $scope.columns = ["1"];
 	var onLoad = checkData();
     var charPos = ["Y34", "", "S41", "U39", "@37", "&40", "Z36", "", "R34", "%36", "T29", "R39", "R33", "+40", "T27", "S39", "W39", "V39", "#42", "", "V34", "X28", "X39", "Y33", "$42", "=39", "Q33", "W32", "@36", "Y38"];
     var enemyPos = ["S26", "&17", "K45", "M21", "~18", "S29", "", "S27", "W20", "@11", "%11", "", "K41", "J42", "T21", "H35", "N26", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];
     $scope.kaden = "https://vignette4.wikia.nocookie.net/fireemblem/images/3/34/FE14_Nishiki_Fox_Spirit_Map_Sprite.gif/revision/latest?cb=20151107160827";
+    var rowTimer = $timeout(calcNumRows(), 100);
+    var colTimer = $timeout(calcNumColumns(), 100);
     
     //Reroutes the user if they haven't logged into the app
     //Loads data from the DataService if they have
@@ -25,7 +27,12 @@ app.controller('HomeCtrl', ['$scope', '$location', 'DataService', function ($sco
     	
     	height -= 36;
     	height = height / 34;
-    	$scope.rows = rowNames.slice(0, height+1);
+    	var temp = rowNames.slice(0, height+1);
+    	
+    	if(temp.length != 0){
+    		$timeout.cancel(rowTimer);
+    		$scope.rows = temp;
+    	}
     };
     
    function calcNumColumns(){
@@ -34,10 +41,15 @@ app.controller('HomeCtrl', ['$scope', '$location', 'DataService', function ($sco
     	
     	width -= 36;
     	width = width / 34;
-    	$scope.columns = [];
+    	var temp = [];
     	
     	for(var i = 0; i < width; i++)
-    		$scope.columns.push(i+1);
+    		temp.push(i+1);
+    	
+    	if(temp.length != 0){
+    		$timeout.cancel(colTimer);
+    		$scope.columns = temp;
+    	}
     };
     
     //Sets the character to display in the information box
