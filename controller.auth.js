@@ -122,6 +122,7 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
 	         			 var column = weapons[i];
 	             		 for(var j = 0; j < column.length; j++){
 	             			var wRay = locateWeapon(column[j], wIndex);
+	             			wRay[0] = column[j]; //replace weapon name with original name
 	             			characterData.values[i].push(wRay);
 	             		 }
 	         		 }
@@ -185,7 +186,17 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
             range: 'Loser Cowards!A3:CD',
           }).then(function(response) {
        	   	  enemyData = response.result.values;
-       	   	  enemyData.splice(40,2); //temp solution to extra data in spreadsheet
+       	   	  
+       	   	  //Remove blank/incomplete data from end of set
+       	   	  var realEnemy = false;
+       	   	  var index = enemyData.length-1;
+       	   	  while(!realEnemy){
+       	   		  if(enemyData[index].length >= 82) realEnemy = true;
+       	   		  else{
+       	   			  enemyData.splice(enemyData.length-1,1); //remove last element
+       	   			  index--;
+       	   		  }
+       	   	  }
        	   	  
        	   	  //Replace weapon names with weapon data arrays
        	   	  for(var i = 0; i < enemyData.length; i++){

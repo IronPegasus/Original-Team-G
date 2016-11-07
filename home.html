@@ -1,8 +1,8 @@
 <div id="dropArea" class="mapBox">
-	<img id="map" class="absolutePos" src="https://i.imgur.com/RJl1oFD.png"></img>
+	<img id="map" class="absolutePos" src="https://i.imgur.com/RJl1oFD.png">
 	
 	<!--Draw tile names-->
-	<div ng-repeat="row in rows" class="glowBoxIndent absolutePos" ng-style="{top: determineGlowY($index)}">
+	<div ng-repeat="(yIndex,row) in rows" class="glowBoxIndent absolutePos" ng-style="{top: determineGlowY(yIndex)}">
 		<div class="glowBox" ng-repeat="(indexX,column) in columns" title="{{row}}{{column}}" ng-style="{left: determineGlowX(indexX)}"></div>
 	</div>
 	
@@ -16,10 +16,11 @@
 	
 	<!--Draw enemies-->
 	<div class="absolutePos charDiv" ng-style="{top: determineY($index,1), left: determineX($index,1)}" ng-repeat="enemy in enemyData" id="enemy_{{$index}}">
-		<img ng-src="{{kaden}}" ng-click="enemy_$index=!enemy_$index" class="hoverImage mapCharCentered" style="width:28px;"></img>
+		<img ng-src="{{kaden}}" ng-click="enemy_$index=!enemy_$index" class="hoverImage mapCharCentered">
 		<div class="healthBarBack"></div>
 		<div class="healthBarFront" ng-style="{width:((enemy[5]/enemy[6])*28)+'px'}"></div>
 		<div class="healthBarBorder"></div>
+		<div class="enemyNum">{{getEnemyNum($index)}}</div>
 		
 		<!--ENEMY INFO BOX-->
 		<div class="infoElement enemyInfo" ng-style="{top: displayEInfoY($index), left: displayEInfoX($index)}" ng-if="enemy_$index==true">
@@ -144,6 +145,13 @@
 			<div class="infoElement lightTan redText" style="margin-left:280px;margin-top:5px;width:198px;height:24px;">
 				<span class="indentedEWeaponIcon" ng-if="validEnemyWeapon($index,29)"><img ng-src="{{getEnemyWeaponClassIcon($index,29)}}"/></span>
 				<span class="indentedEnemyItem">{{enemy[29][0]}}</span>
+				<div class="enemyWeaponEffectIcons">
+					<img ng-if="enemyWeaponEffective($index, 29, 'armor')" src="IMG/eff_armor.png">
+					<img ng-if="enemyWeaponEffective($index, 29, 'flier')" src="IMG/eff_flying.png">
+					<img ng-if="enemyWeaponEffective($index, 29, 'beast')" src="IMG/eff_beast.png">
+					<img ng-if="enemyWeaponEffective($index, 29, 'dragon')" src="IMG/eff_dragon.png">
+					<img ng-if="enemyWeaponEffective($index, 29, 'monster')" src="IMG/eff_monster.png">
+				</div>
 			</div>
 			<div class="infoElement paleTan redText" style="margin-left:280px;margin-top:34px;width:198px;height:24px;">
 				<span class="indentedEWeaponIcon" ng-if="validEnemyWeapon($index,30)"><img ng-src="{{getEnemyWeaponClassIcon($index,30)}}"/></span>
@@ -291,22 +299,57 @@
 		<div class="infoElement lightTan redText itemsPos" ng-mouseenter="wpn1=true" ng-mouseleave="wpn1=false" style="margin-top:10px">
 			<span class="indentedWeaponIcon" ng-if="validWeapon(100)"><img ng-src="{{getWeaponClassIcon(100)}}"/></span>
 			<span class="indentedWeaponName" ng-if="validWeapon(100)">{{loadedChar[100][0]}}</span>
+			<div class="weaponEffectIcons">
+				<img ng-if="weaponEffective(100,'armor')" src="IMG/eff_armor.png">
+				<img ng-if="weaponEffective(100,'flier')" src="IMG/eff_flying.png">
+				<img ng-if="weaponEffective(100,'beast')" src="IMG/eff_beast.png">
+				<img ng-if="weaponEffective(100,'dragon')" src="IMG/eff_dragon.png">
+				<img ng-if="weaponEffective(100,'monster')" src="IMG/eff_monster.png">
+			</div>
 		</div>
 		<div class="infoElement paleTan redText itemsPos" ng-mouseenter="wpn2=true" ng-mouseleave="wpn2=false" style="margin-top:45px">
 			<span class="indentedWeaponIcon" ng-if="validWeapon(101)"><img ng-src="{{getWeaponClassIcon(101)}}"/></span>
 			<span class="indentedWeaponName" ng-if="validWeapon(101)">{{loadedChar[101][0]}}</span>
+			<div class="weaponEffectIcons">
+				<img ng-if="weaponEffective(101,'armor')" src="IMG/eff_armor.png">
+				<img ng-if="weaponEffective(101,'flier')" src="IMG/eff_flying.png">
+				<img ng-if="weaponEffective(101,'beast')" src="IMG/eff_beast.png">
+				<img ng-if="weaponEffective(101,'dragon')" src="IMG/eff_dragon.png">
+				<img ng-if="weaponEffective(101,'monster')" src="IMG/eff_monster.png">
+			</div>
 		</div>
 		<div class="infoElement paleTan redText itemsPos" ng-mouseenter="wpn3=true" ng-mouseleave="wpn3=false" style="margin-top:80px">
 			<span class="indentedWeaponIcon" ng-if="validWeapon(102)"><img ng-src="{{getWeaponClassIcon(102)}}"/></span>
 			<span class="indentedWeaponName" ng-if="validWeapon(102)">{{loadedChar[102][0]}}</span>
+			<div class="weaponEffectIcons">
+				<img ng-if="weaponEffective(102,'armor')" src="IMG/eff_armor.png">
+				<img ng-if="weaponEffective(102,'flier')" src="IMG/eff_flying.png">
+				<img ng-if="weaponEffective(102,'beast')" src="IMG/eff_beast.png">
+				<img ng-if="weaponEffective(102,'dragon')" src="IMG/eff_dragon.png">
+				<img ng-if="weaponEffective(102,'monster')" src="IMG/eff_monster.png">
+			</div>
 		</div>
 		<div class="infoElement paleTan redText itemsPos" ng-mouseenter="wpn4=true" ng-mouseleave="wpn4=false" style="margin-top:115px">
 			<span class="indentedWeaponIcon" ng-if="validWeapon(103)"><img ng-src="{{getWeaponClassIcon(103)}}"/></span>
 			<span class="indentedWeaponName" ng-if="validWeapon(103)">{{loadedChar[103][0]}}</span>
+			<div class="weaponEffectIcons">
+				<img ng-if="weaponEffective(103,'armor')" src="IMG/eff_armor.png">
+				<img ng-if="weaponEffective(103,'flier')" src="IMG/eff_flying.png">
+				<img ng-if="weaponEffective(103,'beast')" src="IMG/eff_beast.png">
+				<img ng-if="weaponEffective(103,'dragon')" src="IMG/eff_dragon.png">
+				<img ng-if="weaponEffective(103,'monster')" src="IMG/eff_monster.png">
+			</div>
 		</div>
 		<div class="infoElement paleTan redText itemsPos" ng-mouseenter="wpn5=true" ng-mouseleave="wpn5=false" style="margin-top:150px">
 			<span class="indentedWeaponIcon" ng-if="validWeapon(104)"><img ng-src="{{getWeaponClassIcon(104)}}"/></span>
 			<span class="indentedWeaponName" ng-if="validWeapon(104)">{{loadedChar[104][0]}}</span>
+			<div class="weaponEffectIcons">
+				<img ng-if="weaponEffective(104,'armor')" src="IMG/eff_armor.png">
+				<img ng-if="weaponEffective(104,'flier')" src="IMG/eff_flying.png">
+				<img ng-if="weaponEffective(104,'beast')" src="IMG/eff_beast.png">
+				<img ng-if="weaponEffective(104,'dragon')" src="IMG/eff_dragon.png">
+				<img ng-if="weaponEffective(104,'monster')" src="IMG/eff_monster.png">
+			</div>
 		</div>
 		
 		

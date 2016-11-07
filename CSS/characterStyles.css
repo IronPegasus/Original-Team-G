@@ -75,6 +75,15 @@
 	display:inline-block;
 }
 
+.weaponEffectIcons{
+	position: absolute;
+	margin-left:150px;
+	margin-top:6px;
+	width:90px;
+	display:inline-block;
+	text-align:right;
+}
+
 .indentedClassName{
 	position: absolute;
 	margin-left:10px;

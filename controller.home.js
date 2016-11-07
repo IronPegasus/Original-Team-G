@@ -3,8 +3,8 @@ app.controller('HomeCtrl', ['$scope', '$location', '$timeout', 'DataService', fu
     $scope.columns = ["1"];
 	var onLoad = checkData();
     var charPos = ["Y34", "", "S41", "U39", "@37", "&40", "Z36", "", "R34", "%36", "T29", "R39", "R33", "+40", "T27", "S39", "W39", "V39", "#42", "", "V34", "X28", "X39", "Y33", "$42", "=39", "Q33", "W32", "@36", "Y38"];
-    var enemyPos = ["S26", "&17", "K45", "M21", "~18", "S29", "", "S27", "W20", "@11", "%11", "", "K41", "J42", "T21", "H35", "N26", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];
-    $scope.kaden = "https://vignette4.wikia.nocookie.net/fireemblem/images/3/34/FE14_Nishiki_Fox_Spirit_Map_Sprite.gif/revision/latest?cb=20151107160827";
+    var enemyPos = ["M16", "&17", "K45", "M21", "~18", "S29", "A1", "S27", "W20", "@11", "%11", "A2", "K41", "J42", "T21", "H35", "N26", "A3", "A4", "A5", "A6", "A7", "A8", "A9", "A10", "A11", "A12", "A13", "A14", "A15", "A16", "A17", "A18", "A19", "A20", "A21", "A22", "A23", "A24", "A25", "A26", "A27", "A28", "A29", "A30", "A31"];
+    $scope.kaden = "IMG/kitsune.gif";
     var rowTimer = $timeout(calcNumRows(), 100);
     var colTimer = $timeout(calcNumColumns(), 100);
     
@@ -99,7 +99,7 @@ app.controller('HomeCtrl', ['$scope', '$location', '$timeout', 'DataService', fu
     	var w = $scope.enemyData[enemy][index];
     	return compareWeaponName(w);
     };
-    
+      
     function compareWeaponName(weaponName){
     	if(weaponName == "Sword" || weaponName == "Lance" || weaponName == "Axe"
     		|| weaponName == "Tome" || weaponName == "Knife" || weaponName == "Bow"
@@ -107,6 +107,20 @@ app.controller('HomeCtrl', ['$scope', '$location', '$timeout', 'DataService', fu
     		return true;
     	else
     		return false;
+    };
+    
+    $scope.weaponEffective = function(index, type){
+    	var types = $scope.loadedChar[index][17];
+    	types = types.toLowerCase();
+    	if(types.indexOf(type) != -1) return true;
+    	else return false;
+    };
+    
+    $scope.enemyWeaponEffective = function(enemy, index, type){
+    	var types = $scope.enemyData[enemy][index][17];
+    	types = types.toLowerCase();
+    	if(types.indexOf(type) != -1) return true;
+    	else return false;
     };
     
     //Returns the icon route relevant to the passed weapon type
@@ -121,15 +135,8 @@ app.controller('HomeCtrl', ['$scope', '$location', '$timeout', 'DataService', fu
     };
     
     function getIcon(weaponName){
-    	if(weaponName == "Sword"){ return "IMG/sword_rank.png";}
-    	if(weaponName == "Lance"){ return "IMG/lance_rank.png";}
-    	if(weaponName == "Axe"){ return "IMG/axe_rank.png"; }
-    	if(weaponName == "Tome"){ return "IMG/tome_rank.png"; }
-    	if(weaponName == "Knife"){ return "IMG/star_rank.png"; }
-    	if(weaponName == "Bow"){ return "IMG/bow_rank.png"; }
-    	if(weaponName == "Stone"){ return "IMG/stone_rank.png"; }
-    	if(weaponName == "Staff"){ return "IMG/stave_rank.png"; }
-    	return "";
+    	var c = weaponName.toLowerCase();
+    	return "IMG/rank_" + c + ".png";
     };
     
     //Calculates the percentage of weapon proficicency for a specific weapon,
@@ -285,6 +292,16 @@ app.controller('HomeCtrl', ['$scope', '$location', '$timeout', 'DataService', fu
     $scope.checkEShields = function(enemy, number){
     	if($scope.enemyData[enemy][3] >= number) return true;
     	else return false;
+    };
+    
+    $scope.getEnemyNum = function(index){
+    	var name = $scope.enemyData[index][0];
+    	if(name.lastIndexOf(" ") == -1 || name == undefined)
+    		return "";
+    	name = name.substring(name.lastIndexOf(" ")+1, name.length);
+    	
+    	if(name.match(/^[0-9]+$/) != null) return name;
+    	else return "";
     };
     
     $scope.determineX = function(index, num){
