@@ -110,6 +110,8 @@ app.controller('HomeCtrl', ['$scope', '$location', '$timeout', 'DataService', fu
     };
     
     $scope.weaponEffective = function(index, type){
+    	if($scope.loadedChar == undefined) return false;
+    	
     	var types = $scope.loadedChar[index][17];
     	types = types.toLowerCase();
     	if(types.indexOf(type) != -1) return true;
