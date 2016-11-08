@@ -25,77 +25,77 @@
 		<!--ENEMY INFO BOX-->
 		<div class="infoElement enemyInfo" ng-style="{top: displayEInfoY($index), left: displayEInfoX($index)}" ng-if="enemy_$index==true">
 			<!--Name-->
-			<div class="infoElement navy whiteText" style="width:185px;height:38px;margin-left:5px;margin-top:5px">
+			<div class="infoElement navy whiteText enemyNamePos">
 				<span class="boldText popOutText" style="margin-top:5px">{{enemy[0]}}</span><br>
 				<span class="popOutText">Lv. {{enemy[4]}} {{enemy[1]}}</span>
 			</div>
 			<!--HP-->
-			<div class="infoElement darkTan tanText" style="margin-left:5px;margin-top:48px;width:92px;height:19px;">
+			<div class="infoElement darkTan tanText enemyHpMovPos" style="margin-left:5px;width:92px;">
 				<span class="enemyStatLabel">HP</span>
 				<span class="indentedEnemyHPStat">{{enemy[5]}}/{{enemy[6]}}</span>
 			</div>
 			<!--Movement-->
-			<div class="infoElement darkTan tanText" style="margin-left:103px;margin-top:48px;width:87px;height:19px;">
+			<div class="infoElement darkTan tanText enemyHpMovPos" style="margin-left:103px;width:87px">
 				<span class="enemyStatLabel">Mov</span>
 				<span class="indentedEnemyStat">{{enemy[14]}}</span>
 			</div>
 			<!--Attack-->
-			<div class="infoElement darkTan tanText" style="margin-left:5px;margin-top:72px;width:97px;height:19px;">
+			<div class="infoElement darkTan tanText enemyAtkHitPos" style="margin-top:72px">
 				<span class="enemyStatLabel">Atk</span>
 				<span class="indentedEnemyStat">{{enemy[24]}}</span>
 			</div>
 			<!--Critical-->
-			<div class="infoElement darkTan tanText" style="margin-left:88px;margin-top:72px;width:102px;height:19px;">
+			<div class="infoElement darkTan tanText enemyAvoCritPos" style="margin-top:72px">
 				<span class="enemyStatLabel">Crit</span>
 				<span class="indentedEnemyStat">{{enemy[26]}}</span>
 			</div>
 			<!--Hit-->
-			<div class="infoElement darkTan tanText" style="margin-left:5px;margin-top:96px;width:97px;height:19px;">
+			<div class="infoElement darkTan tanText enemyAtkHitPos" style="margin-top:96px">
 				<span class="enemyStatLabel">Hit</span>
 				<span class="indentedEnemyStat">{{enemy[25]}}</span>
 			</div>
 			<!--Avoidance-->
-			<div class="infoElement darkTan tanText" style="margin-left:88px;margin-top:96px;width:102px;height:19px;">
+			<div class="infoElement darkTan tanText enemyAvoCritPos" style="margin-top:96px">
 				<span class="enemyStatLabel">Avo</span>
 				<span class="indentedEnemyStat">{{enemy[27]}}</span>
 			</div>
 			<!--Shields-->
-			<div class="infoElement darkTan" style="margin-left:5px;margin-top:120px;width:185px;height:19px;">
+			<div class="infoElement darkTan enemyShieldsPos">
 				<div style="margin-left:52px;margin-top:1px">
 					<img ng-if="!checkEShields($index,2)" src="IMG/emptyshield.png"/><img ng-if="checkEShields($index,2)" src="IMG/filledshield.png"/><img ng-if="!checkEShields($index,4)" src="IMG/emptyshield.png"/><img ng-if="checkEShields($index,4)" src="IMG/filledshield.png"/><img ng-if="!checkEShields($index,6)" src="IMG/emptyshield.png"/><img ng-if="checkEShields($index,6)" src="IMG/filledshield.png"/><img ng-if="!checkEShields($index,8)" src="IMG/emptyshield.png"/><img ng-if="checkEShields($index,8)" src="IMG/filledshield.png"/><img ng-if="!checkEShields($index,10)" src="IMG/emptyshield.png"/><img ng-if="checkEShields($index,10)" src="IMG/filledshield.png"/>
 				</div>
 			</div>
 			
 			<!--Skill Gems-->
-			<div class="infoElement hoverImage" style="margin-left:7px;margin-top:149px;width:16px;height:16px;">
+			<div class="infoElement hoverImage enemyGemPos" style="margin-left:7px">
 				<img ng-if="hasSkill($index,42)" title="Personal skill" ng-src="IMG/white_skill.png"></img>
 				<img ng-if="!hasSkill($index,42)" ng-src="IMG/blank_skill.png"></img>
 			</div>
-			<div class="infoElement hoverImage" style="margin-left:28px;margin-top:149px;width:16px;height:16px;">
+			<div class="infoElement hoverImage enemyGemPos" style="margin-left:28px">
 				<img ng-if="hasSkill($index,34)" ng-src="IMG/pink_skill.png"></img>
 				<img ng-if="!hasSkill($index,34)" ng-src="IMG/blank_skill.png"></img>
 			</div>
-			<div class="infoElement hoverImage" style="margin-left:49px;margin-top:149px;width:16px;height:16px;">
+			<div class="infoElement hoverImage enemyGemPos" style="margin-left:49px">
 				<img ng-if="hasSkill($index,35)" ng-src="IMG/red_skill.png"></img>
 				<img ng-if="!hasSkill($index,35)" ng-src="IMG/blank_skill.png"></img>
 			</div>
-			<div class="infoElement hoverImage" style="margin-left:70px;margin-top:149px;width:16px;height:16px;">
+			<div class="infoElement hoverImage enemyGemPos" style="margin-left:70px">
 				<img ng-if="hasSkill($index,36)" ng-src="IMG/orange_skill.png"></img>
 				<img ng-if="!hasSkill($index,36)" ng-src="IMG/blank_skill.png"></img>
 			</div>
-			<div class="infoElement hoverImage" style="margin-left:91px;margin-top:149px;width:16px;height:16px;">
+			<div class="infoElement hoverImage enemyGemPos" style="margin-left:91px">
 				<img ng-if="hasSkill($index,37)" ng-src="IMG/yellow_skill.png"></img>
 				<img ng-if="!hasSkill($index,37)" ng-src="IMG/blank_skill.png"></img>
 			</div>
-			<div class="infoElement hoverImage" style="margin-left:112px;margin-top:149px;width:16px;height:16px;">
+			<div class="infoElement hoverImage enemyGemPos" style="margin-left:112px">
 				<img ng-if="hasSkill($index,38)" ng-src="IMG/green_skill.png"></img>
 				<img ng-if="!hasSkill($index,38)" ng-src="IMG/blank_skill.png"></img>
 			</div>
-			<div class="infoElement hoverImage" style="margin-left:133px;margin-top:149px;width:16px;height:16px;">
+			<div class="infoElement hoverImage enemyGemPos" style="margin-left:133px">
 				<img ng-if="hasSkill($index,39)" ng-src="IMG/aqua_skill.png"></img>
 				<img ng-if="!hasSkill($index,39)" ng-src="IMG/blank_skill.png"></img>
 			</div>
-			<div class="infoElement hoverImage" style="margin-left:152px;margin-top:149px;width:16px;height:16px;">
+			<div class="infoElement hoverImage enemyGemPos" style="margin-left:152px">
 				<img ng-if="hasSkill($index,40)" ng-src="IMG/blue_skill.png"></img>
 				<img ng-if="!hasSkill($index,40)" ng-src="IMG/blank_skill.png"></img>
 			</div>
@@ -106,43 +106,43 @@
 			
 			<!--Stats Column-->
 			<!--Strength-->
-			<div class="infoElement darkTan tanText" style="margin-left:195px;margin-top:5px;width:80px;height:19px;">
+			<div class="infoElement darkTan tanText enemyStatPos" style="margin-top:5px">
 				<span class="enemyStatLabel">Str</span>
 				<span class="indentedEnemyStat">{{enemy[7]}}</span>
 			</div>
 			<!--Magic-->
-			<div class="infoElement darkTan tanText" style="margin-left:195px;margin-top:29px;width:80px;height:19px;">
+			<div class="infoElement darkTan tanText enemyStatPos" style="margin-top:29px">
 				<span class="enemyStatLabel">Mag</span>
 				<span class="indentedEnemyStat">{{enemy[8]}}</span>
 			</div>
 			<!--Skill-->
-			<div class="infoElement darkTan tanText" style="margin-left:195px;margin-top:53px;width:80px;height:19px;">
+			<div class="infoElement darkTan tanText enemyStatPos" style="margin-top:53px">
 				<span class="enemyStatLabel">Skl</span>
 				<span class="indentedEnemyStat">{{enemy[9]}}</span>
 			</div>
 			<!--Speed-->
-			<div class="infoElement darkTan tanText" style="margin-left:195px;margin-top:77px;width:80px;height:19px;">
+			<div class="infoElement darkTan tanText enemyStatPos" style="margin-top:77px">
 				<span class="enemyStatLabel">Spd</span>
 				<span class="indentedEnemyStat">{{enemy[10]}}</span>
 			</div>
 			<!--Luck-->
-			<div class="infoElement darkTan tanText" style="margin-left:195px;margin-top:101px;width:80px;height:19px;">
+			<div class="infoElement darkTan tanText enemyStatPos" style="margin-top:101px">
 				<span class="enemyStatLabel">Lck</span>
 				<span class="indentedEnemyStat">{{enemy[11]}}</span>
 			</div>
 			<!--Defense-->
-			<div class="infoElement darkTan tanText" style="margin-left:195px;margin-top:125px;width:80px;height:19px;">
+			<div class="infoElement darkTan tanText enemyStatPos" style="margin-top:125px">
 				<span class="enemyStatLabel">Def</span>
 				<span class="indentedEnemyStat">{{enemy[12]}}</span>
 			</div>
 			<!--Resistance-->
-			<div class="infoElement darkTan tanText" style="margin-left:195px;margin-top:149px;width:80px;height:19px;">
+			<div class="infoElement darkTan tanText enemyStatPos" style="margin-top:149px">
 				<span class="enemyStatLabel">Res</span>
 				<span class="indentedEnemyStat">{{enemy[13]}}</span>
 			</div>
 			
 			<!--Item Inventory-->
-			<div class="infoElement lightTan redText" style="margin-left:280px;margin-top:5px;width:198px;height:24px;">
+			<div class="infoElement lightTan redText enemyInventoryBoxPos" style="margin-top:5px">
 				<span class="indentedEWeaponIcon" ng-if="validEnemyWeapon($index,29)"><img ng-src="{{getEnemyWeaponClassIcon($index,29)}}"/></span>
 				<span class="indentedEnemyItem">{{enemy[29][0]}}</span>
 				<div class="enemyWeaponEffectIcons">
@@ -153,37 +153,65 @@
 					<img ng-if="enemyWeaponEffective($index, 29, 'monster')" src="IMG/eff_monster.png">
 				</div>
 			</div>
-			<div class="infoElement paleTan redText" style="margin-left:280px;margin-top:34px;width:198px;height:24px;">
+			<div class="infoElement paleTan redText enemyInventoryBoxPos" style="margin-top:34px">
 				<span class="indentedEWeaponIcon" ng-if="validEnemyWeapon($index,30)"><img ng-src="{{getEnemyWeaponClassIcon($index,30)}}"/></span>
 				<span class="indentedEnemyItem">{{enemy[30][0]}}</span>
+				<div class="enemyWeaponEffectIcons">
+					<img ng-if="enemyWeaponEffective($index, 30, 'armor')" src="IMG/eff_armor.png">
+					<img ng-if="enemyWeaponEffective($index, 30, 'flier')" src="IMG/eff_flying.png">
+					<img ng-if="enemyWeaponEffective($index, 30, 'beast')" src="IMG/eff_beast.png">
+					<img ng-if="enemyWeaponEffective($index, 30, 'dragon')" src="IMG/eff_dragon.png">
+					<img ng-if="enemyWeaponEffective($index, 30, 'monster')" src="IMG/eff_monster.png">
+				</div>
 			</div>
-			<div class="infoElement paleTan redText" style="margin-left:280px;margin-top:63px;width:198px;height:24px;">
+			<div class="infoElement paleTan redText enemyInventoryBoxPos" style="margin-top:63px">
 				<span class="indentedEWeaponIcon" ng-if="validEnemyWeapon($index,31)"><img ng-src="{{getEnemyWeaponClassIcon($index,31)}}"/></span>
 				<span class="indentedEnemyItem">{{enemy[31][0]}}</span>
+				<div class="enemyWeaponEffectIcons">
+					<img ng-if="enemyWeaponEffective($index, 31, 'armor')" src="IMG/eff_armor.png">
+					<img ng-if="enemyWeaponEffective($index, 31, 'flier')" src="IMG/eff_flying.png">
+					<img ng-if="enemyWeaponEffective($index, 31, 'beast')" src="IMG/eff_beast.png">
+					<img ng-if="enemyWeaponEffective($index, 31, 'dragon')" src="IMG/eff_dragon.png">
+					<img ng-if="enemyWeaponEffective($index, 31, 'monster')" src="IMG/eff_monster.png">
+				</div>
 			</div>
-			<div class="infoElement paleTan redText" style="margin-left:280px;margin-top:92px;width:198px;height:24px;">
+			<div class="infoElement paleTan redText enemyInventoryBoxPos" style="margin-top:92px">
 				<span class="indentedEWeaponIcon" ng-if="validEnemyWeapon($index,32)"><img ng-src="{{getEnemyWeaponClassIcon($index,32)}}"/></span>
 				<span class="indentedEnemyItem">{{enemy[32][0]}}</span>
+				<div class="enemyWeaponEffectIcons">
+					<img ng-if="enemyWeaponEffective($index, 32, 'armor')" src="IMG/eff_armor.png">
+					<img ng-if="enemyWeaponEffective($index, 32, 'flier')" src="IMG/eff_flying.png">
+					<img ng-if="enemyWeaponEffective($index, 32, 'beast')" src="IMG/eff_beast.png">
+					<img ng-if="enemyWeaponEffective($index, 32, 'dragon')" src="IMG/eff_dragon.png">
+					<img ng-if="enemyWeaponEffective($index, 32, 'monster')" src="IMG/eff_monster.png">
+				</div>
 			</div>
-			<div class="infoElement paleTan redText" style="margin-left:280px;margin-top:121px;width:198px;height:24px;">
+			<div class="infoElement paleTan redText enemyInventoryBoxPos" style="margin-top:121px">
 				<span class="indentedEWeaponIcon" ng-if="validEnemyWeapon($index,33)"><img ng-src="{{getEnemyWeaponClassIcon($index,33)}}"/></span>
 				<span class="indentedEnemyItem">{{enemy[33][0]}}</span>
+				<div class="enemyWeaponEffectIcons">
+					<img ng-if="enemyWeaponEffective($index, 33, 'armor')" src="IMG/eff_armor.png">
+					<img ng-if="enemyWeaponEffective($index, 33, 'flier')" src="IMG/eff_flying.png">
+					<img ng-if="enemyWeaponEffective($index, 33, 'beast')" src="IMG/eff_beast.png">
+					<img ng-if="enemyWeaponEffective($index, 33, 'dragon')" src="IMG/eff_dragon.png">
+					<img ng-if="enemyWeaponEffective($index, 33, 'monster')" src="IMG/eff_monster.png">
+				</div>
 			</div>
 			
 			<!--Weapon ranks-->
-			<div ng-if="existsEnemyWeapon($index,43)" class="infoElement" style="margin-left:297px;margin-top:151px;height:24px;width:67px;">
+			<div ng-if="existsEnemyWeapon($index,43)" class="infoElement enemyWeaponRankPos" style="margin-left:297px">
 				<span style="position:relative">
 					<img ng-src="{{enemyWeaponIcon($index,43)}}" style="display:inline-block">
 					<div class="weaponRankLtrPos">{{enemy[44]}}</div>
 				</span>
 			</div>
-			<div ng-if="existsEnemyWeapon($index,45)" class="infoElement" style="margin-left:364px;margin-top:151px;height:24px;width:67px;">
+			<div ng-if="existsEnemyWeapon($index,45)" class="infoElement enemyWeaponRankPos" style="margin-left:364px">
 				<span style="position:relative">
 					<img ng-src="{{enemyWeaponIcon($index,45)}}" style="display:inline-block">
 					<div class="weaponRankLtrPos">{{enemy[46]}}</div>
 				</span>
 			</div>
-			<div ng-if="existsEnemyWeapon($index,47)" class="infoElement" style="margin-left:431px;margin-top:151px;height:24px;width:67px;">
+			<div ng-if="existsEnemyWeapon($index,47)" class="infoElement enemyWeaponRankPos" style="margin-left:431px">
 				<span style="position:relative">
 					<img ng-src="{{enemyWeaponIcon($index,47)}}" style="display:inline-block">
 					<div class="weaponRankLtrPos">{{enemy[48]}}</div>

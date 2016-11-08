@@ -2,6 +2,7 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
     var id = fetch();
     $scope.loadingIcon = pickLoadingIcon();
     var salvSheetId = '15e6GxH-FkGeRXrx3shsVencuJTnT8eQdaVM2MY9yy7A';
+    var bar = document.getElementById('progress'); 
     var characterData;
     var enemyData;
     var wIndex;
@@ -256,7 +257,6 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
     
     //Increments the progress bar by 12%
     function updateProgressBar(){
-    	var bar = document.getElementById('progress'); 
     	bar.value = bar.value + 14.2;
     };
 
