@@ -9,7 +9,9 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
     //Set div visibility
     var authorizeDiv = document.getElementById('authorize-div');
     var loadingDiv = document.getElementById('loading-div');
+    var bar = document.getElementById('progress');
     loadingDiv.style.display = 'none';
+    bar.style.value = '0px';
 
     //Initiate auth flow in response to user clicking authorize button.
     $scope.loadAPI = function(event) {
@@ -51,6 +53,7 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
         range: 'Ugly Characatures!A3:CU32',
       }).then(function(response) {
     	 characterData = response.result;
+    	 updateProgressBar(); //update progress bar
     	 fetchImageData();
       });
     };
@@ -83,6 +86,7 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
         			 i-=1;
         		 }
         	 }
+         	 updateProgressBar(); //update progress bar
         	 fetchWeaponNames();
           });
     };
@@ -96,6 +100,7 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
             range: 'Characatures!B27:AH31',
           }).then(function(response) {
         	  var weapons = response.result.values;
+        	  updateProgressBar(); //update progress bar
         	  
         	  //Fetch weapon information sheet
         	  gapi.client.sheets.spreadsheets.values.get({
@@ -127,6 +132,7 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
 	             		 }
 	         		 }
 	         	  }
+	         	  updateProgressBar(); //update progress bar
 	         	  fetchSkillInfo();
                 });
           });
@@ -141,6 +147,7 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
             range: 'Characatures!B35:AG42',
           }).then(function(response) {
         	  var skills = response.result.values;
+        	  updateProgressBar(); //update progress bar
         	  
         	  //Fetch normal skills and their matching descriptions
         	  gapi.client.sheets.spreadsheets.values.get({
@@ -149,6 +156,7 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
                   range: 'Skrillex!A1:B143',
                 }).then(function(response2) {
                 	 var skillDescriptions = response2.result.values;
+                	 updateProgressBar(); //update progress bar
                 	 
                 	 //Fetch personal skills and their matching descriptions
                 	 gapi.client.sheets.spreadsheets.values.get({
@@ -171,6 +179,7 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
                        		 }
                        	   }
                     	   
+                    	   updateProgressBar(); //update progress bar
 	                       DataService.setCharacters(characterData.values); //save compiled data
 	                       getEnemyData();
                        });
@@ -205,6 +214,7 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
        	   		  }
        	   	  }
        	   	  
+       	      updateProgressBar(); //update progress bar
               DataService.setEnemies(enemyData); //save compiled data
               redirect(); //go to map page
           });
@@ -236,18 +246,23 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
     	return [name, "Mystery", "Mental", "0", "Z", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "Confusion", "0", "Couldn't find any data on this weapon."];
     };
     
-    //Redirect user to the map page once data has been loaded
-    function redirect(){
-    	$scope.loadPercent = 100;
-    	$location.path('/map').replace();
-    	$scope.$apply();
-    };
-    
     function fetch(){
     	var request = new XMLHttpRequest();
     	request.open('GET', 'LIB/text.txt', false);
     	request.send();
     	if (request.status == 200)
     		return request.responseText;
+    };
+    
+    //Increments the progress bar by 12%
+    function updateProgressBar(){
+    	var bar = document.getElementById('progress'); 
+    	bar.value = bar.value + 14.2;
+    };
+
+    //Redirect user to the map page once data has been loaded
+    function redirect(){
+    	$location.path('/map').replace();
+    	$scope.$apply();
     };
 }]);
