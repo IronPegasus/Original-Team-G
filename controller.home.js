@@ -1,12 +1,12 @@
-app.controller('HomeCtrl', ['$scope', '$location', '$timeout', 'DataService', function ($scope, $location, $timeout, DataService) {
+app.controller('HomeCtrl', ['$scope', '$location', '$interval', 'DataService', function ($scope, $location, $interval, DataService) {
 	$scope.rows = ["A"];
     $scope.columns = ["1"];
 	var onLoad = checkData();
     var charPos = ["Y34", "", "S41", "U39", "@37", "&40", "Z36", "", "R34", "%36", "T29", "R39", "R33", "+40", "T27", "S39", "W39", "V39", "#42", "", "V34", "X28", "X39", "Y33", "$42", "=39", "Q33", "W32", "@36", "Y38"];
     var enemyPos = ["M16", "&17", "K45", "M21", "~18", "S29", "A1", "S27", "W20", "@11", "%11", "A2", "K41", "J42", "T21", "H35", "N26", "A3", "A4", "A5", "A6", "A7", "A8", "A9", "A10", "A11", "A12", "A13", "A14", "A15", "A16", "A17", "A18", "A19", "A20", "A21", "A22", "A23", "A24", "A25", "A26", "A27", "A28", "A29", "A30", "A31"];
     $scope.kaden = "IMG/kitsune.gif";
-    var rowTimer = $timeout(calcNumRows(), 100);
-    var colTimer = $timeout(calcNumColumns(), 100);
+    var rowTimer = $interval(calcNumRows(), 100, 25); //attempt to get rows 25 times, at 100 ms intervals
+    var colTimer = $interval(calcNumColumns(), 100, 25); //attempt to get columns 25 times, at 100 ms intervals
     
     //Reroutes the user if they haven't logged into the app
     //Loads data from the DataService if they have
@@ -30,7 +30,7 @@ app.controller('HomeCtrl', ['$scope', '$location', '$timeout', 'DataService', fu
     	var temp = rowNames.slice(0, height+1);
     	
     	if(temp.length != 0){
-    		$timeout.cancel(rowTimer);
+    		$interval.cancel(rowTimer);
     		$scope.rows = temp;
     	}
     };
@@ -47,7 +47,7 @@ app.controller('HomeCtrl', ['$scope', '$location', '$timeout', 'DataService', fu
     		temp.push(i+1);
     	
     	if(temp.length != 0){
-    		$timeout.cancel(colTimer);
+    		$interval.cancel(colTimer);
     		$scope.columns = temp;
     	}
     };
@@ -101,12 +101,8 @@ app.controller('HomeCtrl', ['$scope', '$location', '$timeout', 'DataService', fu
     };
       
     function compareWeaponName(weaponName){
-    	if(weaponName == "Sword" || weaponName == "Lance" || weaponName == "Axe"
-    		|| weaponName == "Tome" || weaponName == "Knife" || weaponName == "Bow"
-    		|| weaponName == "Stone" || weaponName == "Staff")
-    		return true;
-    	else
-    		return false;
+    	if(weaponName != "") return true;
+    	else return false;
     };
     
     $scope.weaponEffective = function(index, type){
