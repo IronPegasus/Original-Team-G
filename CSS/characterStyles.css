@@ -20,6 +20,12 @@
 	cursor:move;
 }
 
+.dragBarButton{
+	width:16px;
+	height:16px;
+	margin-top: -18px;
+}
+
 .weaponRankLtrPos{
 	position: absolute;
 	left: 20px;
@@ -237,4 +243,12 @@
 	margin-left:10px;
 	margin-top:10px;
 	height:40px;
+}
+
+.pairUpIcon{
+	position: absolute;
+	width: 10px;
+	height: 11px;
+	left: 1px;
+	bottom: 8px;
 }

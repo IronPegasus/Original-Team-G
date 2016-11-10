@@ -1,6 +1,8 @@
-app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($scope, $location, DataService) {
+app.controller('AuthCtrl', ['$scope', '$location', '$interval', 'DataService', function ($scope, $location, $interval, DataService) {
     var id = fetch();
     $scope.loadingIcon = pickLoadingIcon();
+    var checkGapi = $interval(checkAuth, 250);
+    $scope.ready = false;
     var salvSheetId = '15e6GxH-FkGeRXrx3shsVencuJTnT8eQdaVM2MY9yy7A';
     var bar = document.getElementById('progress'); 
     var characterData;
@@ -13,7 +15,15 @@ app.controller('AuthCtrl', ['$scope', '$location', 'DataService', function ($sco
     var bar = document.getElementById('progress');
     loadingDiv.style.display = 'none';
     bar.style.value = '0px';
-
+    
+    //Continue to check gapi until it's loaded
+    function checkAuth() {
+    	if(gapi.client != undefined){
+    		$scope.ready = true;
+    		$interval.cancel(checkGapi);
+    	}
+    }
+    
     //Initiate auth flow in response to user clicking authorize button.
     $scope.loadAPI = function(event) {
     	gapi.client.init({

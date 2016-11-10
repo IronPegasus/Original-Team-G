@@ -2,11 +2,11 @@ app.controller('HomeCtrl', ['$scope', '$location', '$interval', 'DataService', f
 	$scope.rows = ["A"];
     $scope.columns = ["1"];
 	var onLoad = checkData();
-    var charPos = ["Y34", "", "S41", "U39", "@37", "&40", "Z36", "", "R34", "%36", "T29", "R39", "R33", "+40", "T27", "S39", "W39", "V39", "#42", "", "V34", "X28", "X39", "Y33", "$42", "=39", "Q33", "W32", "@36", "Y38"];
-    var enemyPos = ["M16", "&17", "K45", "M21", "~18", "S29", "A1", "S27", "W20", "@11", "%11", "A2", "K41", "J42", "T21", "H35", "N26", "A3", "A4", "A5", "A6", "A7", "A8", "A9", "A10", "A11", "A12", "A13", "A14", "A15", "A16", "A17", "A18", "A19", "A20", "A21", "A22", "A23", "A24", "A25", "A26", "A27", "A28", "A29", "A30", "A31"];
+    var charPos = ["Y34", "B3", "S41", "U39", "@37", "&40", "Z36", "B1", "R34", "%36", "T29", "R39", "R33", "+40", "T27", "S39", "W39", "V39", "#42", "B2", "V34", "X28", "X39", "Y33", "$42", "=39", "Q33", "W32", "@36", "Y38"];
+    var enemyPos = ["M16", "&17", "K45", "M21", "~18", "S29", "A1", "S27", "W20", "@11", "%11", "A2", "K41", "J42", "T21", "H35", "N26", "A3", "A4", "A5", "A6", "A7", "A8", "A9", "A10", "A11", "A12", "", "A14", "A15", "A16", "A17", "A18", "A19", "A20", "A21", "A22", "A23", "", "A25", "A26", "A27", "A28", "A29", "A30", "A31"];
     $scope.kaden = "IMG/kitsune.gif";
-    var rowTimer = $interval(calcNumRows(), 250, 20); //attempt to get rows 20 times at 250 ms intervals (total run: 5 sec)
-    var colTimer = $interval(calcNumColumns(), 250, 20);
+    var rowTimer = $interval(calcNumRows, 250, 20); //attempt to get rows 20 times at 250 ms intervals (total run: 5 sec)
+    var colTimer = $interval(calcNumColumns, 250, 20);
     
     //Reroutes the user if they haven't logged into the app
     //Loads data from the DataService if they have
@@ -33,7 +33,7 @@ app.controller('HomeCtrl', ['$scope', '$location', '$interval', 'DataService', f
     	var temp = rowNames.slice(0, height+1);
     	
     	if(temp.length != 0){
-    		$interval.cancel(rowTimer);
+    		$interval.cancel(rowTimer); //cancel $interval timer
     		$scope.rows = temp;
     	}
     };
@@ -54,7 +54,7 @@ app.controller('HomeCtrl', ['$scope', '$location', '$interval', 'DataService', f
     		temp.push(i+1);
     	
     	if(temp.length != 0){
-    		$interval.cancel(colTimer);
+    		$interval.cancel(colTimer); //cancel $interval timer
     		$scope.columns = temp;
     	}
     };
@@ -63,7 +63,12 @@ app.controller('HomeCtrl', ['$scope', '$location', '$interval', 'DataService', f
     $scope.displayData = function(index){
     	if($scope.loadedChar == undefined)
     		positionCharBox(index);
-		$scope.loadedChar = $scope.charaData[index];
+    	
+    	//Close the box if you click the same character again
+    	if($scope.loadedChar == $scope.charaData[index])
+    		$scope.loadedChar = undefined;
+    	else 
+    		$scope.loadedChar = $scope.charaData[index];
     };
     
     //Relocate the information box relative to the clicked char
@@ -84,12 +89,95 @@ app.controller('HomeCtrl', ['$scope', '$location', '$interval', 'DataService', f
     	drag.style.top = y + 'px';
     };
     
+    //Returns true if the enemy has a coordinate on the map
+    //Units in the back of a pair up should have a coordinate of ""
+    $scope.enemyHasPos = function(index){
+    	if(enemyPos[index] != "") return true;
+    	else return false;
+    }
+    
     //Removes the character being displayed in the info box and hides it
     $scope.removeData = function(){
     	$scope.loadedChar = undefined;
     };
     
-    //Checks rate of atk/crit/hit/avo to see if they are greater than 0
+    //Returns true if the currently loaded character is paired up with another character
+    $scope.ifPaired = function(){
+    	if($scope.loadedChar == undefined) return false;
+    	if($scope.loadedChar[57] != "None") return true;
+    	else return false;
+    };
+    
+    //Returns true if the unit at index is paired up
+    $scope.isPairedAllChars = function(index){
+    	if($scope.charaData[index][57] != "None") return true;
+    	else return false;
+    };
+    
+    //Returns true if the enemy at index is paired up
+    $scope.enemyIsPaired = function(index){
+    	if($scope.enemyData[index][2] != "None") return true;
+    	else return false;
+    };
+    
+    /* Triggered when the enemy's "Switch to Paired Unit" button is clicked
+     * Finds paired unit, relocates its info box to the same position as the currently
+     * open one and displays it. Old info box is hidden.
+     * WARNING: DOESN'T WORK PROPERLY IF BOTH UNITS ARE DISPLAYED BECAUSE OF RELIANCE
+     * ON SPRITE BEING HIDDEN
+     */
+    $scope.toggleEnemyPair = function(index){
+    	var pairUp = $scope.enemyData[index][2]; //get paired unit's name
+    	var found = false;
+    	var inc = 0;
+    	
+    	//Find paired unit
+    	while(!found && inc < $scope.enemyData.length){
+    		if($scope.enemyData[inc][0] == pairUp) found = true;
+    		else inc++;
+    	}
+    	
+    	//Checks if the enemy the info box belongs to is hidden
+    	var spriteHidden;
+    	if(enemyPos[index] == "") spriteHidden = true;
+    	else spriteHidden = false;
+    	
+    	//Collect info about the current info box and the info box to be displayed
+    	var currBox = document.getElementById('enemy_' + index + '_box');
+    	var currBoxScope = angular.element(currBox).scope();
+    	var pairBox = document.getElementById('enemy_' + inc + '_box');
+    	var pairBoxScope = angular.element(pairBox).scope();
+    	
+    	//Toggle visibility
+    	currBoxScope.viewInfo = false;
+    	pairBoxScope.viewInfo = true;
+    	
+    	//If the sprite is not hidden (enemy is in front of pair up), relocate paired unit's info box
+    	if(!spriteHidden){
+    		var currEnemy = document.getElementById('enemy_' + index);
+    		pairBox.style.top = (currBox.offsetTop + currEnemy.offsetTop) + 'px';
+        	pairBox.style.left = (currBox.offsetLeft + currEnemy.offsetLeft) + 'px';
+    	}
+    };
+    
+    //Switches char info box to show the stats of the paired unit
+    //Triggered when char info box "Switch to Paired Unit" button is clicked
+    $scope.findPairUpChar = function(){
+    	if($scope.loadedChar == undefined) return false;
+    	var pairedUnit = $scope.loadedChar[57]; //get paired unit's name
+    	var found = false;
+    	var inc = 0;
+    	
+    	//Find paired unit
+    	while(!found && inc < $scope.charaData.length){
+    		if($scope.charaData[inc][0] == pairedUnit){
+    			$scope.loadedChar = $scope.charaData[inc];
+    			found = true;
+    		}else inc++;
+    	}
+    };
+    
+    //Checks rate of atk/crit/hit/avo (@ index) to see if they are greater than 0
     $scope.checkRate = function(index){
     	if($scope.loadedChar == undefined) return false;
     	
@@ -113,6 +201,7 @@ app.controller('HomeCtrl', ['$scope', '$location', '$interval', 'DataService', f
     	return compareWeaponName(w);
     };
     
+    //Helper function
     function compareWeaponName(weaponName){
     	if(weaponName != "" && weaponName != "N/A") return true;
     	else return false;
@@ -150,6 +239,7 @@ app.controller('HomeCtrl', ['$scope', '$location', '$interval', 'DataService', f
     	return getIcon(w);
     };
     
+    //Helper function :)
     function getIcon(weaponName){
     	var c = weaponName.toLowerCase();
     	return "IMG/rank_" + c + ".png";
@@ -334,6 +424,11 @@ app.controller('HomeCtrl', ['$scope', '$location', '$interval', 'DataService', f
     	else return "";
     };
     
+    //***********************\\
+    // X,Y POSITION SETTING  \\
+    // FOR VARIOUS THINGS    \\
+    //***********************\\
+    
     //Using a character's coordinates, calculates their horizontal
     //position on the map
     $scope.determineX = function(index, num){
@@ -415,7 +510,11 @@ app.controller('HomeCtrl', ['$scope', '$location', '$interval', 'DataService', f
     	return left + "px";
     };
     
-    //SUPPORT FOR DRAGABILITY
+    //*************************\\
+    // SUPPORT FOR DRAGABILITY \\
+    // OF CHAR INFO BOX        \\
+    //*************************\\
+    
     function dragStart(event){
     	var style = window.getComputedStyle(event.target, null);
         event.dataTransfer.setData("text/html",(parseInt(style.getPropertyValue("left"),10) - event.clientX) + ',' + (parseInt(style.getPropertyValue("top"),10) - event.clientY));
@@ -438,16 +537,11 @@ app.controller('HomeCtrl', ['$scope', '$location', '$interval', 'DataService', f
     	drag.style.top = (event.clientY + parseInt(offset[1],10)) + 'px';
     };
     
+    //Set event listeners to be activated when the div is dragged
     var drag = document.getElementById('infoBox');
     var drop = document.getElementById('dropArea');
-    var map = document.getElementById('map');
     drag.addEventListener('dragstart',dragStart,false);
     drop.addEventListener('dragenter',dragEnter,false);
     drop.addEventListener('dragover',dragOver,false);
     drop.addEventListener('drop',dropDiv,false);
-    drop.style.width = map.naturalWidth + 'px';
-	drop.style.height = map.naturalHeight + 'px';
-	
-	calcNumRows();
-	calcNumColumns();
 }]);

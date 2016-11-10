@@ -17,7 +17,7 @@ body{
 }
 
 .hoverImage:hover{
-	cursor: pointer !important;
+	cursor: pointer;
 	filter: brightness(160%);
 }
 
@@ -79,14 +79,6 @@ body{
 
 .popOutTextSpacing{
 	margin-top:5px;
-}
-
-
-.closeButton{
-	width:16px;
-	height:16px;
-	margin-left: calc(100% - 18px);
-	margin-top: -18px;
 }
 
 .glowBox{

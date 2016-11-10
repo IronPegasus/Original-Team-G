@@ -7,23 +7,39 @@
 	</div>
 	
 	<!--Draw characters-->
-	<div class="absolutePos charDiv" ng-style="{top: determineY($index,0), left: determineX($index,0)}" ng-repeat="character in charaData" id="char_{{$index}}">
-		<img ng-src="{{character[99]}}" ng-click="displayData($index)" class="hoverImage mapCharCentered"></img>
+	<div class="absolutePos charDiv hoverImage" ng-click="displayData($index)" ng-style="{top: determineY($index,0), left: determineX($index,0)}" ng-repeat="character in charaData" id="char_{{$index}}">
+		<img ng-src="{{character[99]}}" class="mapCharCentered"></img>
 		<div class="healthBarBack"></div>
 		<div class="healthBarFront" ng-style="{width:((character[7]/character[8])*28)+'px'}"></div>
 		<div class="healthBarBorder"></div>
+		<div ng-if="isPairedAllChars($index)" class="pairUpIcon"><img src="IMG/shield_pairup.png"></div>
 	</div>
 	
 	<!--Draw enemies-->
 	<div class="absolutePos charDiv" ng-style="{top: determineY($index,1), left: determineX($index,1)}" ng-repeat="enemy in enemyData" id="enemy_{{$index}}">
-		<img ng-src="{{kaden}}" ng-click="enemy_$index=!enemy_$index" class="hoverImage mapCharCentered">
-		<div class="healthBarBack"></div>
-		<div class="healthBarFront" ng-style="{width:((enemy[5]/enemy[6])*28)+'px'}"></div>
-		<div class="healthBarBorder"></div>
-		<div class="enemyNum">{{getEnemyNum($index)}}</div>
+		<div ng-show="enemyHasPos($index)" class="hoverImage charDiv" ng-click="viewInfo=!viewInfo" id="enemy_{{$index}}_sprite">
+			<img ng-src="{{kaden}}" class="mapCharCentered">
+			<div class="healthBarBack"></div>
+			<div class="healthBarFront" ng-style="{width:((enemy[5]/enemy[6])*28)+'px'}"></div>
+			<div class="healthBarBorder"></div>
+			<div class="enemyNum">{{getEnemyNum($index)}}</div>
+			<div ng-if="enemyIsPaired($index)" class="pairUpIcon"><img src="IMG/shield_pairup.png"></div>
+			<!--<div class="enemyTalkBalloon"><img src="IMG/talk.gif"></div>-->
+		</div>
 		
 		<!--ENEMY INFO BOX-->
-		<div class="infoElement enemyInfo" ng-style="{top: displayEInfoY($index), left: displayEInfoX($index)}" ng-if="enemy_$index==true">
+		<div class="infoElement enemyInfo" ng-style="{top: displayEInfoY($index), left: displayEInfoX($index)}" ng-show="viewInfo==true" id="enemy_{{$index}}_box">
+			<!--Buttons-->
+			<div class="absolutePos olive enemyBar">
+				<!--Close button-->
+				<div class="enemyBarButton hoverImage" title="Close" ng-click="viewInfo=false" style="right:2px">
+					<img src="IMG/close.png"></img>
+				</div>
+				<!--Pair-Up button-->
+				<div class="enemyBarButton hoverImage" ng-if="enemyIsPaired($index)" ng-click="toggleEnemyPair($index)" title="Switch to Paired Unit" style="right:20px">
+					<img src="IMG/switchpairup.png"></img>
+				</div>
+			</div>
 			<!--Name-->
 			<div class="infoElement navy whiteText enemyNamePos">
 				<span class="boldText popOutText" style="margin-top:5px">{{enemy[0]}}</span><br>
@@ -199,19 +215,19 @@
 			</div>
 			
 			<!--Weapon ranks-->
-			<div ng-if="existsEnemyWeapon($index,43)" class="infoElement enemyWeaponRankPos" style="margin-left:297px">
+			<div ng-if="existsEnemyWeapon($index,43)" title="{{enemyData[$index][43]}} Rank" class="infoElement enemyWeaponRankPos" style="margin-left:297px">
 				<span style="position:relative">
 					<img ng-src="{{enemyWeaponIcon($index,43)}}" style="display:inline-block">
 					<div class="weaponRankLtrPos">{{enemy[44]}}</div>
 				</span>
 			</div>
-			<div ng-if="existsEnemyWeapon($index,45)" class="infoElement enemyWeaponRankPos" style="margin-left:364px">
+			<div ng-if="existsEnemyWeapon($index,45)" title="{{enemyData[$index][45]}} Rank" class="infoElement enemyWeaponRankPos" style="margin-left:364px">
 				<span style="position:relative">
 					<img ng-src="{{enemyWeaponIcon($index,45)}}" style="display:inline-block">
 					<div class="weaponRankLtrPos">{{enemy[46]}}</div>
 				</span>
 			</div>
-			<div ng-if="existsEnemyWeapon($index,47)" class="infoElement enemyWeaponRankPos" style="margin-left:431px">
+			<div ng-if="existsEnemyWeapon($index,47)" title="{{enemyData[$index][47]}} Rank" class="infoElement enemyWeaponRankPos" style="margin-left:431px">
 				<span style="position:relative">
 					<img ng-src="{{enemyWeaponIcon($index,47)}}" style="display:inline-block">
 					<div class="weaponRankLtrPos">{{enemy[48]}}</div>
@@ -226,8 +242,12 @@
 		<!--Drag bar-->
 		<div class="absolutePos dragBar olive"></div>
 		<!--Close button-->
-		<div class="infoElement closeButton hoverImage" ng-click="removeData()">
+		<div class="infoElement dragBarButton hoverImage" title="Close" style="left:calc(100% - 18px)" ng-click="removeData()">
 			<img src="IMG/close.png"></img>
+		</div>
+		<!--Pair-Up button-->
+		<div class="infoElement dragBarButton hoverImage" title="Switch to Paired Unit" style="left:calc(100% - 38px)" ng-if="ifPaired()" ng-click="findPairUpChar()">
+			<img src="IMG/switchpairup.png"></img>
 		</div>
 		<!--Name-->
 		<div class="infoElement navy whiteText charNamePos" style="text-align:center">
@@ -382,7 +402,7 @@
 		
 		
 		<!--Weapon ranks-->
-		<div ng-if="existsWeapon(28)" class="infoElement weaponRankPos" style="margin-left:355px">
+		<div ng-if="existsWeapon(28)" title="{{loadedChar[28]}} Rank" class="infoElement weaponRankPos" style="margin-left:355px">
 			<span style="position:relative">
 				<img ng-src="{{weaponIcon(28)}}" style="display:inline-block">
 				<div class="weaponRankBackground"></div>
@@ -390,7 +410,7 @@
 				<div class="weaponRankLtrPos">{{loadedChar[29]}}</div>
 			</span>
 		</div>
-		<div ng-if="existsWeapon(30)" class="infoElement weaponRankPos" style="margin-left:430px">
+		<div ng-if="existsWeapon(30)" title="{{loadedChar[30]}} Rank" class="infoElement weaponRankPos" style="margin-left:430px">
 			<span style="position:relative">
 				<img ng-src="{{weaponIcon(30)}}" style="display:inline-block">
 				<div class="weaponRankBackground"></div>
@@ -398,7 +418,7 @@
 				<div class="weaponRankLtrPos">{{loadedChar[31]}}</div>
 			</span>
 		</div>
-		<div ng-if="existsWeapon(32)" class="infoElement weaponRankPos" style="margin-left:505px">
+		<div ng-if="existsWeapon(32)" title="{{loadedChar[32]}} Rank" class="infoElement weaponRankPos" style="margin-left:505px">
 			<span style="position:relative">
 				<img ng-src="{{weaponIcon(32)}}" style="display:inline-block">
 				<div class="weaponRankBackground"></div>
