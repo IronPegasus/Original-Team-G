@@ -2,8 +2,8 @@ app.controller('HomeCtrl', ['$scope', '$location', '$interval', 'DataService', f
 	$scope.rows = ["A"];
     $scope.columns = ["1"];
 	var onLoad = checkData();
-    var charPos = ["Y34", "B3", "S41", "U39", "@37", "&40", "Z36", "B1", "R34", "%36", "T29", "R39", "R33", "+40", "T27", "S39", "W39", "V39", "#42", "B2", "V34", "X28", "X39", "Y33", "$42", "=39", "Q33", "W32", "@36", "Y38"];
-    var enemyPos = ["M16", "&17", "K45", "M21", "~18", "S29", "A1", "S27", "W20", "@11", "%11", "A2", "K41", "J42", "T21", "H35", "N26", "A3", "A4", "A5", "A6", "A7", "A8", "A9", "A10", "A11", "A12", "", "A14", "A15", "A16", "A17", "A18", "A19", "A20", "A21", "A22", "A23", "", "A25", "A26", "A27", "A28", "A29", "A30", "A31"];
+    var charPos = ["Y34", "", "", "U39", "@37", "&40", "Z36", "", "", "%36", "T29", "R39", "R33", "+40", "T27", "S39", "W39", "V39", "#42", "", "V34", "", "X39", "Y33", "$42", "=39", "Q33", "W32", "@36", "Y38"];
+    var enemyPos = ["M16", "&17", "K45", "M21", "~18", "S29", "A1", "S27", "W20", "A13", "", "A2", "K41", "J42", "T21", "H35", "N26", "A3", "A4", "A5", "A6", "A7", "A8", "A9", "A10", "A11", "A12", "", "A14", "A15", "A16", "A17", "A18", "A19", "A20", "A21", "A22", "A23", "", "A25", "A26", "A27", "A28", "A29", "A30", "A31"];
     $scope.kaden = "IMG/kitsune.gif";
     var rowTimer = $interval(calcNumRows, 250, 20); //attempt to get rows 20 times at 250 ms intervals (total run: 5 sec)
     var colTimer = $interval(calcNumColumns, 250, 20);
@@ -101,23 +101,40 @@ app.controller('HomeCtrl', ['$scope', '$location', '$interval', 'DataService', f
     	$scope.loadedChar = undefined;
     };
     
+    //Returns true if a character has a position coordinate
+    $scope.hasPos = function(index){
+    	return charPos[index] != "";
+    };
+    
     //Returns true if the currently loaded character is paired up with another character
     $scope.ifPaired = function(){
     	if($scope.loadedChar == undefined) return false;
-    	if($scope.loadedChar[57] != "None") return true;
-    	else return false;
+    	return $scope.loadedChar[57] != "None";
     };
     
     //Returns true if the unit at index is paired up
     $scope.isPairedAllChars = function(index){
-    	if($scope.charaData[index][57] != "None") return true;
-    	else return false;
+    	return $scope.charaData[index][57] != "None";
+    };
+    
+    $scope.getPairUnitIcon = function(index){
+    	var pairedUnit = $scope.charaData[index][57]; //get paired unit's name
+    	var found = false;
+    	var inc = 0;
+    	
+    	//Find paired unit
+    	while(!found && inc < $scope.charaData.length){
+    		if($scope.charaData[inc][0] == pairedUnit){
+    			found = true;
+    		}else inc++;
+    	}
+    	
+    	return $scope.charaData[inc][99];
     };
     
     //Returns true if the enemy at index is paired up
     $scope.enemyIsPaired = function(index){
-    	if($scope.enemyData[index][2] != "None") return true;
-    	else return false;
+    	return $scope.enemyData[index][2] != "None";
     };
     
     /* Triggered when the enemy's "Switch to Paired Unit" button is clicked
@@ -360,6 +377,45 @@ app.controller('HomeCtrl', ['$scope', '$location', '$interval', 'DataService', f
     	return color;
     };
     
+    $scope.determineEnemyStatColor = function(stat, index){
+    	var color = "#E5C68D"; //default tan
+    	var debuff;
+    	var weaponBuff;
+    	var pairUp;
+    	
+    	//Determine appropriate indicies for stat being evaluated (passed string)
+    	if(stat == "str"){
+    		debuff = 16; weaponBuff = 59; pairUp = 66;
+    	}else if(stat == "mag"){
+    		debuff = 17; weaponBuff = 60; pairUp = 67;
+    	}else if(stat == "skl"){
+    		debuff = 18; weaponBuff = 61; pairUp = 68;
+    	}else if(stat == "spd"){
+    		debuff = 19; weaponBuff = 62; pairUp = 69;
+    	}else if(stat == "lck"){
+    		debuff = 20; weaponBuff = 63; pairUp = 70;
+    	}else if(stat == "def"){
+    		debuff = 21; weaponBuff = 64; pairUp = 71;
+    	}else if(stat == "res"){
+    		debuff = 22; weaponBuff = 65; pairUp = 72;
+    	}else{ return color; } //if string passed is invalid, return tan
+    	
+    	var enemy = $scope.enemyData[index];
+    	
+    	debuff = parseInt(enemy[debuff]);
+    	weaponBuff = parseInt(enemy[weaponBuff]);
+    	
+    	if(enemy[pairUp] == "") pairUp = 0;
+    	else pairUp = parseInt(enemy[pairUp]);
+    	
+    	var totalBuffs = debuff + weaponBuff + pairUp;
+    	if(totalBuffs > 0)
+    		color = "#42adf4"; //blue buff
+    	else if(totalBuffs < 0)
+    		color = "#af2b00"; //red debuff
+    	return color;
+    };
+    
     //Checks if there is a value in the index
     $scope.validDebuff = function(index){
     	if($scope.loadedChar == undefined) return false;
@@ -373,8 +429,7 @@ app.controller('HomeCtrl', ['$scope', '$location', '$interval', 'DataService', f
     	if($scope.loadedChar == undefined) return false;
     	
     	var value = parseInt($scope.loadedChar[index]);
-    	if(value == 0) return false;
-    	else return true;
+    	return value != 0;
     };
     
     //Checks if the loaded character is a) paired with someone
@@ -384,8 +439,13 @@ app.controller('HomeCtrl', ['$scope', '$location', '$interval', 'DataService', f
     	if($scope.loadedChar[index] == "") return false;
     	
     	var value = parseInt($scope.loadedChar[index]);
-    	if(value == 0) return false;
-    	else return true;
+    	return value != 0;
+    };
+    
+    $scope.formatWeaponBuff = function(index){
+    	var value = parseInt($scope.loadedChar[index]);
+    	if(value > 0) return "+" + value;
+    	else return value;
     };
     
     //For displaying skill gems, checks to see if the character's

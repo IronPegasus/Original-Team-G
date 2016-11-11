@@ -8,17 +8,29 @@
 	
 	<!--Draw characters-->
 	<div class="absolutePos charDiv hoverImage" ng-click="displayData($index)" ng-style="{top: determineY($index,0), left: determineX($index,0)}" ng-repeat="character in charaData" id="char_{{$index}}">
-		<img ng-src="{{character[99]}}" class="mapCharCentered"></img>
-		<div class="healthBarBack"></div>
-		<div class="healthBarFront" ng-style="{width:((character[7]/character[8])*28)+'px'}"></div>
-		<div class="healthBarBorder"></div>
-		<div ng-if="isPairedAllChars($index)" class="pairUpIcon"><img src="IMG/shield_pairup.png"></div>
+		<div class="charDiv" ng-if="hasPos($index)">
+			<div ng-if="isPairedAllChars($index)" class="charDiv mapCharOffsetLeft">
+				<img ng-src="{{getPairUnitIcon($index)}}" class="mapCharCentered dimImage">
+			</div>
+			<div class="charDiv" ng-class="isPairedAllChars($index) ? 'mapCharOffsetRight' : 'mapCharOffsetNone'">
+				<img ng-src="{{character[99]}}" class="mapCharCentered">
+			</div>
+			<div class="healthBarBack"></div>
+			<div class="healthBarFront" ng-style="{width:((character[7]/character[8])*28)+'px'}"></div>
+			<div class="healthBarBorder"></div>
+			<div ng-if="isPairedAllChars($index)" class="pairUpIcon"><img src="IMG/shield_pairup.png"></div>
+		</div>
 	</div>
 	
 	<!--Draw enemies-->
 	<div class="absolutePos charDiv" ng-style="{top: determineY($index,1), left: determineX($index,1)}" ng-repeat="enemy in enemyData" id="enemy_{{$index}}">
 		<div ng-show="enemyHasPos($index)" class="hoverImage charDiv" ng-click="viewInfo=!viewInfo" id="enemy_{{$index}}_sprite">
-			<img ng-src="{{kaden}}" class="mapCharCentered">
+			<div ng-if="enemyIsPaired($index)" class="charDiv mapCharOffsetLeft">
+				<img ng-src="{{kaden}}" class="mapCharCentered dimImage">
+			</div>
+			<div class="charDiv" ng-class="enemyIsPaired($index) ? 'mapCharOffsetRight' : 'mapCharOffsetNone'">
+				<img ng-src="{{kaden}}" class="mapCharCentered">
+			</div>
 			<div class="healthBarBack"></div>
 			<div class="healthBarFront" ng-style="{width:((enemy[5]/enemy[6])*28)+'px'}"></div>
 			<div class="healthBarBorder"></div>
@@ -124,37 +136,37 @@
 			<!--Strength-->
 			<div class="infoElement darkTan tanText enemyStatPos" style="margin-top:5px">
 				<span class="enemyStatLabel">Str</span>
-				<span class="indentedEnemyStat">{{enemy[7]}}</span>
+				<span class="indentedEnemyStat" ng-style="{color: determineEnemyStatColor('str', $index)}">{{enemy[7]}}</span>
 			</div>
 			<!--Magic-->
 			<div class="infoElement darkTan tanText enemyStatPos" style="margin-top:29px">
 				<span class="enemyStatLabel">Mag</span>
-				<span class="indentedEnemyStat">{{enemy[8]}}</span>
+				<span class="indentedEnemyStat" ng-style="{color: determineEnemyStatColor('mag', $index)}">{{enemy[8]}}</span>
 			</div>
 			<!--Skill-->
 			<div class="infoElement darkTan tanText enemyStatPos" style="margin-top:53px">
 				<span class="enemyStatLabel">Skl</span>
-				<span class="indentedEnemyStat">{{enemy[9]}}</span>
+				<span class="indentedEnemyStat" ng-style="{color: determineEnemyStatColor('skl', $index)}">{{enemy[9]}}</span>
 			</div>
 			<!--Speed-->
 			<div class="infoElement darkTan tanText enemyStatPos" style="margin-top:77px">
 				<span class="enemyStatLabel">Spd</span>
-				<span class="indentedEnemyStat">{{enemy[10]}}</span>
+				<span class="indentedEnemyStat" ng-style="{color: determineEnemyStatColor('spd', $index)}">{{enemy[10]}}</span>
 			</div>
 			<!--Luck-->
 			<div class="infoElement darkTan tanText enemyStatPos" style="margin-top:101px">
 				<span class="enemyStatLabel">Lck</span>
-				<span class="indentedEnemyStat">{{enemy[11]}}</span>
+				<span class="indentedEnemyStat" ng-style="{color: determineEnemyStatColor('lck', $index)}">{{enemy[11]}}</span>
 			</div>
 			<!--Defense-->
 			<div class="infoElement darkTan tanText enemyStatPos" style="margin-top:125px">
 				<span class="enemyStatLabel">Def</span>
-				<span class="indentedEnemyStat">{{enemy[12]}}</span>
+				<span class="indentedEnemyStat" ng-style="{color: determineEnemyStatColor('def', $index)}">{{enemy[12]}}</span>
 			</div>
 			<!--Resistance-->
 			<div class="infoElement darkTan tanText enemyStatPos" style="margin-top:149px">
 				<span class="enemyStatLabel">Res</span>
-				<span class="indentedEnemyStat">{{enemy[13]}}</span>
+				<span class="indentedEnemyStat" ng-style="{color: determineEnemyStatColor('res', $index)}">{{enemy[13]}}</span>
 			</div>
 			
 			<!--Item Inventory-->
@@ -517,7 +529,7 @@
 			<div class="popOutText personalSkillBody">
 				<span>Base value: {{loadedChar[92]}}<br></span>
 				<span ng-if="validDebuff(19)">Buff/Debuff: {{loadedChar[19]}}<br></span>
-				<span ng-if="validWeaponBuff(45)">{{loadedChar[37]}}: {{loadedChar[45]}}<br></span>
+				<span ng-if="validWeaponBuff(45)">{{loadedChar[37]}}: {{formatWeaponBuff(45)}}<br></span>
 				<span ng-if="validPairUpBuff(59)">Pair-up: +{{loadedChar[59]}}</span>
 			</div>
 		</div>
@@ -526,7 +538,7 @@
 			<div class="popOutText personalSkillBody">
 				<span>Base value: {{loadedChar[93]}}<br></span>
 				<span ng-if="validDebuff(20)">Buff/Debuff: {{loadedChar[20]}}<br></span>
-				<span ng-if="validWeaponBuff(46)">{{loadedChar[37]}}: {{loadedChar[46]}}<br></span>
+				<span ng-if="validWeaponBuff(46)">{{loadedChar[37]}}: {{formatWeaponBuff(46)}}<br></span>
 				<span ng-if="validPairUpBuff(60)">Pair-up: +{{loadedChar[60]}}</span>
 			</div>
 		</div>
@@ -535,7 +547,7 @@
 			<div class="popOutText personalSkillBody">
 				<span>Base value: {{loadedChar[94]}}<br></span>
 				<span ng-if="validDebuff(21)">Buff/Debuff: {{loadedChar[21]}}<br></span>
-				<span ng-if="validWeaponBuff(47)">{{loadedChar[37]}}: {{loadedChar[47]}}<br></span>
+				<span ng-if="validWeaponBuff(47)">{{loadedChar[37]}}: {{formatWeaponBuff(47)}}<br></span>
 				<span ng-if="validPairUpBuff(61)">Pair-up: +{{loadedChar[61]}}</span>
 			</div>
 		</div>
@@ -544,7 +556,7 @@
 			<div class="popOutText personalSkillBody">
 				<span>Base value: {{loadedChar[95]}}<br></span>
 				<span ng-if="validDebuff(22)">Buff/Debuff: {{loadedChar[22]}}<br></span>
-				<span ng-if="validWeaponBuff(48)">{{loadedChar[37]}}: {{loadedChar[48]}}<br></span>
+				<span ng-if="validWeaponBuff(48)">{{loadedChar[37]}}: {{formatWeaponBuff(48)}}<br></span>
 				<span ng-if="validPairUpBuff(62)">Pair-up: +{{loadedChar[62]}}</span>
 			</div>
 		</div>
@@ -553,7 +565,7 @@
 			<div class="popOutText personalSkillBody">
 				<span>Base value: {{loadedChar[96]}}<br></span>
 				<span ng-if="validDebuff(23)">Buff/Debuff: {{loadedChar[23]}}<br></span>
-				<span ng-if="validWeaponBuff(49)">{{loadedChar[37]}}: {{loadedChar[49]}}<br></span>
+				<span ng-if="validWeaponBuff(49)">{{loadedChar[37]}}: {{formatWeaponBuff(49)}}<br></span>
 				<span ng-if="validPairUpBuff(63)">Pair-up: +{{loadedChar[63]}}</span>
 			</div>
 		</div>
@@ -562,7 +574,7 @@
 			<div class="popOutText personalSkillBody">
 				<span>Base value: {{loadedChar[97]}}<br></span>
 				<span ng-if="validDebuff(24)">Buff/Debuff: {{loadedChar[24]}}<br></span>
-				<span ng-if="validWeaponBuff(50)">{{loadedChar[37]}}: {{loadedChar[50]}}<br></span>
+				<span ng-if="validWeaponBuff(50)">{{loadedChar[37]}}: {{formatWeaponBuff(50)}}<br></span>
 				<span ng-if="validPairUpBuff(64)">Pair-up: +{{loadedChar[64]}}</span>
 			</div>
 		</div>
@@ -571,7 +583,7 @@
 			<div class="popOutText personalSkillBody">
 				<span>Base value: {{loadedChar[98]}}<br></span>
 				<span ng-if="validDebuff(25)">Buff/Debuff: {{loadedChar[25]}}<br></span>
-				<span ng-if="validWeaponBuff(51)">{{loadedChar[37]}}: {{loadedChar[51]}}<br></span>
+				<span ng-if="validWeaponBuff(51)">{{loadedChar[37]}}: {{formatWeaponBuff(51)}}<br></span>
 				<span ng-if="validPairUpBuff(65)">Pair-up: +{{loadedChar[65]}}</span>
 			</div>
 		</div>

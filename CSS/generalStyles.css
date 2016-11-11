@@ -21,6 +21,10 @@ body{
 	filter: brightness(160%);
 }
 
+.dimImage{
+	filter: brightness(60%);
+}
+
 .hoverBrown:hover{
 	background-color: #965b1f !important;
 	cursor: pointer !important;
@@ -108,6 +112,24 @@ body{
 	right: 0;
 	top: 0;
 	bottom: 0;  
+}
+
+.mapCharOffsetLeft{
+	position:absolute;
+	left:-6px;
+	top:-3px;
+}
+
+.mapCharOffsetRight{
+	position:absolute;
+	left:6px;
+	top:3px;
+}
+
+.mapCharOffsetNone{
+	position:absolute;
+	left:0px;
+	top:0px;
 }
 
 .floatAbove{
