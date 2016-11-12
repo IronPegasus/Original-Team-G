@@ -26,6 +26,11 @@ app.controller('AuthCtrl', ['$scope', '$location', '$interval', 'DataService', f
     	}
     }
     
+    $scope.openSurvey = function(){
+    	var win = window.open("https://goo.gl/forms/yZUzLiOWCn719OQV2", '_blank');
+    	win.focus();
+    };
+    
     //Initiate auth flow in response to user clicking authorize button.
     $scope.loadAPI = function(event) {
     	gapi.client.init({

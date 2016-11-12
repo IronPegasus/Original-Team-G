@@ -3,7 +3,7 @@ app.controller('HomeCtrl', ['$scope', '$location', '$interval', 'DataService', f
     $scope.columns = ["1"];
 	var onLoad = checkData();
     var charPos = ["V29", "", "", "K38", "@36", "", "T29", "", "", "&37", "S22", "J32", "L31", "#39", "R17", "K35", "K37", "K36", "@39", "", "@34", "", "S40", "R28", "#36", "#37", "K31", "N33", "@35", "V28"];
-    var enemyPos = ["A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8", "A9", "A10", "", "A11", "A12", "A13", "A14", "A15", "B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8", "B9", "B10", "B11", "", "B12", "B13", "B14", "B15", "C1", "C2", "C3", "C4", "C5", "C6"];
+    var enemyPos = ["A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8", "A9", "A10", "B14", "A11", "A12", "A13", "A14", "A15", "B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8", "B9", "B10", "B11", "B12", "B13", "", "B15", "B16", "C1", "C2", "C3", "C4", "C5", "C6"];
     $scope.kaden = "IMG/kitsune.gif";
     var rowTimer = $interval(calcNumRows, 250, 20); //attempt to get rows 20 times at 250 ms intervals (total run: 5 sec)
     var colTimer = $interval(calcNumColumns, 250, 20);
@@ -431,17 +431,17 @@ app.controller('HomeCtrl', ['$scope', '$location', '$interval', 'DataService', f
     //Checks if there is a value in the index
     $scope.validDebuff = function(index){
     	if($scope.loadedChar == undefined) return false;
-    	
-    	if($scope.loadedChar[index] == "") return false;
-    	else return true;
+    	return $scope.loadedChar[index] != "";
+    };
+    
+    $scope.eValidDebuff = function(enemy, index){
+    	return $scope.enemyData[enemy][index] != "0";
     };
     
     //Checks if the value in the index is != 0
     $scope.validWeaponBuff = function(index){
     	if($scope.loadedChar == undefined) return false;
-    	
-    	var value = parseInt($scope.loadedChar[index]);
-    	return value != 0;
+    	return $scope.loadedChar[index] != "0";
     };
     
     //Checks if the loaded character is a) paired with someone
@@ -449,15 +449,46 @@ app.controller('HomeCtrl', ['$scope', '$location', '$interval', 'DataService', f
     $scope.validPairUpBuff = function(index){
     	if($scope.loadedChar == undefined) return false;
     	if($scope.loadedChar[index] == "") return false;
-    	
-    	var value = parseInt($scope.loadedChar[index]);
-    	return value != 0;
+    	return $scope.loadedChar[index] != "0";
+    };
+    
+    $scope.eValidPairUpBuff = function(enemy, stat){
+    	var s = $scope.enemyData[enemy][stat];
+    	return s != "" && s != "0";
     };
     
     $scope.formatWeaponBuff = function(index){
     	var value = parseInt($scope.loadedChar[index]);
     	if(value > 0) return "+" + value;
     	else return value;
+    };
+    
+    $scope.calcEnemyBaseStat = function(index, stat){
+    	var total, debuff, weaponBuff, pairUp;
+    	//Determine appropriate indicies for stat being evaluated (passed string)
+    	if(stat == "str"){
+    		total = 7; debuff = 16; weaponBuff = 59; pairUp = 66;
+    	}else if(stat == "mag"){
+    		total = 8; debuff = 17; weaponBuff = 60; pairUp = 67;
+    	}else if(stat == "skl"){
+    		total = 9; debuff = 18; weaponBuff = 61; pairUp = 68;
+    	}else if(stat == "spd"){
+    		total = 10; debuff = 19; weaponBuff = 62; pairUp = 69;
+    	}else if(stat == "lck"){
+    		total = 11; debuff = 20; weaponBuff = 63; pairUp = 70;
+    	}else if(stat == "def"){
+    		total = 12; debuff = 21; weaponBuff = 64; pairUp = 71;
+    	}else if(stat == "res"){
+    		total = 13; debuff = 22; weaponBuff = 65; pairUp = 72;
+    	}
+    	
+    	var enemy = $scope.enemyData[index];
+    	total = parseInt(enemy[total]);
+    	debuff = parseInt(enemy[debuff]);
+    	weaponBuff = parseInt(enemy[weaponBuff]);
+    	if(enemy[pairUp] == "") pairUp = 0;
+    	else pairUp = parseInt(enemy[pairUp]);
+    	return total - (debuff + weaponBuff + pairUp);
     };
     
     //For displaying skill gems, checks to see if the character's
@@ -518,7 +549,7 @@ app.controller('HomeCtrl', ['$scope', '$location', '$interval', 'DataService', f
     	
     	pos = pos.substring(0,1); //grab first char
     	if(pos.match(/[A-Z]/i)) //If pos is a letter
-    		return (-34*(64-pos.charCodeAt(0))+2) + "px";
+    		return (34*(pos.charCodeAt(0)-64)+2) + "px";
     	
     	switch(pos){
     		case '@': pos = 27; break;

@@ -85,3 +85,99 @@ progress::-moz-progress-bar {
 	background-color: #003051;
 	border-radius:5px;
 }
+
+.surveyButton{
+	position:fixed;
+	border-radius:50%;
+	border: 0px;
+	box-shadow:none;
+ 	background-color: #0063a7;
+ 	color: white;
+ 	font-size:20px;
+	height:60px;
+	width:60px;
+	bottom:20px;
+	right:20px;
+}
+
+.surveyButton:hover{
+	background-color: #0099ff;
+	cursor: pointer;
+}
+
+.surveyFlag{
+	position:fixed;
+	border-radius:10px;
+	background-color: white;
+ 	color: #0063a7;
+	font-family: "Verdana";
+ 	font-size:12px;
+ 	text-align:center;
+	height:40px;
+	width:200px;
+	bottom:30px;
+	right:100px;
+}
+
+.stretchLeft{
+	animation-name: stretchLeft;
+	-webkit-animation-name: stretchLeft;	
+
+	animation-duration: 1.5s;	
+	-webkit-animation-duration: 1.5s;
+
+	animation-timing-function: ease-out;	
+	-webkit-animation-timing-function: ease-out;	
+
+	transform-origin: 100% 0%;
+	-ms-transform-origin: 100% 0%;
+	-webkit-transform-origin: 100% 0%; 
+}
+
+@keyframes stretchLeft {
+	0% {
+		transform: scaleX(0.3);
+	}
+	40% {
+		transform: scaleX(1.02);
+	}
+	60% {
+		transform: scaleX(0.98);
+	}
+	80% {
+		transform: scaleX(1.01);
+	}
+	100% {
+		transform: scaleX(0.98);
+	}				
+	80% {
+		transform: scaleX(1.01);
+	}
+	100% {
+		transform: scaleX(1);
+	}							
+}
+
+@-webkit-keyframes stretchLeft {
+	0% {
+		-webkit-transform: scaleX(0.3);
+	}
+	40% {
+		-webkit-transform: scaleX(1.02);
+	}
+	60% {
+		-webkit-transform: scaleX(0.98);
+	}
+	80% {
+		-webkit-transform: scaleX(1.01);
+	}
+	100% {
+		-webkit-transform: scaleX(0.98);
+	}				
+	80% {
+		-webkit-transform: scaleX(1.01);
+	}
+	100% {
+		-webkit-transform: scaleX(1);
+	}		
+}
