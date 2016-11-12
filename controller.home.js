@@ -301,16 +301,28 @@ app.controller('HomeCtrl', ['$scope', '$location', '$interval', 'DataService', f
     	return $scope.loadedChar[index].length == 20;
     };
     
+    $scope.eWeaponHasDes = function(w, index){
+    	return $scope.enemyData[index][w].length == 20;
+    };
+    
     //Returns true if the weapon at the index has a listed range
     $scope.hasWeaponRange = function(index){
     	if($scope.loadedChar == undefined) return false;
     	return $scope.loadedChar[index][18] != "";
     };
     
+    $scope.eHasWeaponRange = function(w, index){
+    	return $scope.enemyData[index][w][18] != "";
+    };
+    
     //Returns true if the weapon at the index has a listed rank
     $scope.hasWeaponRank = function(index){
     	if($scope.loadedChar == undefined) return false;
     	return $scope.loadedChar[index][4] != "";
+    };
+    
+    $scope.eHasWeaponRank = function(w, index){
+    	return $scope.enemyData[index][w][4] != "";
     };
     
     //Returns the icon for the class of the weapon at the index
@@ -452,24 +464,18 @@ app.controller('HomeCtrl', ['$scope', '$location', '$interval', 'DataService', f
     //level >= lvlCap (passed in, value at which character obtains skill)
     $scope.checkLvl = function(lvlCap){
     	if($scope.loadedChar == undefined) return false;
-    	
-    	var lvl = parseInt($scope.loadedChar[2]);
-    	if(lvl >= lvlCap) return true;
-    	else return false;
+    	return parseInt($scope.loadedChar[2]) >= lvlCap;
     };
     
     //For displaying enemy skill gems, checks to see if the enemy has a
     //skill name in that slot
     $scope.hasSkill = function(enemy,index){
-    	if($scope.enemyData[enemy][index] != "-") return true;
-    	else return false;
+    	return $scope.enemyData[enemy][index][0] != "-";
     };
     
     //Checks if the shield value for the passed enemy is greater than number
     $scope.checkEShields = function(enemy, number){
-    	var value = parseInt($scope.enemyData[enemy][3]);
-    	if(value >= number) return true;
-    	else return false;
+    	return parseInt($scope.enemyData[enemy][3]) >= number;
     };
     
     //Parses an enemy's name to see if it contains a number at the end.

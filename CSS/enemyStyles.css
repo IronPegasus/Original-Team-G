@@ -125,6 +125,12 @@
 	height:16px;
 }
 
+.enemySkillGemInfoPos{
+	margin-top:19px;
+	width:275px;
+	height:125px;
+}
+
 .enemyStatPos{
 	margin-left:195px;
 	width:80px;
@@ -135,6 +141,13 @@
 	margin-left:280px;
 	width:198px;
 	height:24px;
+}
+
+.enemyInventoryInfoPos{
+	font-size:12px;
+	margin-left:35px;
+	width:240px;
+	height:105px;
 }
 
 .enemyWeaponRankPos{

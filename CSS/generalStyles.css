@@ -30,6 +30,11 @@ body{
 	cursor: pointer !important;
 }
 
+.hoverTan:hover{
+	background-color: #f2e4cc !important;
+	cursor: pointer !important;
+}
+
 .healthBarBack{
 	position: absolute;
 	width: 28px;

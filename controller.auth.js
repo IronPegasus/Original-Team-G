@@ -8,6 +8,8 @@ app.controller('AuthCtrl', ['$scope', '$location', '$interval', 'DataService', f
     var characterData;
     var enemyData;
     var wIndex;
+    var skillDescriptions;
+    var personalSkillsDesc;
     
     //Set div visibility
     var authorizeDiv = document.getElementById('authorize-div');
@@ -164,18 +166,18 @@ app.controller('AuthCtrl', ['$scope', '$location', '$interval', 'DataService', f
         	  gapi.client.sheets.spreadsheets.values.get({
                   spreadsheetId: salvSheetId,
                   majorDimension: "ROWS",
-                  range: 'Skrillex!A1:B143',
+                  range: 'Skrillex!A1:B',
                 }).then(function(response2) {
-                	 var skillDescriptions = response2.result.values;
+                	 skillDescriptions = response2.result.values;
                 	 updateProgressBar(); //update progress bar
                 	 
                 	 //Fetch personal skills and their matching descriptions
                 	 gapi.client.sheets.spreadsheets.values.get({
                          spreadsheetId: salvSheetId,
                          majorDimension: "ROWS",
-                         range: 'Personal Skrillex!B2:C31',
+                         range: 'Personal Skrillex!B2:C',
                        }).then(function(response3) {
-                    	   var personalSkillsDesc = response3.result.values;
+                    	   personalSkillsDesc = response3.result.values;
                     	   
                     	   for(var i = 0; i < characterData.values.length; i++){
                        		 var charSkl = skills[i];
@@ -218,11 +220,24 @@ app.controller('AuthCtrl', ['$scope', '$location', '$interval', 'DataService', f
        	   		  }
        	   	  }
        	   	  
-       	   	  //Replace weapon names with weapon data arrays
+       	   	 
        	   	  for(var i = 0; i < enemyData.length; i++){
+       	   		  //Replace weapon names with weapon data arrays
        	   		  for(var j = 29; j < 34; j++){
        	   			  enemyData[i][j] = locateWeapon(enemyData[i][j], wIndex);
        	   		  }
+       	   		  
+       	   		  //Replace skills with skill info array
+       	   		  for(var j = 34; j < 42; j++){
+	 	   			  if(enemyData[i][j] != "-")
+	 	   				  enemyData[i][j] = findSkill(enemyData[i][j], skillDescriptions);
+	 	   			  else enemyData[i][j] = ["-", "No skill."];
+       	   		  }
+       	   		  
+       	   		  //Replace personal skill with skill info array
+       	   		  if(enemyData[i][42] != "-")
+       	   			  enemyData[i][42] = findSkill(enemyData[i][42], personalSkillsDesc);
+ 	   			  else enemyData[i][42] = ["-", "No skill."];
        	   	  }
        	   	  
        	      updateProgressBar(); //update progress bar
@@ -243,18 +258,18 @@ app.controller('AuthCtrl', ['$scope', '$location', '$interval', 'DataService', f
     	if(name == undefined) //if last character in the string is G, it's money
     		return ["Undefined Item", "ERROR", "-", "0", "Z", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "-", "0", "Something's wrong here."];
     	
-    	
+    	//Remove parenthesis from end of name
     	if(name.indexOf("(") != -1)
     		name = name.substring(0,name.indexOf("(")-1);
     	
     	if(name.indexOf("G") == name.length-1) //if last character in the string is G, it's money
-    		return [name, "Gold", "-", "0", "Z", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "Wealth", "0", "I bet you could buy something nice with this."];
+    		return [name, "Gold", "Gold", "0", "", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "Wealth", "", "I bet you could buy something nice with this."];
     	
     	for(var i = 0; i < list.length; i++)
     		if(list[i][0] == name)
     			return list[i].slice();
     	
-    	return [name, "Mystery", "Mental", "0", "Z", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "Confusion", "0", "Couldn't find any data on this weapon."];
+    	return [name, "Mystery", "Unknown", "0", "", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "Confusion", "", "What could this be?"];
     };
     
     function fetch(){

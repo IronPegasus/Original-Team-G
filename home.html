@@ -46,11 +46,11 @@
 			<div class="absolutePos olive enemyBar">
 				<!--Close button-->
 				<div class="enemyBarButton hoverImage" title="Close" ng-click="viewInfo=false" style="right:2px">
-					<img src="IMG/close.png"></img>
+					<img src="IMG/close.png">
 				</div>
 				<!--Pair-Up button-->
 				<div class="enemyBarButton hoverImage" ng-if="enemyIsPaired($index)" ng-click="toggleEnemyPair($index)" title="Switch to Paired Unit" style="right:20px">
-					<img src="IMG/switchpairup.png"></img>
+					<img src="IMG/switchpairup.png">
 				</div>
 			</div>
 			<!--Name-->
@@ -89,48 +89,48 @@
 				<span class="indentedEnemyStat">{{enemy[27]}}</span>
 			</div>
 			<!--Shields-->
-			<div class="infoElement darkTan enemyShieldsPos">
+			<div class="infoElement darkTan enemyShieldsPos" title="Dual Guard Shields">
 				<div style="margin-left:52px;margin-top:1px">
 					<img ng-if="!checkEShields($index,2)" src="IMG/emptyshield.png"/><img ng-if="checkEShields($index,2)" src="IMG/filledshield.png"/><img ng-if="!checkEShields($index,4)" src="IMG/emptyshield.png"/><img ng-if="checkEShields($index,4)" src="IMG/filledshield.png"/><img ng-if="!checkEShields($index,6)" src="IMG/emptyshield.png"/><img ng-if="checkEShields($index,6)" src="IMG/filledshield.png"/><img ng-if="!checkEShields($index,8)" src="IMG/emptyshield.png"/><img ng-if="checkEShields($index,8)" src="IMG/filledshield.png"/><img ng-if="!checkEShields($index,10)" src="IMG/emptyshield.png"/><img ng-if="checkEShields($index,10)" src="IMG/filledshield.png"/>
 				</div>
 			</div>
 			
 			<!--Skill Gems-->
-			<div class="infoElement hoverImage enemyGemPos" style="margin-left:7px">
-				<img ng-if="hasSkill($index,42)" title="Personal skill" ng-src="IMG/white_skill.png"></img>
-				<img ng-if="!hasSkill($index,42)" ng-src="IMG/blank_skill.png"></img>
+			<div class="infoElement hoverImage enemyGemPos" ng-mouseenter="wGem=true" ng-mouseleave="wGem=false" style="margin-left:7px">
+				<img ng-if="hasSkill($index,42)" ng-src="IMG/white_skill.png">
+				<img ng-if="!hasSkill($index,42)" ng-src="IMG/blank_skill.png">
 			</div>
-			<div class="infoElement hoverImage enemyGemPos" style="margin-left:28px">
-				<img ng-if="hasSkill($index,34)" ng-src="IMG/pink_skill.png"></img>
-				<img ng-if="!hasSkill($index,34)" ng-src="IMG/blank_skill.png"></img>
+			<div class="infoElement hoverImage enemyGemPos" ng-mouseenter="pkGem=true" ng-mouseleave="pkGem=false" style="margin-left:28px">
+				<img ng-if="hasSkill($index,34)" ng-src="IMG/pink_skill.png">
+				<img ng-if="!hasSkill($index,34)" ng-src="IMG/blank_skill.png">
 			</div>
-			<div class="infoElement hoverImage enemyGemPos" style="margin-left:49px">
-				<img ng-if="hasSkill($index,35)" ng-src="IMG/red_skill.png"></img>
-				<img ng-if="!hasSkill($index,35)" ng-src="IMG/blank_skill.png"></img>
+			<div class="infoElement hoverImage enemyGemPos" ng-mouseenter="rGem=true" ng-mouseleave="rGem=false" style="margin-left:49px">
+				<img ng-if="hasSkill($index,35)" ng-src="IMG/red_skill.png">
+				<img ng-if="!hasSkill($index,35)" ng-src="IMG/blank_skill.png">
 			</div>
-			<div class="infoElement hoverImage enemyGemPos" style="margin-left:70px">
-				<img ng-if="hasSkill($index,36)" ng-src="IMG/orange_skill.png"></img>
-				<img ng-if="!hasSkill($index,36)" ng-src="IMG/blank_skill.png"></img>
+			<div class="infoElement hoverImage enemyGemPos" ng-mouseenter="oGem=true" ng-mouseleave="oGem=false" style="margin-left:70px">
+				<img ng-if="hasSkill($index,36)" ng-src="IMG/orange_skill.png">
+				<img ng-if="!hasSkill($index,36)" ng-src="IMG/blank_skill.png">
 			</div>
-			<div class="infoElement hoverImage enemyGemPos" style="margin-left:91px">
-				<img ng-if="hasSkill($index,37)" ng-src="IMG/yellow_skill.png"></img>
-				<img ng-if="!hasSkill($index,37)" ng-src="IMG/blank_skill.png"></img>
+			<div class="infoElement hoverImage enemyGemPos" ng-mouseenter="yGem=true" ng-mouseleave="yGem=false" style="margin-left:91px">
+				<img ng-if="hasSkill($index,37)" ng-src="IMG/yellow_skill.png">
+				<img ng-if="!hasSkill($index,37)" ng-src="IMG/blank_skill.png">
 			</div>
-			<div class="infoElement hoverImage enemyGemPos" style="margin-left:112px">
-				<img ng-if="hasSkill($index,38)" ng-src="IMG/green_skill.png"></img>
-				<img ng-if="!hasSkill($index,38)" ng-src="IMG/blank_skill.png"></img>
+			<div class="infoElement hoverImage enemyGemPos" ng-mouseenter="gGem=true" ng-mouseleave="gGem=false" style="margin-left:112px">
+				<img ng-if="hasSkill($index,38)" ng-src="IMG/green_skill.png">
+				<img ng-if="!hasSkill($index,38)" ng-src="IMG/blank_skill.png">
 			</div>
-			<div class="infoElement hoverImage enemyGemPos" style="margin-left:133px">
-				<img ng-if="hasSkill($index,39)" ng-src="IMG/aqua_skill.png"></img>
-				<img ng-if="!hasSkill($index,39)" ng-src="IMG/blank_skill.png"></img>
+			<div class="infoElement hoverImage enemyGemPos" ng-mouseenter="aGem=true" ng-mouseleave="aGem=false" style="margin-left:133px">
+				<img ng-if="hasSkill($index,39)" ng-src="IMG/aqua_skill.png">
+				<img ng-if="!hasSkill($index,39)" ng-src="IMG/blank_skill.png">
 			</div>
-			<div class="infoElement hoverImage enemyGemPos" style="margin-left:152px">
-				<img ng-if="hasSkill($index,40)" ng-src="IMG/blue_skill.png"></img>
-				<img ng-if="!hasSkill($index,40)" ng-src="IMG/blank_skill.png"></img>
+			<div class="infoElement hoverImage enemyGemPos" ng-mouseenter="bGem=true" ng-mouseleave="bGem=false" style="margin-left:152px">
+				<img ng-if="hasSkill($index,40)" ng-src="IMG/blue_skill.png">
+				<img ng-if="!hasSkill($index,40)" ng-src="IMG/blank_skill.png">
 			</div>
-			<div class="infoElement hoverImage" style="margin-left:171px;margin-top:149px;width:16px;height:16px;">
-				<img ng-if="hasSkill($index,41)" ng-src="IMG/purple_skill.png"></img>
-				<img ng-if="!hasSkill($index,41)" ng-src="IMG/blank_skill.png"></img>
+			<div class="infoElement hoverImage enemyGemPos" ng-mouseenter="prGem=true" ng-mouseleave="prGem=false" style="margin-left:171px">
+				<img ng-if="hasSkill($index,41)" ng-src="IMG/purple_skill.png">
+				<img ng-if="!hasSkill($index,41)" ng-src="IMG/blank_skill.png">
 			</div>
 			
 			<!--Stats Column-->
@@ -171,7 +171,7 @@
 			</div>
 			
 			<!--Item Inventory-->
-			<div class="infoElement lightTan redText enemyInventoryBoxPos" style="margin-top:5px">
+			<div class="infoElement lightTan redText hoverTan enemyInventoryBoxPos" ng-mouseenter="wpn1=true" ng-mouseleave="wpn1=false" style="margin-top:5px">
 				<span class="indentedEWeaponIcon" ng-if="validEnemyWeapon($index,29)"><img ng-src="{{getEnemyWeaponClassIcon($index,29)}}"/></span>
 				<span class="indentedEnemyItem">{{enemy[29][0]}}</span>
 				<div class="enemyWeaponEffectIcons">
@@ -182,7 +182,7 @@
 					<img ng-if="enemyWeaponEffective($index, 29, 'monster')" src="IMG/eff_monster.png">
 				</div>
 			</div>
-			<div class="infoElement paleTan redText enemyInventoryBoxPos" style="margin-top:34px">
+			<div class="infoElement paleTan redText hoverTan enemyInventoryBoxPos" ng-mouseenter="wpn2=true" ng-mouseleave="wpn2=false" style="margin-top:34px">
 				<span class="indentedEWeaponIcon" ng-if="validEnemyWeapon($index,30)"><img ng-src="{{getEnemyWeaponClassIcon($index,30)}}"/></span>
 				<span class="indentedEnemyItem">{{enemy[30][0]}}</span>
 				<div class="enemyWeaponEffectIcons">
@@ -193,7 +193,7 @@
 					<img ng-if="enemyWeaponEffective($index, 30, 'monster')" src="IMG/eff_monster.png">
 				</div>
 			</div>
-			<div class="infoElement paleTan redText enemyInventoryBoxPos" style="margin-top:63px">
+			<div class="infoElement paleTan redText hoverTan enemyInventoryBoxPos" ng-mouseenter="wpn3=true" ng-mouseleave="wpn3=false" style="margin-top:63px">
 				<span class="indentedEWeaponIcon" ng-if="validEnemyWeapon($index,31)"><img ng-src="{{getEnemyWeaponClassIcon($index,31)}}"/></span>
 				<span class="indentedEnemyItem">{{enemy[31][0]}}</span>
 				<div class="enemyWeaponEffectIcons">
@@ -204,7 +204,7 @@
 					<img ng-if="enemyWeaponEffective($index, 31, 'monster')" src="IMG/eff_monster.png">
 				</div>
 			</div>
-			<div class="infoElement paleTan redText enemyInventoryBoxPos" style="margin-top:92px">
+			<div class="infoElement paleTan redText hoverTan enemyInventoryBoxPos" ng-mouseenter="wpn4=true" ng-mouseleave="wpn4=false" style="margin-top:92px">
 				<span class="indentedEWeaponIcon" ng-if="validEnemyWeapon($index,32)"><img ng-src="{{getEnemyWeaponClassIcon($index,32)}}"/></span>
 				<span class="indentedEnemyItem">{{enemy[32][0]}}</span>
 				<div class="enemyWeaponEffectIcons">
@@ -215,7 +215,7 @@
 					<img ng-if="enemyWeaponEffective($index, 32, 'monster')" src="IMG/eff_monster.png">
 				</div>
 			</div>
-			<div class="infoElement paleTan redText enemyInventoryBoxPos" style="margin-top:121px">
+			<div class="infoElement paleTan redText hoverTan enemyInventoryBoxPos" ng-mouseenter="wpn5=true" ng-mouseleave="wpn5=false" style="margin-top:121px">
 				<span class="indentedEWeaponIcon" ng-if="validEnemyWeapon($index,33)"><img ng-src="{{getEnemyWeaponClassIcon($index,33)}}"/></span>
 				<span class="indentedEnemyItem">{{enemy[33][0]}}</span>
 				<div class="enemyWeaponEffectIcons">
@@ -246,6 +246,78 @@
 					<div class="weaponRankLtrPos">{{enemy[48]}}</div>
 				</span>
 			</div>
+		
+			<!--Skill Gem Info Boxes-->
+			<div ng-if="wGem && hasSkill($index,42)" class="infoElement green whiteText enemySkillGemInfoPos" style="margin-left:5px">
+				<div class="italicText popOutText popOutHeader">[Personal Skill]</div>
+				<div class="boldText popOutText personalSkillHeader">{{enemy[42][0]}}</div>
+				<div class="popOutText personalSkillBody">{{enemy[42][1]}}</div>
+			</div>
+			<div ng-if="pkGem && hasSkill($index,34)" class="infoElement green whiteText enemySkillGemInfoPos" style="margin-left:26px">
+				<div class="boldText popOutText popOutHeader">{{enemy[34][0]}}</div>
+				<div class="popOutText popOutBody">{{enemy[34][1]}}</div>
+			</div>
+			<div ng-if="rGem && hasSkill($index,35)" class="infoElement green whiteText enemySkillGemInfoPos" style="margin-left:47px">
+				<div class="boldText popOutText popOutHeader">{{enemy[35][0]}}</div>
+				<div class="popOutText popOutBody">{{enemy[35][1]}}</div>
+			</div>
+			<div ng-if="oGem && hasSkill($index,36)" class="infoElement green whiteText enemySkillGemInfoPos" style="margin-left:68px">
+				<div class="boldText popOutText popOutHeader">{{enemy[36][0]}}</div>
+				<div class="popOutText popOutBody">{{enemy[36][1]}}</div>
+			</div>
+			<div ng-if="yGem && hasSkill($index,37)" class="infoElement green whiteText enemySkillGemInfoPos" style="margin-left:89px">
+				<div class="boldText popOutText popOutHeader">{{enemy[37][0]}}</div>
+				<div class="popOutText popOutBody">{{enemy[37][1]}}</div>
+			</div>
+			<div ng-if="gGem && hasSkill($index,38)" class="infoElement green whiteText enemySkillGemInfoPos" style="margin-left:110px">
+				<div class="boldText popOutText popOutHeader">{{enemy[38][0]}}</div>
+				<div class="popOutText popOutBody">{{enemy[38][1]}}</div>
+			</div>
+			<div ng-if="aGem && hasSkill($index,39)" class="infoElement green whiteText enemySkillGemInfoPos" style="margin-left:131px">
+				<div class="boldText popOutText popOutHeader">{{enemy[39][0]}}</div>
+				<div class="popOutText popOutBody">{{enemy[39][1]}}</div>
+			</div>
+			<div ng-if="bGem && hasSkill($index,40)" class="infoElement green whiteText enemySkillGemInfoPos" style="margin-left:150px">
+				<div class="boldText popOutText popOutHeader">{{enemy[40][0]}}</div>
+				<div class="popOutText popOutBody">{{enemy[40][1]}}</div>
+			</div>
+			<div ng-if="prGem && hasSkill($index,41)" class="infoElement green whiteText enemySkillGemInfoPos" style="margin-left:169px">
+				<div class="boldText popOutText popOutHeader">{{enemy[41][0]}}</div>
+				<div class="popOutText popOutBody">{{enemy[41][1]}}</div>
+			</div>
+			
+			<!--Weapon Info Boxes-->
+			<div class="infoElement green whiteText enemyInventoryInfoPos" ng-if="wpn1 && validEnemyWeapon($index,29)" style="margin-top:5px">
+				<span class="popOutText popOutHeader italicText">[Equipped Weapon]</span><br>
+				<span class="popOutText popOutTextSpacing">Type: {{enemy[29][2]}}</span><br>
+				<span class="popOutText popOutTextSpacing" ng-if="eHasWeaponRank(29, $index)">Rank: {{enemy[29][4]}}</span><br>
+				<span class="popOutText popOutTextSpacing" ng-if="eHasWeaponRange(29, $index)">Range: {{enemy[29][18]}}</span><br>
+				<span class="popOutText popOutTextSpacing" ng-if="eWeaponHasDes(29, $index)">{{enemy[29][19]}}</span>
+			</div>
+			<div class="infoElement green whiteText enemyInventoryInfoPos" ng-if="wpn2 && validEnemyWeapon($index,30)" style="margin-top:20px">
+				<span class="popOutText popOutHeader">Type: {{enemy[30][2]}}</span><br>
+				<span class="popOutText popOutTextSpacing" ng-if="eHasWeaponRank(30, $index)">Rank: {{enemy[30][4]}}</span><br>
+				<span class="popOutText popOutTextSpacing" ng-if="eHasWeaponRange(30, $index)">Range: {{enemy[30][18]}}</span><br>
+				<span class="popOutText popOutTextSpacing" ng-if="eWeaponHasDes(30, $index)">{{enemy[30][19]}}</span>
+			</div>
+			<div class="infoElement green whiteText enemyInventoryInfoPos" ng-if="wpn3 && validEnemyWeapon($index,31)" style="margin-top:40px">
+				<span class="popOutText popOutHeader">Type: {{enemy[31][2]}}</span><br>
+				<span class="popOutText popOutTextSpacing" ng-if="eHasWeaponRank(31, $index)">Rank: {{enemy[31][4]}}</span><br>
+				<span class="popOutText popOutTextSpacing" ng-if="eHasWeaponRange(31, $index)">Range: {{enemy[31][18]}}</span><br>
+				<span class="popOutText popOutTextSpacing" ng-if="eWeaponHasDes(31, $index)">{{enemy[31][19]}}</span>
+			</div>
+			<div class="infoElement green whiteText enemyInventoryInfoPos" ng-if="wpn4 && validEnemyWeapon($index,32)" style="margin-top:55px">
+				<span class="popOutText popOutHeader">Type: {{enemy[32][2]}}</span><br>
+				<span class="popOutText popOutTextSpacing" ng-if="eHasWeaponRank(32, $index)">Rank: {{enemy[32][4]}}</span><br>
+				<span class="popOutText popOutTextSpacing" ng-if="eHasWeaponRange(32, $index)">Range: {{enemy[32][18]}}</span><br>
+				<span class="popOutText popOutTextSpacing" ng-if="eWeaponHasDes(32, $index)">{{enemy[32][19]}}</span>
+			</div>
+			<div class="infoElement green whiteText enemyInventoryInfoPos" ng-if="wpn5 && validEnemyWeapon($index,33)" style="margin-top:65px">
+				<span class="popOutText popOutHeader">Type: {{enemy[33][2]}}</span><br>
+				<span class="popOutText popOutTextSpacing" ng-if="eHasWeaponRank(33, $index)">Rank: {{enemy[33][4]}}</span><br>
+				<span class="popOutText popOutTextSpacing" ng-if="eHasWeaponRange(33, $index)">Range: {{enemy[33][18]}}</span><br>
+				<span class="popOutText popOutTextSpacing" ng-if="eWeaponHasDes(33, $index)">{{enemy[33][19]}}</span>
+			</div>
 			
 		</div>
 	</div>
@@ -256,11 +328,11 @@
 		<div class="absolutePos dragBar olive"></div>
 		<!--Close button-->
 		<div class="infoElement dragBarButton hoverImage" title="Close" style="left:calc(100% - 18px)" ng-click="removeData()">
-			<img src="IMG/close.png"></img>
+			<img src="IMG/close.png">
 		</div>
 		<!--Pair-Up button-->
 		<div class="infoElement dragBarButton hoverImage" title="Switch to Paired Unit" style="left:calc(100% - 38px)" ng-if="ifPaired()" ng-click="findPairUpChar()">
-			<img src="IMG/switchpairup.png"></img>
+			<img src="IMG/switchpairup.png">
 		</div>
 		<!--Name-->
 		<div class="infoElement navy whiteText charNamePos" style="text-align:center">
@@ -357,7 +429,7 @@
 		
 		
 		<!--Equipped items-->
-		<div class="infoElement lightTan redText itemsPos" ng-mouseenter="wpn1=true" ng-mouseleave="wpn1=false" style="margin-top:10px">
+		<div class="infoElement lightTan redText hoverTan itemsPos" ng-mouseenter="wpn1=true" ng-mouseleave="wpn1=false" style="margin-top:10px">
 			<span class="indentedWeaponIcon" ng-if="validWeapon(100)"><img ng-src="{{getWeaponClassIcon(100)}}"/></span>
 			<span class="indentedWeaponName" ng-if="validWeapon(100)">{{loadedChar[100][0]}}</span>
 			<div class="weaponEffectIcons">
@@ -368,7 +440,7 @@
 				<img ng-if="weaponEffective(100,'monster')" src="IMG/eff_monster.png">
 			</div>
 		</div>
-		<div class="infoElement paleTan redText itemsPos" ng-mouseenter="wpn2=true" ng-mouseleave="wpn2=false" style="margin-top:45px">
+		<div class="infoElement paleTan redText hoverTan itemsPos" ng-mouseenter="wpn2=true" ng-mouseleave="wpn2=false" style="margin-top:45px">
 			<span class="indentedWeaponIcon" ng-if="validWeapon(101)"><img ng-src="{{getWeaponClassIcon(101)}}"/></span>
 			<span class="indentedWeaponName" ng-if="validWeapon(101)">{{loadedChar[101][0]}}</span>
 			<div class="weaponEffectIcons">
@@ -379,7 +451,7 @@
 				<img ng-if="weaponEffective(101,'monster')" src="IMG/eff_monster.png">
 			</div>
 		</div>
-		<div class="infoElement paleTan redText itemsPos" ng-mouseenter="wpn3=true" ng-mouseleave="wpn3=false" style="margin-top:80px">
+		<div class="infoElement paleTan redText hoverTan itemsPos" ng-mouseenter="wpn3=true" ng-mouseleave="wpn3=false" style="margin-top:80px">
 			<span class="indentedWeaponIcon" ng-if="validWeapon(102)"><img ng-src="{{getWeaponClassIcon(102)}}"/></span>
 			<span class="indentedWeaponName" ng-if="validWeapon(102)">{{loadedChar[102][0]}}</span>
 			<div class="weaponEffectIcons">
@@ -390,7 +462,7 @@
 				<img ng-if="weaponEffective(102,'monster')" src="IMG/eff_monster.png">
 			</div>
 		</div>
-		<div class="infoElement paleTan redText itemsPos" ng-mouseenter="wpn4=true" ng-mouseleave="wpn4=false" style="margin-top:115px">
+		<div class="infoElement paleTan redText hoverTan itemsPos" ng-mouseenter="wpn4=true" ng-mouseleave="wpn4=false" style="margin-top:115px">
 			<span class="indentedWeaponIcon" ng-if="validWeapon(103)"><img ng-src="{{getWeaponClassIcon(103)}}"/></span>
 			<span class="indentedWeaponName" ng-if="validWeapon(103)">{{loadedChar[103][0]}}</span>
 			<div class="weaponEffectIcons">
@@ -401,7 +473,7 @@
 				<img ng-if="weaponEffective(103,'monster')" src="IMG/eff_monster.png">
 			</div>
 		</div>
-		<div class="infoElement paleTan redText itemsPos" ng-mouseenter="wpn5=true" ng-mouseleave="wpn5=false" style="margin-top:150px">
+		<div class="infoElement paleTan redText hoverTan itemsPos" ng-mouseenter="wpn5=true" ng-mouseleave="wpn5=false" style="margin-top:150px">
 			<span class="indentedWeaponIcon" ng-if="validWeapon(104)"><img ng-src="{{getWeaponClassIcon(104)}}"/></span>
 			<span class="indentedWeaponName" ng-if="validWeapon(104)">{{loadedChar[104][0]}}</span>
 			<div class="weaponEffectIcons">
@@ -444,45 +516,45 @@
 		<!--Pair Up Icon-->
 		<!--ng-mouseover and ng-mouseleave trigger the appearance of the info box when you hover over the icon-->
 		<div class="infoElement hoverImage pairUpIcoPos" ng-mouseover="pairUp=true" ng-mouseleave="pairUp=false">
-			<img ng-src="IMG/pairup.png"></img>
+			<img ng-src="IMG/pairup.png">
 		</div>
 		
 		
 		<!--Skill Gems-->
 		<!--ng-mouseover and ng-mouseleave trigger the appearance of the info box for each skill-->
 		<div class="infoElement hoverImage skillGemPos" ng-mouseover="wGem=true" ng-mouseleave="wGem=false" style="margin-top:10px">
-			<img ng-src="IMG/white_skill.png"></img>
+			<img ng-src="IMG/white_skill.png">
 		</div>
 		<div class="infoElement hoverImage skillGemPos" ng-mouseover="pkGem=true" ng-mouseleave="pkGem=false" style="margin-top:33px">
-			<img ng-src="IMG/pink_skill.png"></img>
+			<img ng-src="IMG/pink_skill.png">
 		</div>
 		<div class="infoElement hoverImage skillGemPos" ng-mouseover="rGem=true" ng-mouseleave="rGem=false" style="margin-top:56px">
-			<img ng-if="checkLvl(5)" ng-src="IMG/red_skill.png"></img>
-			<img ng-if="!checkLvl(5)" ng-src="IMG/blank_skill.png"></img>
+			<img ng-if="checkLvl(5)" ng-src="IMG/red_skill.png">
+			<img ng-if="!checkLvl(5)" ng-src="IMG/blank_skill.png">
 		</div>
 		<div class="infoElement hoverImage skillGemPos" ng-mouseover="oGem=true" ng-mouseleave="oGem=false" style="margin-top:79px">
-			<img ng-if="checkLvl(10)" ng-src="IMG/orange_skill.png"></img>
-			<img ng-if="!checkLvl(10)" ng-src="IMG/blank_skill.png"></img>
+			<img ng-if="checkLvl(10)" ng-src="IMG/orange_skill.png">
+			<img ng-if="!checkLvl(10)" ng-src="IMG/blank_skill.png">
 		</div>
 		<div class="infoElement hoverImage skillGemPos" ng-mouseover="yGem=true" ng-mouseleave="yGem=false" style="margin-top:102px">
-			<img ng-if="checkLvl(15)" ng-src="IMG/yellow_skill.png"></img>
-			<img ng-if="!checkLvl(15)" ng-src="IMG/blank_skill.png"></img>
+			<img ng-if="checkLvl(15)" ng-src="IMG/yellow_skill.png">
+			<img ng-if="!checkLvl(15)" ng-src="IMG/blank_skill.png">
 		</div>
 		<div class="infoElement hoverImage skillGemPos" ng-mouseover="gGem=true" ng-mouseleave="gGem=false" style="margin-top:125px">
-			<img ng-if="checkLvl(20)" ng-src="IMG/green_skill.png"></img>
-			<img ng-if="!checkLvl(20)" ng-src="IMG/blank_skill.png"></img>
+			<img ng-if="checkLvl(20)" ng-src="IMG/green_skill.png">
+			<img ng-if="!checkLvl(20)" ng-src="IMG/blank_skill.png">
 		</div>
 		<div class="infoElement hoverImage skillGemPos" ng-mouseover="aGem=true" ng-mouseleave="aGem=false" style="margin-top:147px">
-			<img ng-if="checkLvl(25)" ng-src="IMG/aqua_skill.png"></img>
-			<img ng-if="!checkLvl(25)" ng-src="IMG/blank_skill.png"></img>
+			<img ng-if="checkLvl(25)" ng-src="IMG/aqua_skill.png">
+			<img ng-if="!checkLvl(25)" ng-src="IMG/blank_skill.png">
 		</div>
 		<div class="infoElement hoverImage skillGemPos" ng-mouseover="bGem=true" ng-mouseleave="bGem=false" style="margin-top:170px">
-			<img ng-if="checkLvl(30)" ng-src="IMG/blue_skill.png"></img>
-			<img ng-if="!checkLvl(30)" ng-src="IMG/blank_skill.png"></img>
+			<img ng-if="checkLvl(30)" ng-src="IMG/blue_skill.png">
+			<img ng-if="!checkLvl(30)" ng-src="IMG/blank_skill.png">
 		</div>
 		<div class="infoElement hoverImage skillGemPos" ng-mouseover="prGem=true" ng-mouseleave="prGem=false" style="margin-top:192px">
-			<img ng-if="checkLvl(35)" ng-src="IMG/purple_skill.png"></img>
-			<img ng-if="!checkLvl(35)" ng-src="IMG/blank_skill.png"></img>
+			<img ng-if="checkLvl(35)" ng-src="IMG/purple_skill.png">
+			<img ng-if="!checkLvl(35)" ng-src="IMG/blank_skill.png">
 		</div>
 		
 		<!--Skill Gem Info Boxes-->
