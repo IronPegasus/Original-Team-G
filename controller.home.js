@@ -2,8 +2,8 @@ app.controller('HomeCtrl', ['$scope', '$location', '$interval', 'DataService', f
 	$scope.rows = ["A"];
     $scope.columns = ["1"];
 	var onLoad = checkData();
-    var charPos = ["Y34", "", "", "U39", "@37", "&40", "Z36", "", "", "%36", "T29", "R39", "R33", "+40", "T27", "S39", "W39", "V39", "#42", "", "V34", "", "X39", "Y33", "$42", "=39", "Q33", "W32", "@36", "Y38"];
-    var enemyPos = ["M16", "&17", "K45", "M21", "~18", "S29", "A1", "S27", "W20", "A13", "", "A2", "K41", "J42", "T21", "H35", "N26", "A3", "A4", "A5", "A6", "A7", "A8", "A9", "A10", "A11", "A12", "", "A14", "A15", "A16", "A17", "A18", "A19", "A20", "A21", "A22", "A23", "", "A25", "A26", "A27", "A28", "A29", "A30", "A31"];
+    var charPos = ["V29", "", "", "K38", "@36", "", "T29", "", "", "&37", "S22", "J32", "L31", "#39", "R17", "K35", "K37", "K36", "@39", "", "@34", "", "S40", "R28", "#36", "#37", "K31", "N33", "@35", "V28"];
+    var enemyPos = ["A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8", "A9", "A10", "", "A11", "A12", "A13", "A14", "A15", "B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8", "B9", "B10", "B11", "", "B12", "B13", "B14", "B15", "C1", "C2", "C3", "C4", "C5", "C6"];
     $scope.kaden = "IMG/kitsune.gif";
     var rowTimer = $interval(calcNumRows, 250, 20); //attempt to get rows 20 times at 250 ms intervals (total run: 5 sec)
     var colTimer = $interval(calcNumColumns, 250, 20);
@@ -551,7 +551,7 @@ app.controller('HomeCtrl', ['$scope', '$location', '$interval', 'DataService', f
     	var enemyTop = enemy.style.top;
     	enemyTop = parseInt(enemyTop.substring(0,enemyTop.length-2));
     	
-    	if(enemyTop < 69) top = 0;
+    	if(enemyTop < 90) top = 0;
     	else if(enemyTop + 109 > pageBottom) top = -1* (pageBottom - enemyTop);
     	
     	return top + "px";

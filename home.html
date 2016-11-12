@@ -1,5 +1,5 @@
 <div id="dropArea" class="mapBox">
-	<img id="map" class="absolutePos" src="https://i.imgur.com/RJl1oFD.png">
+	<img id="map" class="absolutePos" src="http://i.imgur.com/aol5Kkb.png">
 	
 	<!--Draw tile names-->
 	<div ng-repeat="(yIndex,row) in rows" class="glowBoxIndent absolutePos" ng-style="{top: determineGlowY(yIndex)}">
@@ -36,6 +36,7 @@
 			<div class="healthBarBorder"></div>
 			<div class="enemyNum">{{getEnemyNum($index)}}</div>
 			<div ng-if="enemyIsPaired($index)" class="pairUpIcon"><img src="IMG/shield_pairup.png"></div>
+			<div ng-if="enemy[0]=='Ceal'" class="pairUpIcon"><img src="IMG/shield_boss.png"></div>
 			<!--<div class="enemyTalkBalloon"><img src="IMG/talk.gif"></div>-->
 		</div>
 		
@@ -270,7 +271,7 @@
 			<span class="indentedClassName">{{loadedChar[1]}}</span>
 		</div>
 		<!--Current level-->
-		<div class="infoElement paleTan redText classLvlPos" style="width:55px;margin-left:180px">
+		<div class="infoElement paleTan redText classLvlPos" style="width:60px;margin-left:180px">
 			<span class="rightIndented">LV. {{loadedChar[2]}}</span>
 		</div>
 		<!--Current EXP-->
@@ -590,36 +591,32 @@
 		
 		<!--Weapon Info Boxes-->
 		<div class="infoElement green whiteText itemInfoPos" ng-if="wpn1 && validWeapon(100)" style="margin-top:45px">
-			<span class="popOutText popOutHeader">Class: {{loadedChar[100][1]}}</span><br>
+			<span class="popOutText popOutHeader italicText">[Equipped Weapon]</span><br>
 			<span class="popOutText popOutTextSpacing">Type: {{loadedChar[100][2]}}</span><br>
 			<span class="popOutText popOutTextSpacing" ng-if="hasWeaponRank(100)">Rank: {{loadedChar[100][4]}}</span><br>
 			<span class="popOutText popOutTextSpacing" ng-if="hasWeaponRange(100)">Range: {{loadedChar[100][18]}}</span><br>
 			<span class="popOutText popOutTextSpacing" ng-if="weaponHasDes(100)">{{loadedChar[100][19]}}</span>
 		</div>
 		<div class="infoElement green whiteText itemInfoPos" ng-if="wpn2 && validWeapon(101)" style="margin-top:80px">
-			<span class="popOutText popOutHeader">Class: {{loadedChar[101][1]}}</span><br>
-			<span class="popOutText popOutTextSpacing">Type: {{loadedChar[101][2]}}</span><br>
+			<span class="popOutText popOutHeader">Type: {{loadedChar[101][2]}}</span><br>
 			<span class="popOutText popOutTextSpacing" ng-if="hasWeaponRank(101)">Rank: {{loadedChar[101][4]}}</span><br>
 			<span class="popOutText popOutTextSpacing" ng-if="hasWeaponRange(101)">Range: {{loadedChar[101][18]}}</span><br>
 			<span class="popOutText popOutTextSpacing" ng-if="weaponHasDes(101)">{{loadedChar[101][19]}}</span>
 		</div>
 		<div class="infoElement green whiteText itemInfoPos" ng-if="wpn3 && validWeapon(102)" style="margin-top:115px">
-			<span class="popOutText popOutHeader">Class: {{loadedChar[102][1]}}</span><br>
-			<span class="popOutText popOutTextSpacing">Type: {{loadedChar[102][2]}}</span><br>
+			<span class="popOutText popOutHeader">Type: {{loadedChar[102][2]}}</span><br>
 			<span class="popOutText popOutTextSpacing" ng-if="hasWeaponRank(102)">Rank: {{loadedChar[102][4]}}</span><br>
 			<span class="popOutText popOutTextSpacing" ng-if="hasWeaponRange(102)">Range: {{loadedChar[102][18]}}</span><br>
 			<span class="popOutText popOutTextSpacing" ng-if="weaponHasDes(102)">{{loadedChar[102][19]}}</span>
 		</div>
-		<div class="infoElement green whiteText itemInfoPos" ng-if="wpn4 && validWeapon(103)" style="margin-top:5px">
-			<span class="popOutText popOutHeader">Class: {{loadedChar[103][1]}}</span><br>
-			<span class="popOutText popOutTextSpacing">Type: {{loadedChar[103][2]}}</span><br>
+		<div class="infoElement green whiteText itemInfoPos" ng-if="wpn4 && validWeapon(103)" style="margin-top:0px">
+			<span class="popOutText popOutHeader">Type: {{loadedChar[103][2]}}</span><br>
 			<span class="popOutText popOutTextSpacing" ng-if="hasWeaponRank(103)">Rank: {{loadedChar[103][4]}}</span><br>
 			<span class="popOutText popOutTextSpacing" ng-if="hasWeaponRange(103)">Range: {{loadedChar[103][18]}}</span><br>
 			<span class="popOutText popOutTextSpacing" ng-if="weaponHasDes(103)">{{loadedChar[103][19]}}</span>
 		</div>
-		<div class="infoElement green whiteText itemInfoPos" ng-if="wpn5 && validWeapon(104)" style="margin-top:45px">
-			<span class="popOutText popOutHeader">Class: {{loadedChar[104][1]}}</span><br>
-			<span class="popOutText popOutTextSpacing">Type: {{loadedChar[104][2]}}</span><br>
+		<div class="infoElement green whiteText itemInfoPos" ng-if="wpn5 && validWeapon(104)" style="margin-top:40px">
+			<span class="popOutText popOutHeader">Type: {{loadedChar[104][2]}}</span><br>
 			<span class="popOutText popOutTextSpacing" ng-if="hasWeaponRank(104)">Rank: {{loadedChar[104][4]}}</span><br>
 			<span class="popOutText popOutTextSpacing" ng-if="hasWeaponRange(104)">Range: {{loadedChar[104][18]}}</span><br>
 			<span class="popOutText popOutTextSpacing" ng-if="weaponHasDes(104)">{{loadedChar[104][19]}}</span>
