@@ -3,7 +3,7 @@ app.controller('HomeCtrl', ['$scope', '$location', '$interval', 'DataService', f
     $scope.columns = ["1"];
 	var onLoad = checkData();
     var charPos = ["V29", "", "", "K38", "@36", "", "T29", "", "", "&37", "S22", "J32", "L31", "#39", "R17", "K35", "K37", "K36", "@39", "", "@34", "", "S40", "R28", "#36", "#37", "K31", "N33", "@35", "V28"];
-    var enemyPos = ["A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8", "A9", "A10", "B14", "A11", "A12", "A13", "A14", "A15", "B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8", "B9", "B10", "B11", "B12", "B13", "", "B15", "B16", "C1", "C2", "C3", "C4", "C5", "C6"];
+    var enemyPos = ["A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8", "A9", "A10", "", "A11", "A12", "A13", "A14", "A15", "B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8", "B9", "B10", "B11", "B12", "B13", "B14", "B15", "B16", "C1", "C2", "C3", "C4", "C5", "C6"];
     $scope.kaden = "IMG/kitsune.gif";
     var rowTimer = $interval(calcNumRows, 250, 20); //attempt to get rows 20 times at 250 ms intervals (total run: 5 sec)
     var colTimer = $interval(calcNumColumns, 250, 20);
@@ -26,15 +26,17 @@ app.controller('HomeCtrl', ['$scope', '$location', '$interval', 'DataService', f
     function calcNumRows(){
     	var rowNames = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "@", "#", "$", "%", "&", "=", "+", "~", ";", ">"];
     	var map = document.getElementById('map');
-    	var height = map.naturalHeight; //calculate the height of the map
-    	
-    	height -= 36;
-    	height = height / 34;
-    	var temp = rowNames.slice(0, height+1);
-    	
-    	if(temp.length != 0){
-    		$interval.cancel(rowTimer); //cancel $interval timer
-    		$scope.rows = temp;
+    	if(map != null){
+    		var height = map.naturalHeight; //calculate the height of the map
+        	
+        	height -= 36;
+        	height = height / 34;
+        	var temp = rowNames.slice(0, height+1);
+        	
+        	if(temp.length != 0){
+        		$interval.cancel(rowTimer); //cancel $interval timer
+        		$scope.rows = temp;
+        	}
     	}
     };
     
@@ -44,18 +46,20 @@ app.controller('HomeCtrl', ['$scope', '$location', '$interval', 'DataService', f
      */
    function calcNumColumns(){
     	var map = document.getElementById('map');
-    	var width = map.naturalWidth; //calculate the height of the map
-    	
-    	width -= 36;
-    	width = width / 34;
-    	var temp = [];
-    	
-    	for(var i = 0; i < width; i++)
-    		temp.push(i+1);
-    	
-    	if(temp.length != 0){
-    		$interval.cancel(colTimer); //cancel $interval timer
-    		$scope.columns = temp;
+    	if(map != null){
+    		var width = map.naturalWidth; //calculate the height of the map
+        	
+        	width -= 36;
+        	width = width / 34;
+        	var temp = [];
+        	
+        	for(var i = 0; i < width; i++)
+        		temp.push(i+1);
+        	
+        	if(temp.length != 0){
+        		$interval.cancel(colTimer); //cancel $interval timer
+        		$scope.columns = temp;
+        	}
     	}
     };
     
@@ -197,10 +201,11 @@ app.controller('HomeCtrl', ['$scope', '$location', '$interval', 'DataService', f
     //Checks rate of atk/crit/hit/avo (@ index) to see if they are greater than 0
     $scope.checkRate = function(index){
     	if($scope.loadedChar == undefined) return false;
-    	
-    	var rate = parseInt($scope.loadedChar[index]);
-    	if(rate >= 0) return true;
-    	else return false;
+    	return parseInt($scope.loadedChar[index]) >= 0;
+    };
+    
+    $scope.eCheckRate = function(index, stat){
+    	return parseInt($scope.enemyData[index][stat]) >= 0;
     };
     
     //Checks if a weapon name is a valid type, so that weapon proficiency can be displayed
@@ -385,7 +390,7 @@ app.controller('HomeCtrl', ['$scope', '$location', '$interval', 'DataService', f
     	if(totalBuffs > 0)
     		color = "#42adf4"; //blue buff
     	else if(totalBuffs < 0)
-    		color = "#af2b00"; //red debuff
+    		color = "#960000"; //red debuff
     	return color;
     };
     
@@ -424,7 +429,7 @@ app.controller('HomeCtrl', ['$scope', '$location', '$interval', 'DataService', f
     	if(totalBuffs > 0)
     		color = "#42adf4"; //blue buff
     	else if(totalBuffs < 0)
-    		color = "#af2b00"; //red debuff
+    		color = "#960000"; //red debuff
     	return color;
     };
     
@@ -459,6 +464,12 @@ app.controller('HomeCtrl', ['$scope', '$location', '$interval', 'DataService', f
     
     $scope.formatWeaponBuff = function(index){
     	var value = parseInt($scope.loadedChar[index]);
+    	if(value > 0) return "+" + value;
+    	else return value;
+    };
+    
+    $scope.eFormatWeaponBuff = function(index, stat){
+    	var value = parseInt($scope.enemyData[index][stat]);
     	if(value > 0) return "+" + value;
     	else return value;
     };
@@ -504,9 +515,20 @@ app.controller('HomeCtrl', ['$scope', '$location', '$interval', 'DataService', f
     	return $scope.enemyData[enemy][index][0] != "-";
     };
     
+    $scope.checkShields = function(value){
+    	if($scope.loadedChar == undefined) return "IMG/emptyshield.png";
+    	var num = parseInt($scope.loadedChar[17]);
+    	if(num == 10) return "IMG/blueshield.png";
+    	else if(num >= value) return "IMG/filledshield.png";
+    	else return "IMG/emptyshield.png";
+    };
+    
     //Checks if the shield value for the passed enemy is greater than number
-    $scope.checkEShields = function(enemy, number){
-    	return parseInt($scope.enemyData[enemy][3]) >= number;
+    $scope.checkEShields = function(enemy, value){
+    	var num = parseInt($scope.enemyData[enemy][3]);
+    	if(num == 10) return "IMG/blueshield.png";
+    	else if(num >= value) return "IMG/filledshield.png";
+    	else return "IMG/emptyshield.png";
     };
     
     //Parses an enemy's name to see if it contains a number at the end.
