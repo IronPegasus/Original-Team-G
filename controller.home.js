@@ -513,11 +513,40 @@ app.controller('HomeCtrl', ['$scope', '$location', '$interval', 'DataService', f
     	return "IMG/type_" + type + ".png";
     };
    
-    //For displaying skill gems, checks to see if the character's
-    //level >= lvlCap (passed in, value at which character obtains skill)
-    $scope.checkLvl = function(lvlCap){
-    	if($scope.loadedChar == undefined) return false;
-    	return parseInt($scope.loadedChar[2]) >= lvlCap;
+    //Returns the image for a character's skill, if they're at the minimum
+    //level to obtain it. Otherwise, returns the blank skill image.
+    $scope.fetchSkillImage = function(minLvl){
+    	if($scope.loadedChar == undefined) return "";
+    	/*if(minLvl > parseInt($scope.loadedChar[2]))
+    		return "IMG/SKL/skl_blank.png";*/
+    	
+    	var skillName;
+    	
+    	switch(minLvl){
+	    	case 1: skillName = 105; break;
+	    	case 5: skillName = 106; break;
+	    	case 10: skillName = 107; break;
+	    	case 15: skillName = 108; break;
+	    	case 20: skillName = 109; break;
+	    	case 25: skillName = 110; break;
+	    	case 30: skillName = 111; break;
+	    	case 35: skillName = 112; break;
+    	}
+    	
+    	skillName = $scope.loadedChar[skillName][0];
+    	skillName = skillName.toLowerCase();
+    	skillName = skillName.replace(/ /g,"_");
+    	return "IMG/SKL/skl_" + skillName + ".png";
+    };
+    
+    $scope.eFetchSkillImage = function(enemy, skl){
+		var skillName = $scope.enemyData[enemy][skl][0];
+    	if(skillName == "-") return "IMG/SKL/skl_blank.png"; //no skill
+    	else if(skl == 42) return "IMG/SKL/skl_personal.png"; //personal skill
+    	
+    	skillName = skillName.toLowerCase();
+    	skillName = skillName.replace(/ /g,"_");
+    	return "IMG/type_" + skillName + ".png";
     };
     
     //For displaying enemy skill gems, checks to see if the enemy has a

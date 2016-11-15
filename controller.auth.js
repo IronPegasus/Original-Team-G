@@ -264,7 +264,7 @@ app.controller('AuthCtrl', ['$scope', '$location', '$interval', 'DataService', f
     	for(var i = 0; i < list.length; i++)
     		if(list[i][0] == skill)
     			return list[i];
-    	return [skill, "A description could not be found for this skill."];
+    	return [skill, "A description could not be found for this skill. Is the name spelled correctly?"];
     };
     
     function locateWeapon(name){

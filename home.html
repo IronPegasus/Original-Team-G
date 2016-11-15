@@ -100,41 +100,32 @@
 			</div>
 			
 			<!--Skill Gems-->
-			<div class="infoElement hoverImage enemyGemPos" ng-mouseenter="wGem=true" ng-mouseleave="wGem=false" style="margin-left:7px">
-				<img ng-if="hasSkill($index,42)" ng-src="IMG/white_skill.png">
-				<img ng-if="!hasSkill($index,42)" ng-src="IMG/blank_skill.png">
+			<div class="infoElement hoverImage enemyGemPos" ng-mouseenter="wGem=true" ng-mouseleave="wGem=false" style="margin-left:3px">
+				<img ng-src="{{eFetchSkillImage($index, 42)}}">
 			</div>
-			<div class="infoElement hoverImage enemyGemPos" ng-mouseenter="pkGem=true" ng-mouseleave="pkGem=false" style="margin-left:28px">
-				<img ng-if="hasSkill($index,34)" ng-src="IMG/pink_skill.png">
-				<img ng-if="!hasSkill($index,34)" ng-src="IMG/blank_skill.png">
+			<div class="infoElement hoverImage enemyGemPos" ng-mouseenter="pkGem=true" ng-mouseleave="pkGem=false" style="margin-left:24px">
+				<img ng-src="{{eFetchSkillImage($index, 34)}}">
 			</div>
-			<div class="infoElement hoverImage enemyGemPos" ng-mouseenter="rGem=true" ng-mouseleave="rGem=false" style="margin-left:49px">
-				<img ng-if="hasSkill($index,35)" ng-src="IMG/red_skill.png">
-				<img ng-if="!hasSkill($index,35)" ng-src="IMG/blank_skill.png">
+			<div class="infoElement hoverImage enemyGemPos" ng-mouseenter="rGem=true" ng-mouseleave="rGem=false" style="margin-left:45px">
+				<img ng-src="{{eFetchSkillImage($index, 35)}}">
 			</div>
-			<div class="infoElement hoverImage enemyGemPos" ng-mouseenter="oGem=true" ng-mouseleave="oGem=false" style="margin-left:70px">
-				<img ng-if="hasSkill($index,36)" ng-src="IMG/orange_skill.png">
-				<img ng-if="!hasSkill($index,36)" ng-src="IMG/blank_skill.png">
+			<div class="infoElement hoverImage enemyGemPos" ng-mouseenter="oGem=true" ng-mouseleave="oGem=false" style="margin-left:66px">
+				<img ng-src="{{eFetchSkillImage($index, 36)}}">
 			</div>
-			<div class="infoElement hoverImage enemyGemPos" ng-mouseenter="yGem=true" ng-mouseleave="yGem=false" style="margin-left:91px">
-				<img ng-if="hasSkill($index,37)" ng-src="IMG/yellow_skill.png">
-				<img ng-if="!hasSkill($index,37)" ng-src="IMG/blank_skill.png">
+			<div class="infoElement hoverImage enemyGemPos" ng-mouseenter="yGem=true" ng-mouseleave="yGem=false" style="margin-left:87px">
+				<img ng-src="{{eFetchSkillImage($index, 37)}}">
 			</div>
-			<div class="infoElement hoverImage enemyGemPos" ng-mouseenter="gGem=true" ng-mouseleave="gGem=false" style="margin-left:112px">
-				<img ng-if="hasSkill($index,38)" ng-src="IMG/green_skill.png">
-				<img ng-if="!hasSkill($index,38)" ng-src="IMG/blank_skill.png">
+			<div class="infoElement hoverImage enemyGemPos" ng-mouseenter="gGem=true" ng-mouseleave="gGem=false" style="margin-left:108px">
+				<img ng-src="{{eFetchSkillImage($index, 38)}}">
 			</div>
-			<div class="infoElement hoverImage enemyGemPos" ng-mouseenter="aGem=true" ng-mouseleave="aGem=false" style="margin-left:133px">
-				<img ng-if="hasSkill($index,39)" ng-src="IMG/aqua_skill.png">
-				<img ng-if="!hasSkill($index,39)" ng-src="IMG/blank_skill.png">
+			<div class="infoElement hoverImage enemyGemPos" ng-mouseenter="aGem=true" ng-mouseleave="aGem=false" style="margin-left:129px">
+				<img ng-src="{{eFetchSkillImage($index, 39)}}">
 			</div>
-			<div class="infoElement hoverImage enemyGemPos" ng-mouseenter="bGem=true" ng-mouseleave="bGem=false" style="margin-left:152px">
-				<img ng-if="hasSkill($index,40)" ng-src="IMG/blue_skill.png">
-				<img ng-if="!hasSkill($index,40)" ng-src="IMG/blank_skill.png">
+			<div class="infoElement hoverImage enemyGemPos" ng-mouseenter="bGem=true" ng-mouseleave="bGem=false" style="margin-left:150px">
+				<img ng-src="{{eFetchSkillImage($index, 40)}}">
 			</div>
 			<div class="infoElement hoverImage enemyGemPos" ng-mouseenter="prGem=true" ng-mouseleave="prGem=false" style="margin-left:171px">
-				<img ng-if="hasSkill($index,41)" ng-src="IMG/purple_skill.png">
-				<img ng-if="!hasSkill($index,41)" ng-src="IMG/blank_skill.png">
+				<img ng-src="{{eFetchSkillImage($index, 41)}}">
 			</div>
 			
 			<!--Stats Column-->
@@ -591,39 +582,32 @@
 		
 		<!--Skill Gems-->
 		<!--ng-mouseover and ng-mouseleave trigger the appearance of the info box for each skill-->
-		<div class="infoElement hoverImage skillGemPos" ng-mouseover="wGem=true" ng-mouseleave="wGem=false" style="margin-top:10px">
-			<img ng-src="IMG/white_skill.png">
+		<div class="infoElement hoverImage skillGemPos" ng-mouseover="wGem=true" ng-mouseleave="wGem=false" style="margin-top:7px">
+			<img ng-src="IMG/SKL/skl_personal.png">
 		</div>
-		<div class="infoElement hoverImage skillGemPos" ng-mouseover="pkGem=true" ng-mouseleave="pkGem=false" style="margin-top:33px">
-			<img ng-src="IMG/pink_skill.png">
+		<div class="infoElement hoverImage skillGemPos" ng-mouseover="pkGem=true" ng-mouseleave="pkGem=false" style="margin-top:30px">
+			<img ng-src="{{fetchSkillImage(1)}}">
 		</div>
-		<div class="infoElement hoverImage skillGemPos" ng-mouseover="rGem=true" ng-mouseleave="rGem=false" style="margin-top:56px">
-			<img ng-if="checkLvl(5)" ng-src="IMG/red_skill.png">
-			<img ng-if="!checkLvl(5)" ng-src="IMG/blank_skill.png">
+		<div class="infoElement hoverImage skillGemPos" ng-mouseover="rGem=true" ng-mouseleave="rGem=false" style="margin-top:53px">
+			<img ng-src="{{fetchSkillImage(5)}}">
 		</div>
-		<div class="infoElement hoverImage skillGemPos" ng-mouseover="oGem=true" ng-mouseleave="oGem=false" style="margin-top:79px">
-			<img ng-if="checkLvl(10)" ng-src="IMG/orange_skill.png">
-			<img ng-if="!checkLvl(10)" ng-src="IMG/blank_skill.png">
+		<div class="infoElement hoverImage skillGemPos" ng-mouseover="oGem=true" ng-mouseleave="oGem=false" style="margin-top:76px">
+			<img ng-src="{{fetchSkillImage(10)}}">
 		</div>
-		<div class="infoElement hoverImage skillGemPos" ng-mouseover="yGem=true" ng-mouseleave="yGem=false" style="margin-top:102px">
-			<img ng-if="checkLvl(15)" ng-src="IMG/yellow_skill.png">
-			<img ng-if="!checkLvl(15)" ng-src="IMG/blank_skill.png">
+		<div class="infoElement hoverImage skillGemPos" ng-mouseover="yGem=true" ng-mouseleave="yGem=false" style="margin-top:99px">
+			<img ng-src="{{fetchSkillImage(15)}}">
 		</div>
-		<div class="infoElement hoverImage skillGemPos" ng-mouseover="gGem=true" ng-mouseleave="gGem=false" style="margin-top:125px">
-			<img ng-if="checkLvl(20)" ng-src="IMG/green_skill.png">
-			<img ng-if="!checkLvl(20)" ng-src="IMG/blank_skill.png">
+		<div class="infoElement hoverImage skillGemPos" ng-mouseover="gGem=true" ng-mouseleave="gGem=false" style="margin-top:122px">
+			<img ng-src="{{fetchSkillImage(20)}}">
 		</div>
-		<div class="infoElement hoverImage skillGemPos" ng-mouseover="aGem=true" ng-mouseleave="aGem=false" style="margin-top:147px">
-			<img ng-if="checkLvl(25)" ng-src="IMG/aqua_skill.png">
-			<img ng-if="!checkLvl(25)" ng-src="IMG/blank_skill.png">
+		<div class="infoElement hoverImage skillGemPos" ng-mouseover="aGem=true" ng-mouseleave="aGem=false" style="margin-top:144px">
+			<img ng-src="{{fetchSkillImage(25)}}">
 		</div>
-		<div class="infoElement hoverImage skillGemPos" ng-mouseover="bGem=true" ng-mouseleave="bGem=false" style="margin-top:170px">
-			<img ng-if="checkLvl(30)" ng-src="IMG/blue_skill.png">
-			<img ng-if="!checkLvl(30)" ng-src="IMG/blank_skill.png">
+		<div class="infoElement hoverImage skillGemPos" ng-mouseover="bGem=true" ng-mouseleave="bGem=false" style="margin-top:167px">
+			<img ng-src="{{fetchSkillImage(30)}}">
 		</div>
-		<div class="infoElement hoverImage skillGemPos" ng-mouseover="prGem=true" ng-mouseleave="prGem=false" style="margin-top:192px">
-			<img ng-if="checkLvl(35)" ng-src="IMG/purple_skill.png">
-			<img ng-if="!checkLvl(35)" ng-src="IMG/blank_skill.png">
+		<div class="infoElement hoverImage skillGemPos" ng-mouseover="prGem=true" ng-mouseleave="prGem=false" style="margin-top:189px">
+			<img ng-src="{{fetchSkillImage(35)}}">
 		</div>
 		
 		<!--Skill Gem Info Boxes-->
