@@ -100,31 +100,31 @@
 			</div>
 			
 			<!--Skill Gems-->
-			<div class="infoElement hoverImage enemyGemPos" ng-mouseenter="wGem=true" ng-mouseleave="wGem=false" style="margin-left:3px">
+			<div class="infoElement hoverImage enemyGemPos" ng-mouseenter="ewGem=true" ng-mouseleave="wGem=false" style="margin-left:3px">
 				<img ng-src="{{eFetchSkillImage($index, 42)}}">
 			</div>
-			<div class="infoElement hoverImage enemyGemPos" ng-mouseenter="pkGem=true" ng-mouseleave="pkGem=false" style="margin-left:24px">
+			<div class="infoElement hoverImage enemyGemPos" ng-mouseenter="epkGem=true" ng-mouseleave="pkGem=false" style="margin-left:24px">
 				<img ng-src="{{eFetchSkillImage($index, 34)}}">
 			</div>
-			<div class="infoElement hoverImage enemyGemPos" ng-mouseenter="rGem=true" ng-mouseleave="rGem=false" style="margin-left:45px">
+			<div class="infoElement hoverImage enemyGemPos" ng-mouseenter="erGem=true" ng-mouseleave="rGem=false" style="margin-left:45px">
 				<img ng-src="{{eFetchSkillImage($index, 35)}}">
 			</div>
-			<div class="infoElement hoverImage enemyGemPos" ng-mouseenter="oGem=true" ng-mouseleave="oGem=false" style="margin-left:66px">
+			<div class="infoElement hoverImage enemyGemPos" ng-mouseenter="eoGem=true" ng-mouseleave="oGem=false" style="margin-left:66px">
 				<img ng-src="{{eFetchSkillImage($index, 36)}}">
 			</div>
-			<div class="infoElement hoverImage enemyGemPos" ng-mouseenter="yGem=true" ng-mouseleave="yGem=false" style="margin-left:87px">
+			<div class="infoElement hoverImage enemyGemPos" ng-mouseenter="eyGem=true" ng-mouseleave="yGem=false" style="margin-left:87px">
 				<img ng-src="{{eFetchSkillImage($index, 37)}}">
 			</div>
-			<div class="infoElement hoverImage enemyGemPos" ng-mouseenter="gGem=true" ng-mouseleave="gGem=false" style="margin-left:108px">
+			<div class="infoElement hoverImage enemyGemPos" ng-mouseenter="egGem=true" ng-mouseleave="gGem=false" style="margin-left:108px">
 				<img ng-src="{{eFetchSkillImage($index, 38)}}">
 			</div>
-			<div class="infoElement hoverImage enemyGemPos" ng-mouseenter="aGem=true" ng-mouseleave="aGem=false" style="margin-left:129px">
+			<div class="infoElement hoverImage enemyGemPos" ng-mouseenter="eaGem=true" ng-mouseleave="aGem=false" style="margin-left:129px">
 				<img ng-src="{{eFetchSkillImage($index, 39)}}">
 			</div>
-			<div class="infoElement hoverImage enemyGemPos" ng-mouseenter="bGem=true" ng-mouseleave="bGem=false" style="margin-left:150px">
+			<div class="infoElement hoverImage enemyGemPos" ng-mouseenter="ebGem=true" ng-mouseleave="bGem=false" style="margin-left:150px">
 				<img ng-src="{{eFetchSkillImage($index, 40)}}">
 			</div>
-			<div class="infoElement hoverImage enemyGemPos" ng-mouseenter="prGem=true" ng-mouseleave="prGem=false" style="margin-left:171px">
+			<div class="infoElement hoverImage enemyGemPos" ng-mouseenter="eprGem=true" ng-mouseleave="prGem=false" style="margin-left:171px">
 				<img ng-src="{{eFetchSkillImage($index, 41)}}">
 			</div>
 			
@@ -243,75 +243,134 @@
 			</div>
 		
 			<!--Skill Gem Info Boxes-->
-			<div ng-if="wGem && hasSkill($index,42)" class="infoElement green whiteText enemySkillGemInfoPos" style="margin-left:5px">
+			<div ng-if="ewGem && hasSkill($index,42)" class="infoElement green whiteText enemySkillGemInfoPos" style="margin-left:5px">
 				<div class="italicText popOutText popOutHeader">[Personal Skill]</div>
 				<div class="boldText popOutText personalSkillHeader">{{enemy[42][0]}}</div>
 				<div class="popOutText personalSkillBody">{{enemy[42][1]}}</div>
 			</div>
-			<div ng-if="pkGem && hasSkill($index,34)" class="infoElement green whiteText enemySkillGemInfoPos" style="margin-left:26px">
+			<div ng-if="epkGem && hasSkill($index,34)" class="infoElement green whiteText enemySkillGemInfoPos" style="margin-left:26px">
 				<div class="boldText popOutText popOutHeader">{{enemy[34][0]}}</div>
 				<div class="popOutText popOutBody">{{enemy[34][1]}}</div>
 			</div>
-			<div ng-if="rGem && hasSkill($index,35)" class="infoElement green whiteText enemySkillGemInfoPos" style="margin-left:47px">
+			<div ng-if="erGem && hasSkill($index,35)" class="infoElement green whiteText enemySkillGemInfoPos" style="margin-left:47px">
 				<div class="boldText popOutText popOutHeader">{{enemy[35][0]}}</div>
 				<div class="popOutText popOutBody">{{enemy[35][1]}}</div>
 			</div>
-			<div ng-if="oGem && hasSkill($index,36)" class="infoElement green whiteText enemySkillGemInfoPos" style="margin-left:68px">
+			<div ng-if="eoGem && hasSkill($index,36)" class="infoElement green whiteText enemySkillGemInfoPos" style="margin-left:68px">
 				<div class="boldText popOutText popOutHeader">{{enemy[36][0]}}</div>
 				<div class="popOutText popOutBody">{{enemy[36][1]}}</div>
 			</div>
-			<div ng-if="yGem && hasSkill($index,37)" class="infoElement green whiteText enemySkillGemInfoPos" style="margin-left:89px">
+			<div ng-if="eyGem && hasSkill($index,37)" class="infoElement green whiteText enemySkillGemInfoPos" style="margin-left:89px">
 				<div class="boldText popOutText popOutHeader">{{enemy[37][0]}}</div>
 				<div class="popOutText popOutBody">{{enemy[37][1]}}</div>
 			</div>
-			<div ng-if="gGem && hasSkill($index,38)" class="infoElement green whiteText enemySkillGemInfoPos" style="margin-left:110px">
+			<div ng-if="egGem && hasSkill($index,38)" class="infoElement green whiteText enemySkillGemInfoPos" style="margin-left:110px">
 				<div class="boldText popOutText popOutHeader">{{enemy[38][0]}}</div>
 				<div class="popOutText popOutBody">{{enemy[38][1]}}</div>
 			</div>
-			<div ng-if="aGem && hasSkill($index,39)" class="infoElement green whiteText enemySkillGemInfoPos" style="margin-left:131px">
+			<div ng-if="eaGem && hasSkill($index,39)" class="infoElement green whiteText enemySkillGemInfoPos" style="margin-left:131px">
 				<div class="boldText popOutText popOutHeader">{{enemy[39][0]}}</div>
 				<div class="popOutText popOutBody">{{enemy[39][1]}}</div>
 			</div>
-			<div ng-if="bGem && hasSkill($index,40)" class="infoElement green whiteText enemySkillGemInfoPos" style="margin-left:150px">
+			<div ng-if="ebGem && hasSkill($index,40)" class="infoElement green whiteText enemySkillGemInfoPos" style="margin-left:150px">
 				<div class="boldText popOutText popOutHeader">{{enemy[40][0]}}</div>
 				<div class="popOutText popOutBody">{{enemy[40][1]}}</div>
 			</div>
-			<div ng-if="prGem && hasSkill($index,41)" class="infoElement green whiteText enemySkillGemInfoPos" style="margin-left:169px">
+			<div ng-if="eprGem && hasSkill($index,41)" class="infoElement green whiteText enemySkillGemInfoPos" style="margin-left:169px">
 				<div class="boldText popOutText popOutHeader">{{enemy[41][0]}}</div>
 				<div class="popOutText popOutBody">{{enemy[41][1]}}</div>
 			</div>
 			
 			<!--Weapon Info Boxes-->
 			<div class="infoElement green whiteText enemyInventoryInfoPos" ng-if="eWpn1 && validEnemyWeapon($index,29)" style="margin-top:5px">
-				<span class="popOutText popOutHeader italicText">[Equipped Weapon]</span><br>
-				<span class="popOutText popOutTextSpacing">Type: {{enemy[29][2]}}</span><br>
-				<span class="popOutText popOutTextSpacing" ng-if="eHasWeaponRank(29, $index)">Rank: {{enemy[29][4]}}</span><br>
-				<span class="popOutText popOutTextSpacing" ng-if="eHasWeaponRange(29, $index)">Range: {{enemy[29][18]}}</span><br>
-				<span class="popOutText popOutTextSpacing" ng-if="eWeaponHasDes(29, $index)">{{enemy[29][19]}}</span>
+				<div class="popOutText itemNamePos boldText">{{formatEWeaponName($index, 29)}}</div>
+				<div class="popOutText itemRankPos">
+					<span ng-if="eHasWeaponRank($index, 29)">{{enemy[29][4]}} -</span>
+					{{enemy[29][1]}}
+				</div>
+				<div class="customDivider" style="top:22px"></div>
+				<div ng-if="notEItem($index, 29)">
+					<div class="popOutText itemMightPos">Might: {{enemy[29][5]}}</div>
+					<div class="popOutText itemMightPos" style="left:80px">Hit: {{enemy[29][6]}}</div>
+					<div class="popOutText itemMightPos" style="right:0px">Crit: {{enemy[29][7]}}</div>
+					<div class="popOutText itemWeightPos">Avo: {{enemy[29][8]}}</div>
+					<div class="popOutText itemWeightPos" style="left:80px">Dodge: {{enemy[29][9]}}</div>
+					<div class="popOutText itemWeightPos" style="right:0px">Range: {{enemy[29][18]}}</div>
+					<div class="customDivider" style="top:58px"></div>
+				</div>
+				<div class="popOutText italicText" ng-style="{top: setEDescriptionLoc($index, 29)}">{{enemy[29][19]}}</div>
 			</div>
 			<div class="infoElement green whiteText enemyInventoryInfoPos" ng-if="eWpn2 && validEnemyWeapon($index,30)" style="margin-top:20px">
-				<span class="popOutText popOutHeader">Type: {{enemy[30][2]}}</span><br>
-				<span class="popOutText popOutTextSpacing" ng-if="eHasWeaponRank(30, $index)">Rank: {{enemy[30][4]}}</span><br>
-				<span class="popOutText popOutTextSpacing" ng-if="eHasWeaponRange(30, $index)">Range: {{enemy[30][18]}}</span><br>
-				<span class="popOutText popOutTextSpacing" ng-if="eWeaponHasDes(30, $index)">{{enemy[30][19]}}</span>
+				<div class="popOutText itemNamePos boldText">{{formatEWeaponName($index, 30)}}</div>
+				<div class="popOutText itemRankPos">
+					<span ng-if="eHasWeaponRank($index, 30)">{{enemy[30][4]}} -</span>
+					{{enemy[30][1]}}
+				</div>
+				<div class="customDivider" style="top:22px"></div>
+				<div ng-if="notEItem($index, 30)">
+					<div class="popOutText itemMightPos">Might: {{enemy[30][5]}}</div>
+					<div class="popOutText itemMightPos" style="left:80px">Hit: {{enemy[30][6]}}</div>
+					<div class="popOutText itemMightPos" style="right:0px">Crit: {{enemy[30][7]}}</div>
+					<div class="popOutText itemWeightPos">Avo: {{enemy[30][8]}}</div>
+					<div class="popOutText itemWeightPos" style="left:80px">Dodge: {{enemy[30][9]}}</div>
+					<div class="popOutText itemWeightPos" style="right:0px">Range: {{enemy[30][18]}}</div>
+					<div class="customDivider" style="top:58px"></div>
+				</div>
+				<div class="popOutText italicText" ng-style="{top: setEDescriptionLoc($index, 30)}">{{enemy[30][19]}}</div>
 			</div>
 			<div class="infoElement green whiteText enemyInventoryInfoPos" ng-if="eWpn3 && validEnemyWeapon($index,31)" style="margin-top:40px">
-				<span class="popOutText popOutHeader">Type: {{enemy[31][2]}}</span><br>
-				<span class="popOutText popOutTextSpacing" ng-if="eHasWeaponRank(31, $index)">Rank: {{enemy[31][4]}}</span><br>
-				<span class="popOutText popOutTextSpacing" ng-if="eHasWeaponRange(31, $index)">Range: {{enemy[31][18]}}</span><br>
-				<span class="popOutText popOutTextSpacing" ng-if="eWeaponHasDes(31, $index)">{{enemy[31][19]}}</span>
+				<div class="popOutText itemNamePos boldText">{{formatEWeaponName($index, 31)}}</div>
+				<div class="popOutText itemRankPos">
+					<span ng-if="eHasWeaponRank($index, 31)">{{enemy[31][4]}} -</span>
+					{{enemy[31][1]}}
+				</div>
+				<div class="customDivider" style="top:22px"></div>
+				<div ng-if="notEItem($index, 31)">
+					<div class="popOutText itemMightPos">Might: {{enemy[31][5]}}</div>
+					<div class="popOutText itemMightPos" style="left:80px">Hit: {{enemy[31][6]}}</div>
+					<div class="popOutText itemMightPos" style="right:0px">Crit: {{enemy[31][7]}}</div>
+					<div class="popOutText itemWeightPos">Avo: {{enemy[31][8]}}</div>
+					<div class="popOutText itemWeightPos" style="left:80px">Dodge: {{enemy[31][9]}}</div>
+					<div class="popOutText itemWeightPos" style="right:0px">Range: {{enemy[31][18]}}</div>
+					<div class="customDivider" style="top:58px"></div>
+				</div>
+				<div class="popOutText italicText" ng-style="{top: setEDescriptionLoc($index, 31)}">{{enemy[31][19]}}</div>
 			</div>
 			<div class="infoElement green whiteText enemyInventoryInfoPos" ng-if="eWpn4 && validEnemyWeapon($index,32)" style="margin-top:55px">
-				<span class="popOutText popOutHeader">Type: {{enemy[32][2]}}</span><br>
-				<span class="popOutText popOutTextSpacing" ng-if="eHasWeaponRank(32, $index)">Rank: {{enemy[32][4]}}</span><br>
-				<span class="popOutText popOutTextSpacing" ng-if="eHasWeaponRange(32, $index)">Range: {{enemy[32][18]}}</span><br>
-				<span class="popOutText popOutTextSpacing" ng-if="eWeaponHasDes(32, $index)">{{enemy[32][19]}}</span>
+				<div class="popOutText itemNamePos boldText">{{formatEWeaponName($index, 32)}}</div>
+				<div class="popOutText itemRankPos">
+					<span ng-if="eHasWeaponRank($index, 32)">{{enemy[32][4]}} -</span>
+					{{enemy[32][1]}}
+				</div>
+				<div class="customDivider" style="top:22px"></div>
+				<div ng-if="notEItem($index, 32)">
+					<div class="popOutText itemMightPos">Might: {{enemy[32][5]}}</div>
+					<div class="popOutText itemMightPos" style="left:80px">Hit: {{enemy[32][6]}}</div>
+					<div class="popOutText itemMightPos" style="right:0px">Crit: {{enemy[32][7]}}</div>
+					<div class="popOutText itemWeightPos">Avo: {{enemy[32][8]}}</div>
+					<div class="popOutText itemWeightPos" style="left:80px">Dodge: {{enemy[32][9]}}</div>
+					<div class="popOutText itemWeightPos" style="right:0px">Range: {{enemy[32][18]}}</div>
+					<div class="customDivider" style="top:58px"></div>
+				</div>
+				<div class="popOutText italicText" ng-style="{top: setEDescriptionLoc($index, 32)}">{{enemy[32][19]}}</div>
 			</div>
 			<div class="infoElement green whiteText enemyInventoryInfoPos" ng-if="eWpn5 && validEnemyWeapon($index,33)" style="margin-top:65px">
-				<span class="popOutText popOutHeader">Type: {{enemy[33][2]}}</span><br>
-				<span class="popOutText popOutTextSpacing" ng-if="eHasWeaponRank(33, $index)">Rank: {{enemy[33][4]}}</span><br>
-				<span class="popOutText popOutTextSpacing" ng-if="eHasWeaponRange(33, $index)">Range: {{enemy[33][18]}}</span><br>
-				<span class="popOutText popOutTextSpacing" ng-if="eWeaponHasDes(33, $index)">{{enemy[33][19]}}</span>
+				<div class="popOutText itemNamePos boldText">{{formatEWeaponName($index, 33)}}</div>
+				<div class="popOutText itemRankPos">
+					<span ng-if="eHasWeaponRank($index, 33)">{{enemy[33][4]}} -</span>
+					{{enemy[33][1]}}
+				</div>
+				<div class="customDivider" style="top:22px"></div>
+				<div ng-if="notEItem($index, 33)">
+					<div class="popOutText itemMightPos">Might: {{enemy[33][5]}}</div>
+					<div class="popOutText itemMightPos" style="left:80px">Hit: {{enemy[33][6]}}</div>
+					<div class="popOutText itemMightPos" style="right:0px">Crit: {{enemy[33][7]}}</div>
+					<div class="popOutText itemWeightPos">Avo: {{enemy[33][8]}}</div>
+					<div class="popOutText itemWeightPos" style="left:80px">Dodge: {{enemy[33][9]}}</div>
+					<div class="popOutText itemWeightPos" style="right:0px">Range: {{enemy[33][18]}}</div>
+					<div class="customDivider" style="top:58px"></div>
+				</div>
+				<div class="popOutText italicText" ng-style="{top: setEDescriptionLoc($index, 33)}">{{enemy[33][19]}}</div>
 			</div>
 			
 			<!--Stat Info Boxes (Modifiers)-->
@@ -716,35 +775,94 @@
 		
 		<!--Weapon Info Boxes-->
 		<div class="infoElement green whiteText itemInfoPos" ng-if="wpn1 && validWeapon(100)" style="margin-top:45px">
-			<span class="popOutText popOutHeader italicText">[Equipped Weapon]</span><br>
-			<span class="popOutText popOutTextSpacing">Type: {{loadedChar[100][2]}}</span><br>
-			<span class="popOutText popOutTextSpacing" ng-if="hasWeaponRank(100)">Rank: {{loadedChar[100][4]}}</span><br>
-			<span class="popOutText popOutTextSpacing" ng-if="hasWeaponRange(100)">Range: {{loadedChar[100][18]}}</span><br>
-			<span class="popOutText popOutTextSpacing" ng-if="weaponHasDes(100)">{{loadedChar[100][19]}}</span>
+			<div class="popOutText itemNamePos boldText">{{formatWeaponName(100)}}</div>
+			<div class="popOutText itemRankPos">
+				<span ng-if="hasWeaponRank(100)">{{loadedChar[100][4]}} -</span>
+				{{loadedChar[100][1]}}
+			</div>
+			<div class="customDivider" style="top:22px"></div>
+			<div ng-if="notItem(100)">
+				<div class="popOutText itemMightPos">Might: {{loadedChar[100][5]}}</div>
+				<div class="popOutText itemMightPos" style="left:80px">Hit: {{loadedChar[100][6]}}</div>
+				<div class="popOutText itemMightPos" style="right:0px">Crit: {{loadedChar[100][7]}}</div>
+				<div class="popOutText itemWeightPos">Avo: {{loadedChar[100][8]}}</div>
+				<div class="popOutText itemWeightPos" style="left:80px">Dodge: {{loadedChar[100][9]}}</div>
+				<div class="popOutText itemWeightPos" style="right:0px">Range: {{loadedChar[100][18]}}</div>
+				<div class="customDivider" style="top:58px"></div>
+			</div>
+			<div class="popOutText italicText" ng-style="{top: setDescriptionLoc(100)}">{{loadedChar[100][19]}}</div>
 		</div>
 		<div class="infoElement green whiteText itemInfoPos" ng-if="wpn2 && validWeapon(101)" style="margin-top:80px">
-			<span class="popOutText popOutHeader">Type: {{loadedChar[101][2]}}</span><br>
-			<span class="popOutText popOutTextSpacing" ng-if="hasWeaponRank(101)">Rank: {{loadedChar[101][4]}}</span><br>
-			<span class="popOutText popOutTextSpacing" ng-if="hasWeaponRange(101)">Range: {{loadedChar[101][18]}}</span><br>
-			<span class="popOutText popOutTextSpacing" ng-if="weaponHasDes(101)">{{loadedChar[101][19]}}</span>
+			<div class="popOutText itemNamePos boldText">{{formatWeaponName(101)}}</div>
+			<div class="popOutText itemRankPos">
+				<span ng-if="hasWeaponRank(101)">{{loadedChar[101][4]}} -</span>
+				{{loadedChar[101][1]}}
+			</div>
+			<div class="customDivider" style="top:22px"></div>
+			<div ng-if="notItem(101)">
+				<div class="popOutText itemMightPos">Might: {{loadedChar[101][5]}}</div>
+				<div class="popOutText itemMightPos" style="left:80px">Hit: {{loadedChar[101][6]}}</div>
+				<div class="popOutText itemMightPos" style="right:0px">Crit: {{loadedChar[101][7]}}</div>
+				<div class="popOutText itemWeightPos">Avo: {{loadedChar[101][8]}}</div>
+				<div class="popOutText itemWeightPos" style="left:80px">Dodge: {{loadedChar[101][9]}}</div>
+				<div class="popOutText itemWeightPos" style="right:0px">Range: {{loadedChar[101][18]}}</div>
+				<div class="customDivider" style="top:58px"></div>
+			</div>
+			<div class="popOutText italicText" ng-style="{top: setDescriptionLoc(101)}">{{loadedChar[101][19]}}</div>
 		</div>
 		<div class="infoElement green whiteText itemInfoPos" ng-if="wpn3 && validWeapon(102)" style="margin-top:115px">
-			<span class="popOutText popOutHeader">Type: {{loadedChar[102][2]}}</span><br>
-			<span class="popOutText popOutTextSpacing" ng-if="hasWeaponRank(102)">Rank: {{loadedChar[102][4]}}</span><br>
-			<span class="popOutText popOutTextSpacing" ng-if="hasWeaponRange(102)">Range: {{loadedChar[102][18]}}</span><br>
-			<span class="popOutText popOutTextSpacing" ng-if="weaponHasDes(102)">{{loadedChar[102][19]}}</span>
+			<div class="popOutText itemNamePos boldText">{{formatWeaponName(102)}}</div>
+			<div class="popOutText itemRankPos">
+				<span ng-if="hasWeaponRank(102)">{{loadedChar[102][4]}} -</span>
+				{{loadedChar[102][1]}}
+			</div>
+			<div class="customDivider" style="top:22px"></div>
+			<div ng-if="notItem(102)">
+				<div class="popOutText itemMightPos">Might: {{loadedChar[102][5]}}</div>
+				<div class="popOutText itemMightPos" style="left:80px">Hit: {{loadedChar[102][6]}}</div>
+				<div class="popOutText itemMightPos" style="right:0px">Crit: {{loadedChar[102][7]}}</div>
+				<div class="popOutText itemWeightPos">Avo: {{loadedChar[102][8]}}</div>
+				<div class="popOutText itemWeightPos" style="left:80px">Dodge: {{loadedChar[102][9]}}</div>
+				<div class="popOutText itemWeightPos" style="right:0px">Range: {{loadedChar[102][18]}}</div>
+				<div class="customDivider" style="top:58px"></div>
+			</div>
+			<div class="popOutText italicText" ng-style="{top: setDescriptionLoc(102)}">{{loadedChar[102][19]}}</div>
 		</div>
 		<div class="infoElement green whiteText itemInfoPos" ng-if="wpn4 && validWeapon(103)" style="margin-top:0px">
-			<span class="popOutText popOutHeader">Type: {{loadedChar[103][2]}}</span><br>
-			<span class="popOutText popOutTextSpacing" ng-if="hasWeaponRank(103)">Rank: {{loadedChar[103][4]}}</span><br>
-			<span class="popOutText popOutTextSpacing" ng-if="hasWeaponRange(103)">Range: {{loadedChar[103][18]}}</span><br>
-			<span class="popOutText popOutTextSpacing" ng-if="weaponHasDes(103)">{{loadedChar[103][19]}}</span>
+			<div class="popOutText itemNamePos boldText">{{formatWeaponName(103)}}</div>
+			<div class="popOutText itemRankPos">
+				<span ng-if="hasWeaponRank(103)">{{loadedChar[103][4]}} -</span>
+				{{loadedChar[103][1]}}
+			</div>
+			<div class="customDivider" style="top:22px"></div>
+			<div ng-if="notItem(103)">
+				<div class="popOutText itemMightPos">Might: {{loadedChar[103][5]}}</div>
+				<div class="popOutText itemMightPos" style="left:80px">Hit: {{loadedChar[103][6]}}</div>
+				<div class="popOutText itemMightPos" style="right:0px">Crit: {{loadedChar[103][7]}}</div>
+				<div class="popOutText itemWeightPos">Avo: {{loadedChar[103][8]}}</div>
+				<div class="popOutText itemWeightPos" style="left:80px">Dodge: {{loadedChar[103][9]}}</div>
+				<div class="popOutText itemWeightPos" style="right:0px">Range: {{loadedChar[103][18]}}</div>
+				<div class="customDivider" style="top:58px"></div>
+			</div>
+			<div class="popOutText italicText" ng-style="{top: setDescriptionLoc(103)}">{{loadedChar[103][19]}}</div>
 		</div>
 		<div class="infoElement green whiteText itemInfoPos" ng-if="wpn5 && validWeapon(104)" style="margin-top:40px">
-			<span class="popOutText popOutHeader">Type: {{loadedChar[104][2]}}</span><br>
-			<span class="popOutText popOutTextSpacing" ng-if="hasWeaponRank(104)">Rank: {{loadedChar[104][4]}}</span><br>
-			<span class="popOutText popOutTextSpacing" ng-if="hasWeaponRange(104)">Range: {{loadedChar[104][18]}}</span><br>
-			<span class="popOutText popOutTextSpacing" ng-if="weaponHasDes(104)">{{loadedChar[104][19]}}</span>
+			<div class="popOutText itemNamePos boldText">{{formatWeaponName(104)}}</div>
+			<div class="popOutText itemRankPos">
+				<span ng-if="hasWeaponRank(104)">{{loadedChar[104][4]}} -</span>
+				{{loadedChar[104][1]}}
+			</div>
+			<div class="customDivider" style="top:22px"></div>
+			<div ng-if="notItem(104)">
+				<div class="popOutText itemMightPos">Might: {{loadedChar[104][5]}}</div>
+				<div class="popOutText itemMightPos" style="left:80px">Hit: {{loadedChar[104][6]}}</div>
+				<div class="popOutText itemMightPos" style="right:0px">Crit: {{loadedChar[104][7]}}</div>
+				<div class="popOutText itemWeightPos">Avo: {{loadedChar[104][8]}}</div>
+				<div class="popOutText itemWeightPos" style="left:80px">Dodge: {{loadedChar[104][9]}}</div>
+				<div class="popOutText itemWeightPos" style="right:0px">Range: {{loadedChar[104][18]}}</div>
+				<div class="customDivider" style="top:58px"></div>
+			</div>
+			<div class="popOutText italicText" ng-style="{top: setDescriptionLoc(104)}">{{loadedChar[104][19]}}</div>
 		</div>
 		
 		<!--Pair Up Stats Info-->

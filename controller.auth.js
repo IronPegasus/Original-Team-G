@@ -277,14 +277,14 @@ app.controller('AuthCtrl', ['$scope', '$location', '$interval', 'DataService', f
     	
     	//If last character in the string is G, it's money
     	if(name.indexOf("G") == name.length-1)
-    		return [name, "Gold", "Gold", "0", "", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "Wealth", "", "I bet you could buy something nice with this."];
+    		return [name, "Gold", "Gold", "0", "", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "Wealth", "", "Oooh, shiny! I bet you could buy something nice with this."];
     	
     	//Locate item
     	for(var i = 0; i < wIndex.length; i++)
     		if(wIndex[i][0] == name)
     			return wIndex[i].slice();
     	
-    	return [name, "Mystery", "Unknown", "0", "", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "Confusion", "", "What could this be?"];
+    	return [name, "Mystery", "Unknown", "0", "", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "Confusion", "", "Hmmmm, what could this be?"];
     };
     
     function fetch(){

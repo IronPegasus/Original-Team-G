@@ -3,6 +3,15 @@ body{
 	width:100%;
 }
 
+img{
+  image-rendering: optimizeSpeed;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: -o-crisp-edges;
+  image-rendering: pixelated;
+  -ms-interpolation-mode: nearest-neighbor;
+}
+
 .mapBox{
 	position:absolute;
 	top:0px;
@@ -139,6 +148,37 @@ body{
 
 .floatAbove{
 	z-index:3;
+}
+
+.customDivider{
+	position:absolute;
+	width:96%;
+	height:1px;
+	left:2%;
+	background-color: white;	
+}
+
+.itemNamePos{
+	font-size: 14px !important;
+	top: 4px;
+}
+
+.itemRankPos{
+	top: 5px;
+	right: 0px;
+	text-align: right;
+}
+
+.itemMightPos{
+	top:25px;
+}
+
+.itemWeightPos{
+	top:40px;
+}
+
+.itemNotesPos{
+	top:95px;
 }
 
 .centerText{ text-align: center; }

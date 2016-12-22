@@ -466,34 +466,58 @@ app.controller('HomeCtrl', ['$scope', '$location', '$interval', 'DataService', f
     	else return false;
     };
     
-    //Returns true if the weapon at the index has a description
-    $scope.weaponHasDes = function(index){
-    	if($scope.loadedChar == undefined) return false;
-    	return $scope.loadedChar[index].length == 20;
-    };
-    
-    $scope.eWeaponHasDes = function(w, index){
-    	return $scope.enemyData[index][w].length == 20;
-    };
-    
-    //Returns true if the weapon at the index has a listed range
-    $scope.hasWeaponRange = function(index){
-    	if($scope.loadedChar == undefined) return false;
-    	return $scope.loadedChar[index][18] != "";
-    };
-    
-    $scope.eHasWeaponRange = function(w, index){
-    	return $scope.enemyData[index][w][18] != "";
-    };
-    
     //Returns true if the weapon at the index has a listed rank
     $scope.hasWeaponRank = function(index){
     	if($scope.loadedChar == undefined) return false;
     	return $scope.loadedChar[index][4] != "";
     };
     
-    $scope.eHasWeaponRank = function(w, index){
+    $scope.eHasWeaponRank = function(index, w){
     	return $scope.enemyData[index][w][4] != "";
+    };
+    
+    //Returns true if the weapon at the index is not an item
+    $scope.notItem = function(index){
+    	if($scope.loadedChar == undefined) return false;
+    	var type = $scope.loadedChar[index][2];
+    	return type != "Item" && type != "Gold" && type != "Unknown";
+    };
+    
+    //Returns true if the weapon at the index is not an item
+    $scope.notEItem = function(index, w){
+    	var type = $scope.enemyData[index][w][2];
+    	return type != "Item" && type != "Gold" && type != "Unknown";
+    };
+    
+    $scope.setDescriptionLoc = function(index){
+    	if($scope.loadedChar == undefined) return false;
+    	var type = $scope.loadedChar[index][2];
+    	if(type != "Item" && type != "Gold" && type != "Unknown") return "60px";
+    	else return "25px";
+    };
+    
+    $scope.setEDescriptionLoc = function(index, w){
+    	var type = $scope.enemyData[index][w][2];
+    	if(type != "Item" && type != "Gold" && type != "Unknown") return "60px";
+    	else return "25px";
+    };
+    
+    
+    //Returns weapon name without uses
+    $scope.formatWeaponName = function(index){
+    	if($scope.loadedChar == undefined) return false;
+    	var name = $scope.loadedChar[index][0];
+    	
+    	if(name.indexOf("(") == -1) return name;
+    	else return name.substring(0, name.indexOf("(")-1);
+    };
+    
+    //Returns weapon name without uses
+    $scope.formatEWeaponName = function(enemy, w){
+    	var name = $scope.enemyData[enemy][w][0];
+    	
+    	if(name.indexOf("(") == -1) return name;
+    	else return name.substring(0, name.indexOf("(")-1);
     };
     
     //Returns the icon for the class of the weapon at the index
