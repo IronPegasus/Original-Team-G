@@ -3,8 +3,8 @@ app.controller('HomeCtrl', ['$scope', '$location', '$interval', 'DataService', f
 	$scope.rows = ["A"];
     $scope.columns = ["1"];
 	var rowNames = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "@", "#", "$", "%", "&", "=", "+", "~", ";", ">"];
-    var charPos = ["V29", "", "", "K38", "@36", "", "T29", "", "", "&37", "S22", "J32", "L31", "#39", "R17", "K35", "K37", "K36", "@39", "", "@34", "", "S40", "R28", "#36", "#37", "K31", "N33", "@35", "V28"];
-    var enemyPos = ["A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8", "A9", "A10", "", "A11", "A12", "A13", "A14", "A15", "B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8", "B9", "B10", "B11", "B12", "B13", "B14", "B15", "B16", "C1", "C2", "C3", "C4", "C5", "C6"];
+    var charPos = ["V29", "O10", "O11", "K38", "@36", "O12", "T29", "O13", "O14", "&37", "S22", "J32", "L31", "#39", "R17", "K35", "K37", "K36", "@39", "O15", "@34", "O16", "S40", "R28", "#36", "#37", "K31", "N33", "@35", "V28"];
+    var enemyPos = ["A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8", "A9", "A10", "A16", "A11", "A12", "A13", "A14", "A15", "B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8", "B9", "B10", "B11", "B12", "B13", "B14", "B15", "B16", "C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8", "C9", "C10", "C11", "C12", "C13", "C14", "C15", "C16"];
     $scope.kaden = "IMG/kitsune.gif";
     var rowTimer = $interval(calcNumRows, 250, 20); //attempt to get rows 20 times at 250 ms intervals (total run: 5 sec)
     var colTimer = $interval(calcNumColumns, 250, 20);
