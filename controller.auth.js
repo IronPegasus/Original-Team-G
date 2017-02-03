@@ -64,7 +64,7 @@ app.controller('AuthCtrl', ['$scope', '$location', '$interval', 'DataService', f
       gapi.client.sheets.spreadsheets.values.get({
         spreadsheetId: salvSheetId,
         majorDimension: "ROWS",
-        range: 'Ugly Characatures!A3:CU32',
+        range: 'Ugly Characatures!A3:CU26',
       }).then(function(response) {
     	 characterData = response.result.values;
     	 updateProgressBar(); //update progress bar
@@ -78,7 +78,7 @@ app.controller('AuthCtrl', ['$scope', '$location', '$interval', 'DataService', f
             spreadsheetId: salvSheetId,
             majorDimension: "ROWS",
             valueRenderOption: "FORMULA",
-            range: 'Characatures!B3:AH3',
+            range: 'Characatures!B3:AB3',
         }).then(function(response) {
         	charImages = response.result.values[0];
          	updateProgressBar(); //update progress bar
@@ -92,7 +92,7 @@ app.controller('AuthCtrl', ['$scope', '$location', '$interval', 'DataService', f
     	gapi.client.sheets.spreadsheets.values.get({
             spreadsheetId: salvSheetId,
             majorDimension: "COLUMNS",
-            range: 'Characatures!B27:AH31',
+            range: 'Characatures!B27:AB31',
         }).then(function(response) {
         	charWeapons = response.result.values;
         	updateProgressBar(); //update progress bar
@@ -119,7 +119,7 @@ app.controller('AuthCtrl', ['$scope', '$location', '$interval', 'DataService', f
     	gapi.client.sheets.spreadsheets.values.get({
             spreadsheetId: salvSheetId,
             majorDimension: "COLUMNS",
-            range: 'Characatures!B35:AG42',
+            range: 'Characatures!B35:AB42',
           }).then(function(response) {
         	  charSkills = response.result.values;
         	  updateProgressBar(); //update progress bar
@@ -155,29 +155,55 @@ app.controller('AuthCtrl', ['$scope', '$location', '$interval', 'DataService', f
     };
     
     function processCharData(){
+    	//var charaObjs = {};
+    	
      	 for(var i = 0; i < characterData.length; i++){
+     		 var c = characterData[i];
+     		 
+     		 /*var currObj = {
+     				 'name'  : c[0],
+     				 'class' : c[1],
+     				 'level' : c[2],
+     				 'exp'   : c[3],
+     				 'wExp1' : c[4],
+     				 'wExp2' : c[5],
+     				 'wExp3' : c[6],
+     				 'currHp': c[7],
+     				 'maxHp' : c[8],
+     				 'str'   : c[9],
+     				 'mag'   : c[10],
+     				 'skl'   : c[11],
+     				 'spd'   : c[12],
+     				 'lck'   : c[13],
+     				 'def'   : c[14],
+     				 'res'   : c[15],
+     				 'mov'   : c[16],
+     				 'shlds' : c[17],
+     				 'inventory' : {}
+     		 };*/
      		 
      		 //Properly format image URLs
     		 var str = charImages[i];
-    		 if(str != ""){
-    			 characterData[i].push(processImgUrl(str));
-    		 }else{
+    		 if(str == ""){
     			 charImages.splice(i, 1);
     			 str = charImages[i];
-    			 characterData[i].push(processImgUrl(str));
     		 }
+    		 characterData[i].push(processImgUrl(str));
     		 
     		 //Find and append weapons
     		 var charName = characterData[i][0];
     		 var column = charWeapons[i];
-     		 if(charName == "Amy" || charName == "Asami" || charName == "Tristan"){
+     		 if(charName == "Amy" || charName == "Asami" || charName == "Kane"){
      			 //Dual column processing
      			 var uses = charWeapons[i+1];
      			 charWeapons.splice(i+1,1); //remove uses column, don't mess up alignment!
      			 
      			 for(var j = 0; j < column.length; j++){
      				var wRay = locateWeapon(column[j]);
-     				wRay[0] = column[j] + " (" + uses[j] + ")"; //append name with (uses)
+     				if(uses[j] != undefined && uses[j] != "-" && uses[j] != "")
+     					wRay[0] = column[j] + " (" + uses[j] + ")"; //append name with (uses)
+     				else
+     					wRay[0] = column[j]; //append name without (uses)
      				characterData[i].push(wRay);
      			 }
      		 }else{
